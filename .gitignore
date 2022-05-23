@@ -86,7 +86,7 @@ yarn-error.log
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+#*.sln
 
 # Client App 
 .quasar
@@ -108,7 +108,7 @@ yarn-error.log*
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+#*.sln
 /NasleGhalam.WebApi/Content/QuestionGroupTemp
 /NasleGhalam.WindowsApp/159.69.82.251
 /NasleGhalam.WindowsApp/ftp/159.69.82.251/WindowsApp

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlinekhan.SSO.Common", "Onlinekhan.SSO.Common\Onlinekhan.SSO.Common.csproj", "{958B7B46-858B-4241-BE05-11F907B2CA92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlinekhan.SSO.DataAccess", "Onlinekhan.SSO.DataAccess\Onlinekhan.SSO.DataAccess.csproj", "{78139436-C461-4C6B-86FC-F627315902B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlinekhan.SSO.DomainClasses", "Onlinekhan.SSO.DomainClasses\Onlinekhan.SSO.DomainClasses.csproj", "{90D41622-5AA2-47DF-AE1B-1F76B0FA1948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlinekhan.SSO.Service", "Onlinekhan.SSO.Service\Onlinekhan.SSO.Service.csproj", "{65F898A3-15E7-4CF1-BD3D-6198A074C5AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlinekhan.SSO.ViewModel", "Onlinekhan.SSO.ViewModel\Onlinekhan.SSO.ViewModel.csproj", "{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{958B7B46-858B-4241-BE05-11F907B2CA92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958B7B46-858B-4241-BE05-11F907B2CA92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958B7B46-858B-4241-BE05-11F907B2CA92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958B7B46-858B-4241-BE05-11F907B2CA92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78139436-C461-4C6B-86FC-F627315902B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78139436-C461-4C6B-86FC-F627315902B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78139436-C461-4C6B-86FC-F627315902B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78139436-C461-4C6B-86FC-F627315902B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D41622-5AA2-47DF-AE1B-1F76B0FA1948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D41622-5AA2-47DF-AE1B-1F76B0FA1948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D41622-5AA2-47DF-AE1B-1F76B0FA1948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D41622-5AA2-47DF-AE1B-1F76B0FA1948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F898A3-15E7-4CF1-BD3D-6198A074C5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F898A3-15E7-4CF1-BD3D-6198A074C5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F898A3-15E7-4CF1-BD3D-6198A074C5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F898A3-15E7-4CF1-BD3D-6198A074C5AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E739A29-9E6E-4D20-9AF6-4BE05F6A68CB}
+	EndGlobalSection
+EndGlobal
