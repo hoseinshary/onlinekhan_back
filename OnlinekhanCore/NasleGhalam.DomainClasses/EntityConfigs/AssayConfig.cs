@@ -40,18 +40,15 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
                 .HasForeignKey(x => x.LookupId_Type)
                 .WillCascadeOnDelete(false);
 
-            //HasMany(x => x.Lessons)
-            //    .WithMany(x => x.Assays)
-            //    .Map(config =>
-            //    {
-            //        config.MapLeftKey("AssayId");
-            //        config.MapRightKey("LessonId");
-            //        config.ToTable("Assays_Lessons");
+            HasMany(x => x.Lessons)
+                .WithMany(x => x.Assays)
+                .Map(config =>
+                {
+                    config.MapLeftKey("AssayId");
+                    config.MapRightKey("LessonId");
+                    config.ToTable("Assays_Lessons");
 
-            //    });
-
-            HasMany(x => x.Users)
-                .WithMany(x => x.users)
+                });
 
 
 

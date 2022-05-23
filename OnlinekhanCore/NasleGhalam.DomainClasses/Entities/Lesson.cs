@@ -6,7 +6,7 @@ namespace NasleGhalam.DomainClasses.Entities
     {
         public Lesson()
         {
-            Ratios = new HashSet<Ratio>();
+       
             EducationTrees = new HashSet<EducationTree>();
             Topics = new HashSet<Topic>();
             EducationBooks = new HashSet<EducationBook>();
@@ -31,13 +31,13 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public string File { get; set; }
 
-        public ICollection<Ratio> Ratios { get; set; }
+     
 
         public ICollection<EducationTree> EducationTrees { get; set; }
 
         public ICollection<Topic> Topics { get; set; }
 
-        public ICollection<QuestionGroup> QuestionGroups { get; set; }
+      
 
         public ICollection<EducationBook> EducationBooks { get; set; }
 

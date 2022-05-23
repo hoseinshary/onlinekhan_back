@@ -116,7 +116,6 @@
     <Compile Include="MapperProfile\WriterProfile.cs" />
     <Compile Include="Services\ActionService.cs" />
     <Compile Include="Services\AxillaryBookService.cs" />
-    <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\EducationBookService.cs" />
     <Compile Include="Services\EducationSubGroupService.cs" />
     <Compile Include="Services\EducationTreeService.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\LookupService.cs" />
     <Compile Include="Services\MediaService.cs" />
-    <Compile Include="Services\ProvinceService.cs" />
     <Compile Include="Services\PublisherService.cs" />
     <Compile Include="Services\QuestionAnswerJudgeService.cs" />
     <Compile Include="Services\QuestionAnswerService.cs" />

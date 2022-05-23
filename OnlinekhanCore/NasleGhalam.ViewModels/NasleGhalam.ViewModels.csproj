@@ -76,6 +76,7 @@
     <Compile Include="Log\BrowserInfoViewModel.cs" />
     <Compile Include="Log\LogGetAllViewModel.cs" />
     <Compile Include="Log\LogViewModel.cs" />
+    <Compile Include="Lookup\LookupViewModel.cs" />
     <Compile Include="Package\PackageCreateViewModel.cs" />
     <Compile Include="Package\PackageUpdateViewModel.cs" />
     <Compile Include="Package\PackageViewModel.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Program\ProgramItemViewModel.cs" />
     <Compile Include="Program\ProgramCreateViewModel.cs" />
     <Compile Include="Program\ProgramViewModel.cs" />
+    <Compile Include="QuestionAnswer\QuestionAnswerViewModel.cs" />
     <Compile Include="Question\QuestionCreateViewModel.cs" />
     <Compile Include="Question\QuestionCreateWindowsViewModel.cs" />
     <Compile Include="Question\QuestionTopicViewModel.cs" />
@@ -90,10 +92,9 @@
     <Compile Include="Question\QuestionUpdateTopicViewModel.cs" />
     <Compile Include="Question\QuestionUpdateViewModel.cs" />
     <Compile Include="Question\QuestionViewModel.cs" />
-    <Compile Include="Ratio\RatioUpdateViewModel.cs" />
-    <Compile Include="Ratio\RatioCreateViewModel.cs" />
     <Compile Include="Role\RoleUpdateViewModel.cs" />
     <Compile Include="Role\RoleCreateViewModel.cs" />
+    <Compile Include="Tag\TagViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupCreateViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupUpdateViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupViewModel.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Teacher\TeacherUpdateViewModel.cs" />
     <Compile Include="Teacher\TeacherViewModel.cs" />
     <Compile Include="Student\StudentUpdateViewModel.cs" />
+    <Compile Include="Topic\TopicViewModel.cs" />
     <Compile Include="UniversityBranch\UniversityBranchViewModel.cs" />
     <Compile Include="Student\StudentCreateViewModel .cs" />
     <Compile Include="Student\StudentViewModel.cs" />
@@ -127,7 +129,6 @@
     </Compile>
     <Compile Include="Exam\ExamViewModel.cs" />
     <Compile Include="Lesson\LessonCreateViewModel.cs" />
-    <Compile Include="Ratio\RatioViewModel.cs" />
     <Compile Include="Role\RoleAccessViewModel.cs" />
     <Compile Include="Role\RoleViewModel.cs" />
     <Compile Include="User\ForgotPasswordViewModel.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="User\UserViewModel.cs" />
     <Compile Include="User\UserUpdateViewModel.cs" />
     <Compile Include="User\UserCreateViewModel .cs" />
+    <Compile Include="Writer\WriterViewModel.cs" />
     <Compile Include="_Attributes\MinLengthExcludeEmptyAndNullAttribute.cs" />
     <Compile Include="_Attributes\NationalNoAttribute.cs" />
     <Compile Include="_Attributes\RequiredDdlAttribute.cs" />

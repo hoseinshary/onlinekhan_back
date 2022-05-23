@@ -121,8 +121,6 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public string TeachingResumeJson { get; set; }
 
-        public int CityId { get; set; }
-
-        public City City { get; set; }
+  
     }
 }

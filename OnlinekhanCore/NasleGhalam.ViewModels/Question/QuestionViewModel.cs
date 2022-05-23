@@ -4,12 +4,11 @@ using System.Linq;
 using NasleGhalam.Common;
 using NasleGhalam.ViewModels.Lookup;
 using NasleGhalam.ViewModels.QuestionAnswer;
-using NasleGhalam.ViewModels.QuestionJudge;
-using NasleGhalam.ViewModels.QuestionOption;
 using NasleGhalam.ViewModels.Tag;
 using NasleGhalam.ViewModels.Topic;
 using NasleGhalam.ViewModels.User;
 using NasleGhalam.ViewModels.Writer;
+
 
 namespace NasleGhalam.ViewModels.Question
 {
@@ -52,11 +51,7 @@ namespace NasleGhalam.ViewModels.Question
             {
                 if (Topics.Count == 0)
                     return QuestionStatus.Imported;
-                else if (QuestionJudges.Count == 0)
-                    return QuestionStatus.Topiced;
-                else if (QuestionJudges.Count < Topics.First().Lesson.NumberOfJudges)
-                    return QuestionStatus.JudgedInComplete;
-                else if (IsActive)
+              else if (IsActive)
                     return QuestionStatus.JudgedActive;
                 else
                     return QuestionStatus.JudgedInActive;
@@ -100,11 +95,11 @@ namespace NasleGhalam.ViewModels.Question
 
         public List<LookupViewModel> Lookup_AreaTypes { get; set; } = new List<LookupViewModel>();
 
-        public List<QuestionOptionViewModel> QuestionOptions { get; set; } = new List<QuestionOptionViewModel>();
+     
 
         public List<QuestionAnswerViewModel> QuestionAnswers { get; set; } = new List<QuestionAnswerViewModel>();
 
-        public List<QuestionJudgeViewModel> QuestionJudges { get; set; } = new List<QuestionJudgeViewModel>();
+
 
         public List<TopicViewModel> Topics { get; set; } = new List<TopicViewModel>();
 

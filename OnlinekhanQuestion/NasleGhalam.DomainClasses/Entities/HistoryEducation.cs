@@ -7,7 +7,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public HistoryEducation()
         {
             UniversityBranches = new HashSet<UniversityBranch>();
-            Cities = new HashSet<City>();
+            
         }
         public int Id { get; set; }
 
@@ -27,6 +27,6 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public ICollection<UniversityBranch> UniversityBranches { get; set; }
 
-        public ICollection<City> Cities { get; set; }
+     
     }
 }

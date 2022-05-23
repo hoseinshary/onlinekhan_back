@@ -12,10 +12,10 @@ namespace NasleGhalam.DomainClasses.Entities
             QuestionEquals1 = new HashSet<QuestionEqual>();
             QuestionEquals2 = new HashSet<QuestionEqual>();
             Tags = new HashSet<Tag>();
-            Boxes = new HashSet<Box>();
+           
             QuestionAnswers = new HashSet<QuestionAnswer>();
             Topics = new HashSet<Topic>();
-            AssayQuestions =new HashSet<AssayQuestion>();
+           
             QuestionUpdates = new HashSet<QuestionUpdate>();
             Supervisors = new HashSet<User>();
             Lookup_AreaTypes =  new HashSet<Lookup>();
@@ -92,14 +92,14 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public ICollection<User> Supervisors { get; set; }
 
-        public ICollection<Box> Boxes { get; set; }
+        
      
         public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
 
         public ICollection<Topic> Topics { get; set; }
         public ICollection<QuestionGroup> QuestionGroups { get; set; }
 
-        public ICollection<AssayQuestion> AssayQuestions { get; set; }
+      
 
         
     }

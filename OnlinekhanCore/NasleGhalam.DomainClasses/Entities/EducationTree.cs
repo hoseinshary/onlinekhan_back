@@ -6,9 +6,7 @@ namespace NasleGhalam.DomainClasses.Entities
     {
         public EducationTree()
         {
-            Exams = new HashSet<Exam>();
-            EducationSubGroups = new HashSet<EducationSubGroup>();
-            HistoryEducations = new HashSet<HistoryEducation>();
+       
             Lessons = new HashSet<Lesson>();
             ChildrenEducationTree = new HashSet<EducationTree>();
         }
@@ -25,13 +23,11 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public EducationTree ParentEducationTree { get; set; }
 
-        public ICollection<HistoryEducation> HistoryEducations { get; set; }
+      
     
         public ICollection<Lesson> Lessons { get; set; }
 
-        public ICollection<EducationSubGroup> EducationSubGroups { get; set; }
-
-        public ICollection<Exam> Exams { get; set; }
+    
 
         public ICollection<EducationTree> ChildrenEducationTree { get; set; }
 

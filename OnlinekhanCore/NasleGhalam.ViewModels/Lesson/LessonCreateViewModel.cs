@@ -1,7 +1,6 @@
 ﻿using NasleGhalam.ViewModels._Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using NasleGhalam.ViewModels.Ratio;
 
 namespace NasleGhalam.ViewModels.Lesson
 {
@@ -28,7 +27,6 @@ namespace NasleGhalam.ViewModels.Lesson
             set => _numberOfJudges = value< 1 ? 1 :value;
         }
 
-        public IEnumerable<RatioCreateViewModel> Ratios { get; set; }
 
         public IEnumerable<int> EducationTreeIds { get; set; }
 
