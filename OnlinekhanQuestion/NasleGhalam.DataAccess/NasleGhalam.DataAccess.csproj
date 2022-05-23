@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F39F873F-66F3-4966-BAF1-98FC3D6D608C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NasleGhalam.DataAccess</RootNamespace>
+    <AssemblyName>NasleGhalam.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context\DBContext.cs" />
+    <Compile Include="Context\IUnitOfWork.cs" />
+    <Compile Include="Migrations\201910061357444_initDB.cs" />
+    <Compile Include="Migrations\201910061357444_initDB.Designer.cs">
+      <DependentUpon>201910061357444_initDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250821142_questionanswerjudge.cs" />
+    <Compile Include="Migrations\201910250821142_questionanswerjudge.Designer.cs">
+      <DependentUpon>201910250821142_questionanswerjudge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251719562_package.cs" />
+    <Compile Include="Migrations\201910251719562_package.Designer.cs">
+      <DependentUpon>201910251719562_package.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911051513125_fixPackage.cs" />
+    <Compile Include="Migrations\201911051513125_fixPackage.Designer.cs">
+      <DependentUpon>201911051513125_fixPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911051551431_UpdatePackageField.cs" />
+    <Compile Include="Migrations\201911051551431_UpdatePackageField.Designer.cs">
+      <DependentUpon>201911051551431_UpdatePackageField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001171357433_questionupdateuser.cs" />
+    <Compile Include="Migrations\202001171357433_questionupdateuser.Designer.cs">
+      <DependentUpon>202001171357433_questionupdateuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002020534435_teacherfix.cs" />
+    <Compile Include="Migrations\202002020534435_teacherfix.Designer.cs">
+      <DependentUpon>202002020534435_teacherfix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002020535461_teacherfix2.cs" />
+    <Compile Include="Migrations\202002020535461_teacherfix2.Designer.cs">
+      <DependentUpon>202002020535461_teacherfix2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021120085_requerdfieldinteacher.cs" />
+    <Compile Include="Migrations\202002021120085_requerdfieldinteacher.Designer.cs">
+      <DependentUpon>202002021120085_requerdfieldinteacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004270737353_superviosorquestion.cs" />
+    <Compile Include="Migrations\202004270737353_superviosorquestion.Designer.cs">
+      <DependentUpon>202004270737353_superviosorquestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006191825520_program.cs" />
+    <Compile Include="Migrations\202006191825520_program.Designer.cs">
+      <DependentUpon>202006191825520_program.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006201349316_fix_programitem.cs" />
+    <Compile Include="Migrations\202006201349316_fix_programitem.Designer.cs">
+      <DependentUpon>202006201349316_fix_programitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006220539458_fix_topianswer_leght.cs" />
+    <Compile Include="Migrations\202006220539458_fix_topianswer_leght.Designer.cs">
+      <DependentUpon>202006220539458_fix_topianswer_leght.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006220609443_fix_questionasnwer_judge_field.cs" />
+    <Compile Include="Migrations\202006220609443_fix_questionasnwer_judge_field.Designer.cs">
+      <DependentUpon>202006220609443_fix_questionasnwer_judge_field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007121055093_questionMultiAreaType.cs" />
+    <Compile Include="Migrations\202007121055093_questionMultiAreaType.Designer.cs">
+      <DependentUpon>202007121055093_questionMultiAreaType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009070700093_mediaadded.cs" />
+    <Compile Include="Migrations\202009070700093_mediaadded.Designer.cs">
+      <DependentUpon>202009070700093_mediaadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012210948236_updateMediatable.cs" />
+    <Compile Include="Migrations\202012210948236_updateMediatable.Designer.cs">
+      <DependentUpon>202012210948236_updateMediatable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101181256053_fixquestionAnswerJudge.cs" />
+    <Compile Include="Migrations\202101181256053_fixquestionAnswerJudge.Designer.cs">
+      <DependentUpon>202101181256053_fixquestionAnswerJudge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101250830562_questionanswer_change.cs" />
+    <Compile Include="Migrations\202101250830562_questionanswer_change.Designer.cs">
+      <DependentUpon>202101250830562_questionanswer_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110091140428_fixAssayCreate.cs" />
+    <Compile Include="Migrations\202110091140428_fixAssayCreate.Designer.cs">
+      <DependentUpon>202110091140428_fixAssayCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110100633349_changeAssayQuestionFile.cs" />
+    <Compile Include="Migrations\202110100633349_changeAssayQuestionFile.Designer.cs">
+      <DependentUpon>202110100633349_changeAssayQuestionFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110100652401_changeAssayQuestionFile2.cs" />
+    <Compile Include="Migrations\202110100652401_changeAssayQuestionFile2.Designer.cs">
+      <DependentUpon>202110100652401_changeAssayQuestionFile2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110100846359_changeAssayVarient.cs" />
+    <Compile Include="Migrations\202110100846359_changeAssayVarient.Designer.cs">
+      <DependentUpon>202110100846359_changeAssayVarient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110100855055_changeAassayQuestionLessonId.cs" />
+    <Compile Include="Migrations\202110100855055_changeAassayQuestionLessonId.Designer.cs">
+      <DependentUpon>202110100855055_changeAassayQuestionLessonId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110111029205_assayStringLegthFix.cs" />
+    <Compile Include="Migrations\202110111029205_assayStringLegthFix.Designer.cs">
+      <DependentUpon>202110111029205_assayStringLegthFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071713265_fixassayAnswerSheet.cs" />
+    <Compile Include="Migrations\202111071713265_fixassayAnswerSheet.Designer.cs">
+      <DependentUpon>202111071713265_fixassayAnswerSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071721566_fixTable.cs" />
+    <Compile Include="Migrations\202111071721566_fixTable.Designer.cs">
+      <DependentUpon>202111071721566_fixTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161053561_TeacherGroup.cs" />
+    <Compile Include="Migrations\202201161053561_TeacherGroup.Designer.cs">
+      <DependentUpon>202201161053561_TeacherGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201311446024_updateLessonFile.cs" />
+    <Compile Include="Migrations\202201311446024_updateLessonFile.Designer.cs">
+      <DependentUpon>202201311446024_updateLessonFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NasleGhalam.Common\NasleGhalam.Common.csproj">
+      <Project>{f383db37-6c98-4fc8-a8ae-5c3bbf62a998}</Project>
+      <Name>NasleGhalam.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NasleGhalam.DomainClasses\NasleGhalam.DomainClasses.csproj">
+      <Project>{164402ef-47af-4c7b-bd43-0d7d6558ff21}</Project>
+      <Name>NasleGhalam.DomainClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201910061357444_initDB.resx">
+      <DependentUpon>201910061357444_initDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250821142_questionanswerjudge.resx">
+      <DependentUpon>201910250821142_questionanswerjudge.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251719562_package.resx">
+      <DependentUpon>201910251719562_package.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911051513125_fixPackage.resx">
+      <DependentUpon>201911051513125_fixPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911051551431_UpdatePackageField.resx">
+      <DependentUpon>201911051551431_UpdatePackageField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171357433_questionupdateuser.resx">
+      <DependentUpon>202001171357433_questionupdateuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002020534435_teacherfix.resx">
+      <DependentUpon>202002020534435_teacherfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002020535461_teacherfix2.resx">
+      <DependentUpon>202002020535461_teacherfix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021120085_requerdfieldinteacher.resx">
+      <DependentUpon>202002021120085_requerdfieldinteacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004270737353_superviosorquestion.resx">
+      <DependentUpon>202004270737353_superviosorquestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006191825520_program.resx">
+      <DependentUpon>202006191825520_program.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006201349316_fix_programitem.resx">
+      <DependentUpon>202006201349316_fix_programitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006220539458_fix_topianswer_leght.resx">
+      <DependentUpon>202006220539458_fix_topianswer_leght.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006220609443_fix_questionasnwer_judge_field.resx">
+      <DependentUpon>202006220609443_fix_questionasnwer_judge_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007121055093_questionMultiAreaType.resx">
+      <DependentUpon>202007121055093_questionMultiAreaType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009070700093_mediaadded.resx">
+      <DependentUpon>202009070700093_mediaadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012210948236_updateMediatable.resx">
+      <DependentUpon>202012210948236_updateMediatable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101181256053_fixquestionAnswerJudge.resx">
+      <DependentUpon>202101181256053_fixquestionAnswerJudge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101250830562_questionanswer_change.resx">
+      <DependentUpon>202101250830562_questionanswer_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110091140428_fixAssayCreate.resx">
+      <DependentUpon>202110091140428_fixAssayCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110100633349_changeAssayQuestionFile.resx">
+      <DependentUpon>202110100633349_changeAssayQuestionFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110100652401_changeAssayQuestionFile2.resx">
+      <DependentUpon>202110100652401_changeAssayQuestionFile2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110100846359_changeAssayVarient.resx">
+      <DependentUpon>202110100846359_changeAssayVarient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110100855055_changeAassayQuestionLessonId.resx">
+      <DependentUpon>202110100855055_changeAassayQuestionLessonId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110111029205_assayStringLegthFix.resx">
+      <DependentUpon>202110111029205_assayStringLegthFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071713265_fixassayAnswerSheet.resx">
+      <DependentUpon>202111071713265_fixassayAnswerSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071721566_fixTable.resx">
+      <DependentUpon>202111071721566_fixTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161053561_TeacherGroup.resx">
+      <DependentUpon>202201161053561_TeacherGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201311446024_updateLessonFile.resx">
+      <DependentUpon>202201311446024_updateLessonFile.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

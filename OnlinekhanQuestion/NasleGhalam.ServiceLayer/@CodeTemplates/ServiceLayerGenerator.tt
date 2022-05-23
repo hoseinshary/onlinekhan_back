@@ -1,0 +1,126 @@
+﻿<#@ template debug="true" hostSpecific="true" language="C#"  #>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+	string modelName =  "AssayAnswerSheet" ;
+	string instanceName = "assayAnswerSheet";
+	string faName = "پاسخ نامه";
+#>
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using AutoMapper;
+using NasleGhalam.Common;
+using NasleGhalam.DataAccess.Context;
+using NasleGhalam.DomainClasses.Entities;
+using NasleGhalam.ViewModels.<#= modelName #>;
+
+namespace NasleGhalam.ServiceLayer.Services
+{
+	public class <#= modelName #>Service
+	{
+		private const string Title = "<#= faName #>";
+        private readonly IUnitOfWork _uow;
+        private readonly IDbSet<<#= modelName #>> _<#= instanceName #>s;
+       
+	    public <#= modelName #>Service(IUnitOfWork uow)
+        {
+            _uow = uow;
+            _<#= instanceName #>s = uow.Set<<#= modelName #>>();
+        }
+
+		/// <summary>
+        /// گرفتن  <#= faName #> با آی دی
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public <#= modelName #>ViewModel GetById(int id)
+        {
+            return _<#= instanceName #>s
+                .Where(current => current.Id == id)
+                .AsNoTracking()
+                .AsEnumerable()
+                .Select(Mapper.Map<<#= modelName #>ViewModel>)
+                .FirstOrDefault();
+        }
+
+		/// <summary>
+        /// گرفتن همه <#= faName #> ها
+        /// </summary>
+        /// <returns></returns>
+        public IList<<#= modelName #>ViewModel> GetAll()
+        {
+            return _<#= instanceName #>s
+                .AsNoTracking()
+                .AsEnumerable()
+                .Select(Mapper.Map<<#= modelName #>ViewModel>)
+                .ToList();
+        }
+
+		/// <summary>
+        /// ثبت <#= faName #>
+        /// </summary>
+        /// <param name="<#= instanceName #>ViewModel"></param>
+        /// <returns></returns>
+        public ClientMessageResult Create(<#= modelName #>CreateViewModel <#= instanceName #>ViewModel)
+        {
+            var <#= instanceName #> = Mapper.Map<<#= modelName #>>(<#= instanceName #>ViewModel);
+            _<#= instanceName #>s.Add(<#= instanceName #>);
+
+			var serverResult = _uow.CommitChanges(CrudType.Create, Title);
+            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+
+            if (clientResult.MessageType == MessageType.Success)
+                clientResult.Obj = GetById(<#= instanceName #>.Id);
+
+            return clientResult;
+        }
+
+		/// <summary>
+        /// ویرایش <#= faName #>
+        /// </summary>
+        /// <param name="<#= instanceName #>ViewModel"></param>
+        /// <returns></returns>
+        public ClientMessageResult Update(<#= modelName #>UpdateViewModel <#= instanceName #>ViewModel)
+        {
+            var <#= instanceName #> = Mapper.Map<<#= modelName #>>(<#= instanceName #>ViewModel);
+            _uow.MarkAsChanged(<#= instanceName #>);
+			
+			 var serverResult = _uow.CommitChanges(CrudType.Update, Title);
+            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+
+            if (clientResult.MessageType == MessageType.Success)
+                clientResult.Obj = GetById(<#= instanceName #>.Id);
+
+            return clientResult;
+        }
+
+		/// <summary>
+        /// حذف <#= faName #>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ClientMessageResult Delete(int id)
+        {
+			var  <#= instanceName #>ViewModel = GetById(id);
+            if (<#= instanceName #>ViewModel == null)
+            {
+                return ClientMessageResult.NotFound();
+            }
+
+            var <#= instanceName #> = Mapper.Map<<#= modelName #>>(<#= instanceName #>ViewModel);
+            _uow.MarkAsDeleted(<#= instanceName #>);
+            
+			var msgRes = _uow.CommitChanges(CrudType.Delete, Title);
+			return Mapper.Map<ClientMessageResult>(msgRes);
+        }
+	}
+}

@@ -1,0 +1,77 @@
+﻿<#@ template debug="true" hostSpecific="true" language="C#"  #>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#
+	string modelName = "AssayAnswerSheet";
+	string instanceName = "assayAnswerSheet";
+#>
+using System.Web.Http;
+using NasleGhalam.Common;
+using NasleGhalam.ServiceLayer.Services;
+using NasleGhalam.WebApi.FilterAttribute;
+using NasleGhalam.ViewModels.<#= modelName #>;
+using NasleGhalam.WebApi.Extentions;
+
+namespace NasleGhalam.WebApi.Controllers
+{
+    /// <inheritdoc />
+	/// <author>
+	///     name: 
+	///     date: 
+	/// </author>
+	public class <#= modelName #>Controller : ApiController
+	{
+        private readonly <#= modelName #>Service _<#= instanceName #>Service;
+		public <#= modelName #>Controller(<#= modelName #>Service <#= instanceName #>Service)
+        {
+            _<#= instanceName #>Service = <#= instanceName #>Service;
+        }
+
+		[HttpGet, CheckUserAccess(ActionBits.<#= modelName #>ReadAccess)]
+        public IHttpActionResult GetAll()
+        {
+            return Ok(_<#= instanceName #>Service.GetAll());
+        }
+
+		[HttpGet, CheckUserAccess(ActionBits.<#= modelName #>ReadAccess)]
+        public IHttpActionResult GetById(int id)
+        {
+            var <#= instanceName #> = _<#= instanceName #>Service.GetById(id);
+            if (<#= instanceName #> == null)
+            {
+                return NotFound();
+            }
+            return Ok(<#= instanceName #>);
+        }
+
+		[HttpPost]
+        [CheckUserAccess(ActionBits.<#= modelName #>CreateAccess)]
+        [CheckModelValidation]
+        public IHttpActionResult Create(<#= modelName #>CreateViewModel <#= instanceName #>ViewModel)
+        {
+            return Ok(_<#= instanceName #>Service.Create(<#= instanceName #>ViewModel));
+        }
+
+        [HttpPost]
+        [CheckUserAccess(ActionBits.<#= modelName #>UpdateAccess)]
+        [CheckModelValidation]
+        public IHttpActionResult Update(<#= modelName #>UpdateViewModel <#= instanceName #>ViewModel)
+        {
+            return Ok(_<#= instanceName #>Service.Update(<#= instanceName #>ViewModel));
+        }
+
+        [HttpPost, CheckUserAccess(ActionBits.<#= modelName #>DeleteAccess)]
+        public IHttpActionResult Delete(int id)
+        {
+            return Ok(_<#= instanceName #>Service.Delete(id));
+        }
+	}
+}

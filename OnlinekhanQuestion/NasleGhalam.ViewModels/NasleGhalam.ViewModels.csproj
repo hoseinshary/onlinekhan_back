@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2EB40478-6BAF-4AF7-90CA-FE056EC24512}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NasleGhalam.ViewModels</RootNamespace>
+    <AssemblyName>NasleGhalam.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="%40CodeTemplates\ViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelGenerator.tt</DependentUpon>
+    </Content>
+    <Compile Include="AxillaryBook\AxillaryBookViewModel.cs" />
+    <Compile Include="City\CityUpdateViewModel.cs" />
+    <Compile Include="City\CityCreateViewModel.cs" />
+    <Compile Include="EducationBook\EducationBookUpdateViewModel.cs" />
+    <Compile Include="EducationBook\EducationBookViewModel.cs" />
+    <Compile Include="EducationSubGroup\EducationSubGroupCreateViewModel.cs" />
+    <Compile Include="EducationSubGroup\EducationSubGroupUpdateViewModel.cs" />
+    <Compile Include="EducationSubGroup\EducationSubGroupViewModel.cs" />
+    <Compile Include="EducationTree\EducationTreeCreateViewModel.cs" />
+    <Compile Include="EducationTree\EducationTreeViewModel.cs" />
+    <Compile Include="EducationTree\EducationTreeUpdateViewModel.cs" />
+    <Compile Include="EducationYear\EducationYearUpdateViewModel.cs" />
+    <Compile Include="EducationYear\EducationYearCreateViewModel.cs" />
+    <Compile Include="LessonDepartment\LessonDepartmentAssignViewModel.cs" />
+    <Compile Include="LessonDepartment\LessonDepatmentViewModel.cs" />
+    <Compile Include="Lesson\LessonUpdateViewModel.cs" />
+    <Compile Include="Lesson\BuyLessonViewModel.cs" />
+    <Compile Include="Lesson\Lesson_UserViewModel.cs" />
+    <Compile Include="Log\BrowserInfoViewModel.cs" />
+    <Compile Include="Log\LogGetAllViewModel.cs" />
+    <Compile Include="Log\LogViewModel.cs" />
+    <Compile Include="Media\MediaViewModel .cs" />
+    <Compile Include="Media\MediaUpdateViewModel.cs" />
+    <Compile Include="Media\MediaCreateViewModel.cs" />
+    <Compile Include="Publisher\PublisherViewModel.cs" />
+    <Compile Include="QuestionAnswerJudge\QuestionAnswerJudgeCreateViewModel.cs" />
+    <Compile Include="QuestionAnswerJudge\QuestionAnswerJudgeUpdateViewModel.cs" />
+    <Compile Include="QuestionAnswerJudge\QuestionAnswerJudgeViewModel.cs" />
+    <Compile Include="QuestionAnswer\QuestionAnswerUpdateViewModel.cs" />
+    <Compile Include="QuestionAnswer\QuestionAnswerCreateViewModel.cs" />
+    <Compile Include="QuestionAnswer\QuestionAnswerCreateMultiViewModel.cs" />
+    <Compile Include="QuestionAnswer\QuestionAnswerViewModel.cs" />
+    <Compile Include="QuestionGroup\QuestionGroupUpdateViewModel.cs" />
+    <Compile Include="QuestionGroup\QuestionGroupCreateViewModel.cs" />
+    <Compile Include="QuestionGroup\QuestionGroupViewModel.cs" />
+    <Compile Include="QuestionJudge\QuestionJudgeUpdateViewModel.cs" />
+    <Compile Include="QuestionJudge\QuestionJudgeCreateViewModel.cs" />
+    <Compile Include="QuestionJudge\QuestionJudgeViewModel.cs" />
+    <Compile Include="QuestionOption\QuestionOptionViewModel.cs" />
+    <Compile Include="QuestionUpdate\QuestionUpdateViewModel.cs" />
+    <Compile Include="Question\QuestionCreateWindowsViewModel.cs" />
+    <Compile Include="Question\QuestionUpdateImportViewModel.cs" />
+    <Compile Include="Question\QuestionUpdateTopicViewModel.cs" />
+    <Compile Include="Question\QuestionTopicViewModel.cs" />
+    <Compile Include="Question\QuestionViewModel.cs" />
+    <Compile Include="Question\QuestionUpdateViewModel.cs" />
+    <Compile Include="Question\QuestionCreateViewModel.cs" />
+    <Compile Include="Ratio\RatioUpdateViewModel.cs" />
+    <Compile Include="Ratio\RatioCreateViewModel.cs" />
+    <Compile Include="Report\FilterQuestionReportViewModel.cs" />
+    <Compile Include="Report\AllUsersReporQuestionViewModel.cs" />
+    <Compile Include="Report\AllQuestionOfEachLessonViewModel.cs" />
+    <Compile Include="Report\QuestionReportExcelViewModel.cs" />
+    <Compile Include="Report\QuestionReportViewModel.cs" />
+    <Compile Include="Resume\EducationCertificateViewModel.cs" />
+    <Compile Include="Resume\PublicationViewModel.cs" />
+    <Compile Include="Resume\ResumeViewModel.cs" />
+    <Compile Include="Resume\TeachingResumeViewModel.cs" />
+    <Compile Include="Role\RoleUpdateViewModel.cs" />
+    <Compile Include="Role\RoleCreateViewModel.cs" />
+    <Compile Include="Student\AssayAbout\GetQuestionAssayReportForTopicViewModel.cs" />
+    <Compile Include="Student\AssayAbout\LessonReportViewModel.cs" />
+    <Compile Include="Student\AssayAbout\TopicReportViewModel.cs" />
+    <Compile Include="Student\AssayAbout\StudentQuestionAssayReportForTopicViewModel.cs" />
+    <Compile Include="Student\AssayAbout\StudentQuestionAssayReportViewModel.cs" />
+    <Compile Include="Student\AssayAbout\GetQuestionAssayReportViewModel.cs" />
+    <Compile Include="Student\StudentUpdateViewModel.cs" />
+    <Compile Include="Tag\TagViewModel.cs" />
+    <Compile Include="Topic\TopicUpdateViewModel.cs" />
+    <Compile Include="Topic\TopicCreateViewModel .cs" />
+    <Compile Include="Topic\TopicViewModel.cs" />
+    <Compile Include="UniversityBranch\UniversityBranchViewModel.cs" />
+    <Compile Include="Student\StudentCreateViewModel .cs" />
+    <Compile Include="Student\StudentViewModel.cs" />
+    <Compile Include="Action\ActionViewModel.cs" />
+    <Compile Include="Action\MenuViewModel.cs" />
+    <Compile Include="City\CityViewModel.cs" />
+    <Compile Include="Action\SubMenuViewModel .cs" />
+    <Compile Include="EducationYear\EducationYearViewModel.cs" />
+    <Compile Include="ErrorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Lesson\LessonCreateViewModel.cs" />
+    <Compile Include="Lookup\LookupViewModel.cs" />
+    <Compile Include="Province\ProvinceViewModel.cs" />
+    <Compile Include="Ratio\RatioViewModel.cs" />
+    <Compile Include="Role\RoleAccessViewModel.cs" />
+    <Compile Include="Role\RoleViewModel.cs" />
+    <Compile Include="User\LoginResultViewModel.cs" />
+    <Compile Include="User\LoginViewModel.cs" />
+    <Compile Include="Writer\WriterCreateVIewModel.cs" />
+    <Compile Include="Writer\WriterUpdateViewModel.cs" />
+    <Compile Include="Writer\WriterViewModel.cs" />
+    <Compile Include="_Attributes\MinLengthExcludeEmptyAndNullAttribute.cs" />
+    <Compile Include="_Attributes\NationalNoAttribute.cs" />
+    <Compile Include="_Attributes\RequiredDdlAttribute.cs" />
+    <Compile Include="EducationBook\EducationBookCreateViewModel.cs" />
+    <Compile Include="SelectViewModel.cs" />
+    <Compile Include="Lesson\LessonViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NasleGhalam.Common\NasleGhalam.Common.csproj">
+      <Project>{f383db37-6c98-4fc8-a8ae-5c3bbf62a998}</Project>
+      <Name>NasleGhalam.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NasleGhalam.DomainClasses\NasleGhalam.DomainClasses.csproj">
+      <Project>{164402EF-47AF-4C7B-BD43-0D7D6558FF21}</Project>
+      <Name>NasleGhalam.DomainClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="%40CodeTemplates\ViewModelGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModelGenerator.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
