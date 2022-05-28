@@ -13,9 +13,6 @@ using NasleGhalam.Common.ForQuestionMaking;
 using NasleGhalam.DataAccess.Context;
 using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ViewModels.Question;
-using NasleGhalam.ViewModels.Report;
-using NasleGhalam.ViewModels.QuestionUpdate;
-using NasleGhalam.ViewModels.QuestionJudge;
 using NasleGhalam.ViewModels.Topic;
 using Newtonsoft.Json;
 
@@ -33,19 +30,15 @@ namespace NasleGhalam.ServiceLayer.Services
         private readonly IDbSet<QuestionJudge> _questionJudges;
         private readonly IDbSet<QuestionAnswerJudge> _questionAnswerJudges;
 
-        private readonly Lazy<QuestionGroupService> _questionGroupService;
-        private readonly Lazy<QuestionUpdateService> _questionUpdateService;
         private readonly Lazy<TopicService> _topicService;
 
-        public QuestionService(IUnitOfWork uow, Lazy<QuestionGroupService> questionGroupService, Lazy<QuestionUpdateService> questionUpdate ,Lazy<TopicService> topicService)
+        public QuestionService(IUnitOfWork uow, Lazy<TopicService> topicService)
         {
             _uow = uow;
             _questions = uow.Set<Question>();
             _questionJudges = uow.Set<QuestionJudge>();
             _questionAnswerJudges = uow.Set<QuestionAnswerJudge>();
             _users = uow.Set<User>();
-            _questionGroupService = questionGroupService;
-            _questionUpdateService = questionUpdate;
             _topicService = topicService;
 
 
@@ -98,207 +91,8 @@ namespace NasleGhalam.ServiceLayer.Services
             //return returnVal;
         }
 
-        public IList<AllUsersReporQuestionViewModel> GetAllUsersReport()
-        {
-
-            return _users.Where(x => x.Role.Level == 3 || x.Role.Level == 6).Where(x => x.IsActive == true)
-                .Select(x => new AllUsersReporQuestionViewModel
-                {
-                    Name = x.Name,
-                    Family = x.Family,
-                    NumberOfQuestionAnswerJudged = x.QuestionAnswerJudges.Where(f=>f.QuestionAnswer.Question.Deleted == false).Count(),
-                    NumberOfQuestionJudged = x.QuestionJudges.Where(f=> f.Question.Deleted == false).Count(),
-                    NumberOfQuestionTopiced = x.QuestionsUpdates.Where(current =>current.Question.Deleted == false && current.QuestionActivity == QuestionActivity.Topic).Count(),
-                    NumberOfSupervisorQuestion = x.SupervisorQuestions.Where(current => current.Deleted==false).Count(),
-                    NumberOfWriteQuestion = _questions.Where(current => current.Deleted == false).Count(y => y.Writer.User.Id == x.Id),
-                    Department = x.Lessons.FirstOrDefault().LessonDepartments.FirstOrDefault().Name
-                }).ToList();
-
-        }
-
-
-        public IList<QuestionReportViewModel> GetAllQuestionsReport(FilterQuestionReportViewModel filterQuestionReport)
-        {
-
-
-            return _questions
-                .Where(x => x.Deleted == false)
-                .Include(x => x.Topics)
-                .Include(x => x.Topics.Select(y => y.Lesson))
-                .Include(x => x.QuestionJudges)
-                .Include(x => x.QuestionUpdates)
-                .Include(x => x.QuestionUpdates.Select(y => y.User))
-                .Include(x => x.QuestionAnswers)
-                .Include(x => x.QuestionAnswers.Select(y => y.Writer))
-                .Include(x => x.QuestionAnswers.Select(y => y.QuestionAnswerJudges))
-                .Include(x => x.Lookup_AuthorType)
-                .Include(x => x.Lookup_QuestionType)
-                .Include(x => x.Supervisors)
-                .Include(x => x.Writer)
-                .Where(x => x.QuestionGroups.Any(y => y.LessonId == filterQuestionReport.LessonId))
-                .AsNoTracking()
-                .AsEnumerable()
-                .Select(z => new QuestionReportViewModel
-                {
-                    Id = z.Id,
-                    IsActive = z.IsActive,
-                    UserId = z.QuestionUpdates.Where(p => p.QuestionActivity == QuestionActivity.Import).Select(q => q.UserId).FirstOrDefault(),
-                    IsDelete = z.IsDelete,
-                    IsUpdate = z.IsUpdate,
-                    LookupId_AuthorType = z.LookupId_AuthorType,
-                    WriterId = z.WriterId,
-                    AuthorTypeName = z.Lookup_AuthorType.Value,
-                    SupervisorUserId = z.Supervisors.Count == 0 ? 0 : z.Supervisors.FirstOrDefault() == null ? 0 : z.Supervisors.FirstOrDefault().Id,
-                    SupervisorName = z.Supervisors.Count == 0 ? "" : z.Supervisors.FirstOrDefault().Name + z.Supervisors.FirstOrDefault().Family,
-                    WriterName = z.Writer.Name,
-                    QuestionJudges = z.QuestionJudges.Select(Mapper.Map<QuestionJudgeViewModel>).ToList(),
-                    Topics = z.Topics.Select(Mapper.Map<TopicViewModel>).ToList(),
-                    NumberOfAnswers = z.QuestionAnswers.Count,
-                    QuestionJudgedState1 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(0).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(0).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    QuestionJudgedState2 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(1).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(1).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    QuestionJudgedState3 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(2).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(2).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    EditorUserId = z.QuestionUpdates.Count == 0 ? 0 : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).UserId,
-                    EditorUserName = z.QuestionUpdates.Count == 0 ? "" : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).User.Name + z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).User.Family,
-                    LookupId_QuestionType = z.LookupId_QuestionType,
-                    QuestionTypeName = z.Lookup_QuestionType.Value,
-                    TopicUserId = z.QuestionUpdates.Count == 0 ? 0 : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).UserId,
-                    TopicUserName = z.QuestionUpdates.Count == 0 ? "" : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).User.Name + z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).User.Family,
-                    AnswerWriterId = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).WriterId,
-                    AnswerWriterName = z.QuestionAnswers.Count == 0 ? "" : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).Writer.Name,
-                    QuestionAnswerType = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).QuestionAnswerType,
-                    HaveOnlinekhanAnswer = z.QuestionAnswers.Count(p => p.IsMaster) != 0,
-                    AnswerJudgedState1 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(0).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(0).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    AnswerJudgedState2 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(1).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(1).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    AnswerJudgedState3 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(2).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(2).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-
-
-
-
-
-                }
-            ).ToList();
-
-        }
-
-        public string GetAllQuestionsReportExcel(FilterQuestionReportViewModel filterQuestionReport)
-        {
-
-
-            var returnVal = _questions
-                .Where(x => x.Deleted == false)
-                .Include(x => x.Topics)
-                .Include(x => x.Topics.Select(y => y.Lesson))
-                .Include(x => x.QuestionJudges)
-                .Include(x => x.QuestionUpdates)
-                .Include(x => x.QuestionUpdates.Select(y => y.User))
-                .Include(x => x.QuestionAnswers)
-                .Include(x => x.QuestionAnswers.Select(y => y.Writer))
-                .Include(x => x.QuestionAnswers.Select(y => y.QuestionAnswerJudges))
-                .Include(x => x.Lookup_AuthorType)
-                .Include(x => x.Lookup_QuestionType)
-                .Include(x => x.Supervisors)
-                .Include(x => x.Writer)
-                .Where(x => x.QuestionGroups.Any(y => y.LessonId == filterQuestionReport.LessonId))
-                .AsNoTracking()
-                .AsEnumerable()
-                .Select(z => new QuestionReportViewModel
-                {
-                    Id = z.Id,
-                    IsActive = z.IsActive,
-                    UserId = z.QuestionUpdates.Where(p => p.QuestionActivity == QuestionActivity.Import).Select(q => q.UserId).FirstOrDefault(),
-                    IsDelete = z.IsDelete,
-                    IsUpdate = z.IsUpdate,
-                    LookupId_AuthorType = z.LookupId_AuthorType,
-                    WriterId = z.WriterId,
-                    AuthorTypeName = z.Lookup_AuthorType.Value,
-                    SupervisorUserId = z.Supervisors.Count == 0 ? 0 : z.Supervisors.FirstOrDefault() == null ? 0 : z.Supervisors.FirstOrDefault().Id,
-                    SupervisorName = z.Supervisors.Count == 0 ? "" : z.Supervisors.FirstOrDefault().Name + z.Supervisors.FirstOrDefault().Family,
-                    WriterName = z.Writer.Name,
-                    QuestionJudges = z.QuestionJudges.Select(Mapper.Map<QuestionJudgeViewModel>).ToList(),
-                    Topics = z.Topics.Select(Mapper.Map<TopicViewModel>).ToList(),
-                    NumberOfAnswers = z.QuestionAnswers.Count,
-                    QuestionJudgedState1 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(0).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(0).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    QuestionJudgedState2 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(1).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(1).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    QuestionJudgedState3 = z.QuestionJudges.Count < 3 ? 0 : z.QuestionJudges.OrderByDescending(p => p.Id).Skip(2).Take(1).FirstOrDefault().IsActiveQuestion ? QuestionJudgedState.Active :
-                        z.QuestionJudges.OrderByDescending(p => p.Id).Skip(2).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    EditorUserId = z.QuestionUpdates.Count == 0 ? 0 : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).UserId,
-                    EditorUserName = z.QuestionUpdates.Count == 0 ? "" : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).User.Name + z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.UpdateEditor).User.Family,
-                    LookupId_QuestionType = z.LookupId_QuestionType,
-                    QuestionTypeName = z.Lookup_QuestionType.Value,
-                    TopicUserId = z.QuestionUpdates.Count == 0 ? 0 : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).UserId,
-                    TopicUserName = z.QuestionUpdates.Count == 0 ? "" : z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).User.Name + z.QuestionUpdates.OrderByDescending(p => p.Id).FirstOrDefault(p => p.QuestionActivity == QuestionActivity.Topic).User.Family,
-                    AnswerWriterId = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).WriterId,
-                    AnswerWriterName = z.QuestionAnswers.Count == 0 ? "" : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).Writer.Name,
-                    QuestionAnswerType = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster == true).QuestionAnswerType,
-                    HaveOnlinekhanAnswer = z.QuestionAnswers.Count(p => p.IsMaster) != 0,
-                    AnswerJudgedState1 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(0).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(0).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    AnswerJudgedState2 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(1).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(1).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-                    AnswerJudgedState3 = z.QuestionAnswers.Count == 0 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.Count < 3 ? 0 : z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(2).Take(1).FirstOrDefault().IsActiveQuestionAnswer ? QuestionJudgedState.Active :
-                        z.QuestionAnswers.FirstOrDefault(p => p.IsMaster).QuestionAnswerJudges.OrderByDescending(q => q.Id).Skip(2).Take(1).FirstOrDefault().IsUpdate ? QuestionJudgedState.Update : QuestionJudgedState.Delete,
-
-
-
-
-
-                }
-            ).ToList();
-
-            var questionList = Mapper.Map<List<QuestionReportExcelViewModel>>(returnVal);
-            System.Data.DataTable dt = Utility.ConvertToDataTable<QuestionReportExcelViewModel>(questionList);
-
-            DataSet dataSet = new DataSet();
-            dataSet.Tables.Add(dt);
-
-            // create a excel app along side with workbook and worksheet and give a name to it  
-            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Add();
-            // excelApp.Visible = true;
-            Microsoft.Office.Interop.Excel._Worksheet xlWorksheet = excelWorkBook.Sheets[1];
-            Microsoft.Office.Interop.Excel.Range xlRange = xlWorksheet.UsedRange;
-            foreach (System.Data.DataTable table in dataSet.Tables)
-            {
-                //Add a new worksheet to workbook with the Datatable name  
-                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add();
-                excelWorkSheet.Name = table.TableName;
-
-                // add all the columns  
-                for (int i = 1; i < table.Columns.Count + 1; i++)
-                {
-                    excelWorkSheet.Cells[1, i] = table.Columns[i - 1].ColumnName;
-                }
-
-                // add all the rows  
-                for (int j = 0; j < table.Rows.Count; j++)
-                {
-                    for (int k = 0; k < table.Columns.Count; k++)
-                    {
-                        excelWorkSheet.Cells[j + 2, k + 1] = table.Rows[j].ItemArray[k].ToString();
-                    }
-                }
-            }
-
-            // excelApp.Save(SitePath.GetQuestionGroupTempAbsPath("reportResult") + ".xlsx");
-            var filename = SitePath.GetQuestionGroupTempAbsPath("reportResult_") + Guid.NewGuid() + ".xlsx";
-            excelWorkBook.SaveAs(filename);
-
-            excelWorkBook.Close();
-            excelApp.Quit();
-            return filename;
-
-
-        }
-
-
+      
+        
 
         public IList<QuestionViewModel> GetAllByTopicIdsNoJudge(IEnumerable<int> ids, int userid, int rollLevel)
         {
@@ -757,18 +551,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 serverResult = _uow.CommitChanges(CrudType.Create, Title);
 
 
-                if (serverResult.MessageType == MessageType.Success)
-                {
-                    _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                    {
-                        QuestionId = question.Id,
-                        UserId = questionViewModel.UserId,
-                        DateTime = DateTime.Now,
-                        QuestionActivity = QuestionActivity.Import,
-                        Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                    });
-                }
-
+             
 
                 if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName) && !string.IsNullOrEmpty(questionViewModel.FileName))
                 {
@@ -850,14 +633,7 @@ namespace NasleGhalam.ServiceLayer.Services
 
             if (serverResult.MessageType == MessageType.Success)
             {
-                _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                {
-                    QuestionId = question.Id,
-                    UserId = questionViewModel.UserId,
-                    DateTime = DateTime.Now,
-                    QuestionActivity = QuestionActivity.Import,
-                    Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                });
+              
             }
 
             if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName)
@@ -1227,17 +1003,7 @@ namespace NasleGhalam.ServiceLayer.Services
             _uow.ValidateOnSaveEnabled(false);
             var serverResult = _uow.CommitChanges(CrudType.Update, Title);
             serverResult.Id = question.Id;
-            if (serverResult.MessageType == MessageType.Success)
-            {
-                _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                {
-                    QuestionId = question.Id,
-                    UserId = questionViewModel.UserId,
-                    DateTime = DateTime.Now,
-                    QuestionActivity = QuestionActivity.UpdateAdmin,
-                    Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                });
-            }
+           
 
             if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName) &&
                 !string.IsNullOrEmpty(questionViewModel.FileName) && haveFileUpdate)
@@ -1423,17 +1189,7 @@ namespace NasleGhalam.ServiceLayer.Services
             _uow.ValidateOnSaveEnabled(false);
             var serverResult = _uow.CommitChanges(CrudType.Update, Title);
 
-            if (serverResult.MessageType == MessageType.Success)
-            {
-                _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                {
-                    QuestionId = question.Id,
-                    UserId = questionViewModel.UserId,
-                    DateTime = DateTime.Now,
-                    QuestionActivity = QuestionActivity.UpdateImport,
-                    Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                });
-            }
+         
 
             if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName) && !string.IsNullOrEmpty(questionViewModel.FileName) && haveFileUpdate)
             {
@@ -1604,17 +1360,7 @@ namespace NasleGhalam.ServiceLayer.Services
             _uow.ValidateOnSaveEnabled(false);
             var serverResult = _uow.CommitChanges(CrudType.Update, Title);
 
-            if (serverResult.MessageType == MessageType.Success)
-            {
-                _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                {
-                    QuestionId = question.Id,
-                    UserId = questionViewModel.UserId,
-                    DateTime = DateTime.Now,
-                    QuestionActivity = QuestionActivity.UpdateEditor,
-                    Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                });
-            }
+           
 
             if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName) && !string.IsNullOrEmpty(questionViewModel.FileName) && haveFileUpdate)
             {
@@ -1795,17 +1541,7 @@ namespace NasleGhalam.ServiceLayer.Services
             _uow.ValidateOnSaveEnabled(false);
             var serverResult = _uow.CommitChanges(CrudType.Update, Title);
 
-            if (serverResult.MessageType == MessageType.Success)
-            {
-                _questionUpdateService.Value.Create(new ViewModels.QuestionUpdate.QuestionUpdateViewModel
-                {
-                    QuestionId = question.Id,
-                    UserId = questionViewModel.UserId,
-                    DateTime = DateTime.Now,
-                    QuestionActivity = QuestionActivity.Topic,
-                    Description = JsonConvert.SerializeObject(questionViewModel, Formatting.Indented)
-                });
-            }
+           
             //if (serverResult.MessageType == MessageType.Success && !string.IsNullOrEmpty(questionViewModel.FileName) && !string.IsNullOrEmpty(questionViewModel.FileName) && haveFileUpdate)
             //{
             //    if (File.Exists(SitePath.GetQuestionAbsPath(previousFileName) + ".docx"))
@@ -1979,21 +1715,21 @@ namespace NasleGhalam.ServiceLayer.Services
             /// todo:   check with ali
             public int GetNumberOfjudges(int questionId)
         {
+            //Check if Needed
+            //if (_questionGroupService.Value.IsInQuestionGroup(questionId))
+            //{
+            //    return _questions
+            //        .Include(x => x.QuestionGroups.Select(y => y.Lesson))
+            //        .First(x => x.Id == questionId).QuestionGroups.First().Lesson.NumberOfJudges;
 
-            if (_questionGroupService.Value.IsInQuestionGroup(questionId))
-            {
-                return _questions
-                    .Include(x => x.QuestionGroups.Select(y => y.Lesson))
-                    .First(x => x.Id == questionId).QuestionGroups.First().Lesson.NumberOfJudges;
 
-
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 return _questions
                     .Include(x => x.Topics.Select(y => y.Lesson))
                     .First(x => x.Id == questionId).Topics.First().Lesson.NumberOfJudges;
-            }
+            //}
         }
 
         public QuestionStatus GetQuestionStatus(int questionId)
@@ -2002,10 +1738,6 @@ namespace NasleGhalam.ServiceLayer.Services
 
             if (question.Topics.Count == 0)
                 return QuestionStatus.Imported;
-            else if (question.QuestionJudges.Count == 0)
-                return QuestionStatus.Topiced;
-            else if (question.QuestionJudges.Count < question.Topics.FirstOrDefault().Lesson.NumberOfJudges)
-                return QuestionStatus.JudgedInComplete;
             else if (question.IsActive)
                 return QuestionStatus.JudgedActive;
             else

@@ -83,7 +83,6 @@ namespace NasleGhalam.DomainClasses.Entities
         public ICollection<Media> Medias { get; set; }
         public ICollection<Log> Logs { get; set; }
 
-        public ICollection<Assay> Assays { get; set; }
 
     }
 }

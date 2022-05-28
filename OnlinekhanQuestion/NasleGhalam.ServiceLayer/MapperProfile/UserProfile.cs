@@ -9,7 +9,7 @@ namespace NasleGhalam.ServiceLayer.MapperProfile
         public UserProfile()
         {
             CreateMap<UserCreateViewModel, User>();
-            CreateMap<UserPreRegisterViewModel, User>();
+            //CreateMap<UserPreRegisterViewModel, User>();
             CreateMap<UserUpdateViewModel, User>();
             CreateMap<UserViewModel, User>()
                 .ReverseMap()

@@ -1,8 +1,8 @@
-﻿namespace Onlinekhan.SSO.ViewModel.User
+﻿namespace Onlinekhan.SSO.ViewModels.User
 {
     public class LoginViewModel
     {
-
+        
         public string UserName { get; set; }
 
         public string Password { get; set; }

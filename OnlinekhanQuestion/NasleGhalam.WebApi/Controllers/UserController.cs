@@ -22,12 +22,10 @@ namespace NasleGhalam.WebApi.Controllers
     public class UserController : ApiController
     {
         private readonly UserService _userService;
-        private readonly PhoneVerificationService _phoneVerificationService;
         private readonly LogService _logService;
-        public UserController(UserService userService,PhoneVerificationService phoneVerificationService, LogService logService)
+        public UserController(UserService userService, LogService logService)
         {
             _userService = userService;
-            _phoneVerificationService = phoneVerificationService;
             _logService = logService;
         }
 
@@ -72,6 +70,7 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(user);
         }
+        /*
         /// <summary>
         /// ارسال کد احراز هویت
         /// </summary>
@@ -93,13 +92,14 @@ namespace NasleGhalam.WebApi.Controllers
             }
             
         }
+        */
         //[HttpPost]
         //public async Task<IHttpActionResult> CheckVerificationCode([FromUri] string PhoneNumber,string Code)
         //{
         //    var result = await _phoneVerificationService.CheckVerificationCode(PhoneNumber,Code);
         //    return Ok(result);
         //}
-
+        /*
         /// <summary>
         /// فراموشی رمز عبور
         /// </summary>
@@ -149,6 +149,7 @@ namespace NasleGhalam.WebApi.Controllers
             }
 
         }
+        */
         [HttpPost]
         [CheckModelValidation]
         [CheckImageValidationProfileNotRequired("img", 1024)]
@@ -212,7 +213,7 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(msgRes);
         }
-
+        /*
         [HttpPost]
         [CheckUserAccess(ActionBits.PanelAdminReadAccess, ActionBits.PanelTeacherReadAccess, ActionBits.PanelExpertReadAccess, ActionBits.PanelStudentReadAccess)]
         [CheckModelValidation]
@@ -226,7 +227,7 @@ namespace NasleGhalam.WebApi.Controllers
             return Ok(msgRes);
         }
 
-
+        */
         [HttpPost, CheckUserAccess(ActionBits.UserDeleteAccess)]
         public IHttpActionResult Delete(int id)
         {

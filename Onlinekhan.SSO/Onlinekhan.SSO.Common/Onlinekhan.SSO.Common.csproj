@@ -34,8 +34,25 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serilog">
+      <HintPath>..\..\OnlinekhanCore\NasleGhalam.Common\bin\Debug\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Formatting.Compact">
+      <HintPath>..\..\OnlinekhanCore\NasleGhalam.Common\bin\Debug\Serilog.Formatting.Compact.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File">
+      <HintPath>..\..\OnlinekhanCore\NasleGhalam.Common\bin\Debug\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.PeriodicBatching">
+      <HintPath>..\..\OnlinekhanCore\NasleGhalam.Common\bin\Debug\Serilog.Sinks.PeriodicBatching.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Seq">
+      <HintPath>..\..\OnlinekhanCore\NasleGhalam.Common\bin\Debug\Serilog.Sinks.Seq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionBitsEnum.cs" />
+    <Compile Include="ClientMessageResult.cs" />
+    <Compile Include="ConstantStrings.cs" />
+    <Compile Include="Encryption.cs" />
     <Compile Include="Enumerations.cs" />
+    <Compile Include="Logs.cs" />
     <Compile Include="ServerMessageResult.cs" />
+    <Compile Include="SitePath.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

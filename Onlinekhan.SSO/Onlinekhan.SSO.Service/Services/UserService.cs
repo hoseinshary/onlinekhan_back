@@ -6,9 +6,8 @@ using AutoMapper;
 using Onlinekhan.SSO.Common;
 using Onlinekhan.SSO.DataAccess.Context;
 using Onlinekhan.SSO.DomainClasses.Entities;
-using Onlinekhan.SSO.Service.Configs;
-using Onlinekhan.SSO.Service.Jwt;
-using Onlinekhan.SSO.ViewModel.User;
+using Onlinekhan.SSO.ServiceLayer.Configs;
+using Onlinekhan.SSO.ServiceLayer.Jwt;
 using Onlinekhan.SSO.ViewModels.User;
 
 namespace Onlinekhan.SSO.Service.Services
@@ -18,22 +17,13 @@ namespace Onlinekhan.SSO.Service.Services
         private const string Title = "کاربر";
         private readonly IUnitOfWork _uow;
         private readonly IDbSet<User> _users;
-        private readonly IDbSet<Student> _students;
-        private readonly IDbSet<Teacher> _teachers;
 
-        private readonly Lazy<RoleService> _roleService;
-        private readonly Lazy<ActionService> _actionService;
 
-        public UserService(IUnitOfWork uow,
-            Lazy<RoleService> roleService,
-            Lazy<ActionService> actionService)
+        public UserService(IUnitOfWork uow)
         {
             _uow = uow;
             _users = _uow.Set<User>();
-            _students = _uow.Set<Student>();
-            _teachers = _uow.Set<Teacher>();
-            _roleService = roleService;
-            _actionService = actionService;
+           
         }
 
 

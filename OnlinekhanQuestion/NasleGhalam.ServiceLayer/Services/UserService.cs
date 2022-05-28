@@ -133,7 +133,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 .Select(Mapper.Map<UserViewModel>)
                 .ToList();
         }
-
+        /*
         /// <summary>
         /// ثبت نام اولیه کاربر
         /// </summary>
@@ -169,7 +169,7 @@ namespace NasleGhalam.ServiceLayer.Services
             return clientResult;
         }
 
-
+        */
         /// <summary>
         /// ثبت نام کاربر
         /// </summary>
@@ -348,7 +348,7 @@ namespace NasleGhalam.ServiceLayer.Services
             return clientResult;
         }
 
-
+        /*
         /// <summary>
         /// فراموشی رمز عبور
         /// </summary>
@@ -370,7 +370,7 @@ namespace NasleGhalam.ServiceLayer.Services
             return clientResult;
         }
 
-
+        */
         /// <summary>
         /// ویرایش کاربر
         /// </summary>
@@ -430,7 +430,7 @@ namespace NasleGhalam.ServiceLayer.Services
             return clientResult;
         }
 
-
+        /*
 
         /// <summary>
         /// تغییر رمز عبور
@@ -482,7 +482,7 @@ namespace NasleGhalam.ServiceLayer.Services
             clientResult.Obj = userViewModel;
             return clientResult;
         }
-
+        */
         /// <summary>
         /// ویرایش کاربر
         /// </summary>

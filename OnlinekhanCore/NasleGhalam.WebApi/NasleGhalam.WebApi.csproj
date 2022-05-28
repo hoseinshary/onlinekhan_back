@@ -180,7 +180,6 @@
     <Compile Include="Controllers\AssayController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
-    <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\RoleController.cs" />

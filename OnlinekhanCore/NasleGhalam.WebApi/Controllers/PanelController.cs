@@ -15,11 +15,9 @@ namespace NasleGhalam.WebApi.Controllers
 	public class PanelController : ApiController
     {
         private readonly QuestionService _questionService;
-        private readonly QuestionJudgeService _questionJudgeService;
-        public PanelController(QuestionService questionService , QuestionJudgeService questionJudgeService)
+        public PanelController(QuestionService questionService)
         {
             _questionService = questionService;
-            _questionJudgeService = questionJudgeService;
         }
 
         [HttpGet, CheckUserAccess(ActionBits.PublicAccess)]
@@ -40,8 +38,7 @@ namespace NasleGhalam.WebApi.Controllers
             var data = new
             {
                 CountAllQuestions = _questionService.CountAll(),
-                CountAllActiveQuestions = _questionService.CountAllActive(),
-                CountAllJudges = _questionJudgeService.CountAll()
+                CountAllActiveQuestions = _questionService.CountAllActive()
             };
 
             return Ok(data);

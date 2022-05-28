@@ -52,14 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Login.cs" />
-    <Compile Include="Entities\Province.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="EntityConfigs\LogConfig.cs" />
     <Compile Include="EntityConfigs\LoginConfig.cs" />
-    <Compile Include="EntityConfigs\ProvinceConfig.cs" />
-    <Compile Include="EntityConfigs\CityConfig.cs" />
+    <Compile Include="EntityConfigs\RoleConfig.cs" />
     <Compile Include="EntityConfigs\SiteConfig.cs" />
     <Compile Include="EntityConfigs\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +67,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Onlinekhan.SSO.Common\Onlinekhan.SSO.Common.csproj">
+      <Project>{958B7B46-858B-4241-BE05-11F907B2CA92}</Project>
+      <Name>Onlinekhan.SSO.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,15 +18,31 @@ namespace Onlinekhan.SSO.DomainClasses.EntityConfigs
             Property(x => x.Phone).HasMaxLength(8);
             Property(x => x.Mobile).HasMaxLength(11);
 
-    
-            HasRequired(x => x.Site)
+            HasRequired(x => x.Role)
                 .WithMany(x => x.Users)
-                .HasForeignKey(x => x.SiteId)
+                .HasForeignKey(x => x.RoleId)
+                .WillCascadeOnDelete(false);
+
+            HasRequired(x => x.City)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.CityId)
                 .WillCascadeOnDelete(false);
 
 
+            HasOptional(x => x.Teacher)
+                .WithRequired(x => x.User);
 
-          
+            HasOptional(x => x.Student)
+                .WithRequired(x => x.User);
+
+            HasMany(x => x.Lessons)
+                .WithMany(x => x.Users)
+                .Map(config =>
+                {
+                    config.MapLeftKey("UserId");
+                    config.MapRightKey("LessonId");
+                    config.ToTable("Lessons_Users");
+                });
         }
     }
 }

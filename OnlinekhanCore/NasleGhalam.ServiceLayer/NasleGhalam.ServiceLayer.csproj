@@ -112,6 +112,7 @@
     <Compile Include="Services\StudentMajorlistService.cs" />
     <Compile Include="Services\TeacherService.cs" />
     <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\TopicService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Content Include="%40CodeTemplates\ServiceLayerGenerator.cs">
       <AutoGen>True</AutoGen>

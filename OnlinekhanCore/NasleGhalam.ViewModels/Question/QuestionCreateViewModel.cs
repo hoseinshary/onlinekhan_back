@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using NasleGhalam.ViewModels._Attributes;
-using NasleGhalam.ViewModels.QuestionGroup;
 using NasleGhalam.ViewModels.QuestionOption;
 
 namespace NasleGhalam.ViewModels.Question
@@ -138,6 +137,6 @@ namespace NasleGhalam.ViewModels.Question
         public List<int> TagIds { get; set; } = new List<int>();
 
         public List<QuestionOptionViewModel> Options { get; set; } = new List<QuestionOptionViewModel>();
-        public List<QuestionGroupViewModel> QuestionGroups { get; set; } = new List<QuestionGroupViewModel>();
+
     }
 }

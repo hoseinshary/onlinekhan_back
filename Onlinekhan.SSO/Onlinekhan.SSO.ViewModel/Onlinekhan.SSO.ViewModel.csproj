@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,15 +44,36 @@
   <ItemGroup>
     <Compile Include="Actions\MenuViewModel.cs" />
     <Compile Include="Actions\SunMenuViewModel.cs" />
+    <Compile Include="ErrorResources.Designer.cs" />
+    <Compile Include="Log\BrowserInfoViewModel.cs" />
+    <Compile Include="Log\LogGetAllViewModel.cs" />
+    <Compile Include="Log\LogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\RoleAccessViewModel.cs" />
+    <Compile Include="Role\RoleCreateViewModel.cs" />
+    <Compile Include="Role\RoleUpdateViewModel.cs" />
+    <Compile Include="Role\RoleViewModel.cs" />
+    <Compile Include="User\ForgotPasswordViewModel.cs" />
     <Compile Include="User\LoginResultViewModel.cs" />
     <Compile Include="User\LoginViewModel.cs" />
+    <Compile Include="User\UserChangePasswordViewModel.cs" />
+    <Compile Include="User\UserCreateViewModel .cs" />
+    <Compile Include="User\UserPreRegisterViewModel.cs" />
+    <Compile Include="User\UserRegisterViewModel.cs" />
+    <Compile Include="User\UserUpdateViewModel.cs" />
+    <Compile Include="User\UserViewModel.cs" />
+    <Compile Include="_Attributes\MinLengthExcludeEmptyAndNullAttribute.cs" />
+    <Compile Include="_Attributes\NationalNoAttribute.cs" />
+    <Compile Include="_Attributes\RequiredDdlAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Onlinekhan.SSO.Common\Onlinekhan.SSO.Common.csproj">
       <Project>{958B7B46-858B-4241-BE05-11F907B2CA92}</Project>
       <Name>Onlinekhan.SSO.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorResources.resx" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

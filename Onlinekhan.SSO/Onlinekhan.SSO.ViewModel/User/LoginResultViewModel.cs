@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-
 using Onlinekhan.SSO.Common;
 using Onlinekhan.SSO.ViewModel.Action;
 
-namespace Onlinekhan.SSO.ViewModel.User
+namespace Onlinekhan.SSO.ViewModels.User
 {
     public class LoginResultViewModel
     {
