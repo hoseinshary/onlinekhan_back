@@ -34,10 +34,7 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
             Property(x => x.PublicationJson).IsRequired().HasColumnType("nvarchar(max)");
             Property(x => x.TeachingResumeJson).IsRequired().HasColumnType("nvarchar(max)");
 
-            HasRequired(x => x.City)
-                .WithMany(x => x.Resumes)
-                .HasForeignKey(x => x.CityId)
-                .WillCascadeOnDelete(false);
+           
         }
     }
 }

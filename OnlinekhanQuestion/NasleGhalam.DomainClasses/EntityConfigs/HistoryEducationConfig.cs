@@ -27,14 +27,7 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
                 .HasForeignKey(x => x.EducationTreeId)
                 .WillCascadeOnDelete(false);
 
-            HasMany(x => x.Cities)
-             .WithMany(x => x.HistoryEducations)
-             .Map(config =>
-             {
-                 config.MapLeftKey("HistoryEducationId");
-                 config.MapRightKey("CityId");
-                 config.ToTable("HistoryEducations_Cities");
-             });
+           
 
             HasMany(x => x.UniversityBranches)
              .WithMany(x => x.HistoryEducations)

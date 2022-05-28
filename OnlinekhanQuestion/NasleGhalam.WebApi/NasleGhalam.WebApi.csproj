@@ -177,7 +177,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AxillaryBookController.cs" />
-    <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\EducationBookController.cs" />
     <Compile Include="Controllers\EducationSubGroupController.cs" />
     <Compile Include="Controllers\EducationTreeController.cs" />
@@ -189,7 +188,6 @@
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
-    <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\QuestionAnswerController.cs" />
     <Compile Include="Controllers\QuestionAnswerJudgeController.cs" />

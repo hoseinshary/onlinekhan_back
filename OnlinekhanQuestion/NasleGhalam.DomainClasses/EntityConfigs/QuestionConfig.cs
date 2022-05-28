@@ -67,14 +67,7 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
 
 
 
-            HasMany(x => x.Boxes)
-                .WithMany(x => x.Questions)
-                .Map(config =>
-                {
-                    config.MapLeftKey("QuestionId");
-                    config.MapRightKey("BoxId");
-                    config.ToTable("Questions_Boxes");
-                });
+         
 
 
             HasRequired(x => x.Writer)

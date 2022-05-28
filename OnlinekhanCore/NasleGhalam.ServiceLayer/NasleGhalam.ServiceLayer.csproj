@@ -94,9 +94,7 @@
     <Compile Include="MapperProfile\PublicProfile.cs" />
     <Compile Include="MapperProfile\StudentMajorlistProfile.cs" />
     <Compile Include="MapperProfile\TagProfile.cs" />
-    <Compile Include="MapperProfile\RatioProfile.cs" />
     <Compile Include="MapperProfile\StudentProfile.cs" />
-    <Compile Include="MapperProfile\ExamProfile.cs" />
     <Compile Include="MapperProfile\UserProfile.cs" />
     <Compile Include="MapperProfile\RoleProfile.cs" />
     <Compile Include="Services\ActionService.cs" />
@@ -105,6 +103,7 @@
     <Compile Include="Services\Lesson_UserService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\PackageService.cs" />
+    <Compile Include="Services\ProgramService.cs" />
     <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\StudentService.cs" />

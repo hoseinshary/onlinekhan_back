@@ -33,7 +33,6 @@ namespace NasleGhalam.ServiceLayer.Services
         public TeacherViewModel GetById(int id)
         {
             return _teachers
-                .Include(current => current.User.City)
                 .Where(current => current.Id == id)
                 .AsNoTracking()
                 .AsEnumerable()
@@ -48,7 +47,6 @@ namespace NasleGhalam.ServiceLayer.Services
         public IList<TeacherViewModel> GetAll()
         {
             return _teachers
-                .Include(current => current.User.City)
                 .Include(current => current.User.Role)
                 .AsNoTracking()
                 .AsEnumerable()

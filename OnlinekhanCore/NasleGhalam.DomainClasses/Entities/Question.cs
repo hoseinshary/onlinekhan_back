@@ -7,16 +7,13 @@ namespace NasleGhalam.DomainClasses.Entities
     {
         public Question()
         {
-            QuestionJudges = new HashSet<QuestionJudge>();
-            QuestionOptions = new HashSet<QuestionOption>();
-            QuestionEquals1 = new HashSet<QuestionEqual>();
-            QuestionEquals2 = new HashSet<QuestionEqual>();
+          
             Tags = new HashSet<Tag>();
             Boxes = new HashSet<Box>();
             QuestionAnswers = new HashSet<QuestionAnswer>();
             Topics = new HashSet<Topic>();
             AssayQuestions =new HashSet<AssayQuestion>();
-            QuestionUpdates = new HashSet<QuestionUpdate>();
+        
             Supervisors = new HashSet<User>();
             Lookup_AreaTypes =  new HashSet<Lookup>();
 
@@ -77,18 +74,11 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public string  TopicAnswer { get; set; }
         public bool Deleted { get; set; }
-        public ICollection<QuestionJudge> QuestionJudges { get; set; }
-               
-        public ICollection<QuestionOption> QuestionOptions { get; set; }
-               
-        public ICollection<QuestionEqual> QuestionEquals1 { get; set; }
-               
-        public ICollection<QuestionEqual> QuestionEquals2 { get; set; }
-               
+     
         public ICollection<Tag> Tags { get; set; }
 
         //update users
-        public ICollection<QuestionUpdate> QuestionUpdates { get; set; }
+      
 
         public ICollection<User> Supervisors { get; set; }
 
@@ -97,7 +87,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
 
         public ICollection<Topic> Topics { get; set; }
-        public ICollection<QuestionGroup> QuestionGroups { get; set; }
+      
 
         public ICollection<AssayQuestion> AssayQuestions { get; set; }
 

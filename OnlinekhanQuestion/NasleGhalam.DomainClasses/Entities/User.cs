@@ -13,9 +13,7 @@ namespace NasleGhalam.DomainClasses.Entities
             QuestionAnswers = new HashSet<QuestionAnswer>();
             QuestionAnswerJudges = new HashSet<QuestionAnswerJudge>();
             Lessons = new HashSet<Lesson>();
-            AssayAnswerSheets = new HashSet<AssayAnswerSheet>();
-            Assays = new HashSet<Assay>();
-            Sales = new HashSet<Sale>();
+          
             SupervisorQuestions = new HashSet<Question>();
             QuestionsUpdates = new HashSet<QuestionUpdate>();
             Medias = new HashSet<Media>();
@@ -49,9 +47,7 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public int RoleId { get; set; }
 
-        public City City { get; set; }
 
-        public int CityId { get; set; }
 
         public Student Student { get; set; }
 
@@ -71,11 +67,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public ICollection<QuestionAnswerJudge> QuestionAnswerJudges { get; set; }
         public ICollection<Lesson> Lessons { get; set; }
 
-        public ICollection<AssayAnswerSheet> AssayAnswerSheets { get; set; }
 
-        public ICollection<Assay> Assays { get; set; }
-
-        public ICollection<Sale> Sales { get; set; }
 
 
         public ICollection<QuestionUpdate> QuestionsUpdates { get; set; }

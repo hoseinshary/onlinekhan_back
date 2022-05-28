@@ -6,7 +6,6 @@ namespace NasleGhalam.DomainClasses.Entities
     {
         public Student()
         {
-            HistoryEducations = new HashSet<HistoryEducation>();
             QuestionAnswerViews = new HashSet<QuestionAnswerView>();
             Programs = new HashSet<Program>();
             StudentMajorlists = new HashSet<StudentMajorlist>();
@@ -20,7 +19,6 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public User User { get; set; }
 
-        public ICollection<HistoryEducation> HistoryEducations { get; set; }
 
         public ICollection<QuestionAnswerView> QuestionAnswerViews { get; set; }
         

@@ -12,8 +12,8 @@ namespace NasleGhalam.ServiceLayer.MapperProfile
             CreateMap<UserPreRegisterViewModel, User>();
             CreateMap<UserUpdateViewModel, User>();
             CreateMap<UserViewModel, User>()
-                .ReverseMap()
-                .ForMember(dst => dst.ProvinceId, opt => opt.MapFrom(src => src.City.ProvinceId));
+                .ReverseMap();
+
         }
     }
 }

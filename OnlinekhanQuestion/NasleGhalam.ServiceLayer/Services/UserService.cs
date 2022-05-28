@@ -46,7 +46,6 @@ namespace NasleGhalam.ServiceLayer.Services
         public UserViewModel GetById(int id, byte userRoleLevel)
         {
             return _users
-                .Include(current => current.City)
                 .Include(current => current.Role)
                 .Where(current => current.Id == id)
                 .Where(current => current.Role.Level > userRoleLevel)
@@ -66,7 +65,6 @@ namespace NasleGhalam.ServiceLayer.Services
         public UserViewModel GetByIdPrivate(int id, byte userRoleLevel)
         {
             return _users
-                .Include(current => current.City)
                 .Include(current => current.Role)
                 .Where(current => current.Id == id)
                 .AsNoTracking()
@@ -102,7 +100,6 @@ namespace NasleGhalam.ServiceLayer.Services
         public IList<UserViewModel> GetAll(byte userRoleLevel, UserType userType)
         {
             return _users
-                .Include(current => current.City)
                 .Include(current => current.Role)
                 .Where(current => current.Role.Level > userRoleLevel)
                 .Where(current => current.Role.UserType == UserType.Organ)
@@ -149,7 +146,7 @@ namespace NasleGhalam.ServiceLayer.Services
             user.IsActive = true;
             user.IsAdmin = false;
             //Temp
-            user.CityId = 1;
+           // user.CityId = 1;
 
             _users.Add(user);
 

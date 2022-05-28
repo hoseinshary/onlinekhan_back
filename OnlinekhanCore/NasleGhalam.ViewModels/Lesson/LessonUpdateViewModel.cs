@@ -1,7 +1,6 @@
 ﻿using NasleGhalam.ViewModels._Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using NasleGhalam.ViewModels.Ratio;
 
 namespace NasleGhalam.ViewModels.Lesson
 {
@@ -29,7 +28,6 @@ namespace NasleGhalam.ViewModels.Lesson
             get => _numberOfJudges < 1 ? 1 : _numberOfJudges;
             set => _numberOfJudges = value < 1 ? 1 : value;
         }
-        public IEnumerable<RatioUpdateViewModel> Ratios { get; set; }
 
         public IEnumerable<int> EducationTreeIds { get; set; }
 
