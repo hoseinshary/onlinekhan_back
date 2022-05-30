@@ -25,7 +25,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
         /// <summary>
-        /// گرفتن  انتخاب رشته با آی دی
+        /// گرفتن  گروه دانش آموزی با آی دی
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -47,7 +47,7 @@ namespace NasleGhalam.ServiceLayer.Services
       
 
         /// <summary>
-        /// گرفتن همه انتخاب رشته ها
+        /// گرفتن همه گروه دانش آموزی ها
         /// </summary>
         /// <returns></returns>
         public IList<TeacherGroupViewModel> GetAll(int rollId ,  int userId)
@@ -80,7 +80,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
         /// <summary>
-        /// ثبت انتخاب رشته
+        /// ثبت گروه دانش آموزی
         /// </summary>
         /// <param name="teacherGroupViewModel"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
         /// <summary>
-        /// ویرایش انتخاب رشته
+        /// ویرایش گروه دانش آموزی
         /// </summary>
         /// <param name="teacherGroupViewModel"></param>
         /// <returns></returns>
@@ -119,7 +119,7 @@ namespace NasleGhalam.ServiceLayer.Services
                .First(current => current.Id == teacherGroupViewModel.Id);
 
             teachergroup.Name = teacherGroupViewModel.Name;
-
+            //حذف دانش آموزان از کلاس
             var deletestudentList = teachergroup.Students
                  .Where(oldMaj => teacherGroupViewModel.StudentsId.All(newMajId => newMajId != oldMaj.User.Id))
                  .ToList();
@@ -128,6 +128,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 teachergroup.Students.Remove(item);
                 _uow.MarkAsUnChanged(item);
             }
+            //افزودن دانش آموزان جدید
             var addstudentList = teacherGroupViewModel.StudentsId
                .Where(oldMajId => teachergroup.Students.All(newMaj => newMaj.User.Id != oldMajId))
                .ToList();
@@ -154,7 +155,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
         /// <summary>
-        /// حذف انتخاب رشته
+        /// حذف گروه دانش آموزی
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

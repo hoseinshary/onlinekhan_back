@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="MapperProfile\AssayProfile.cs" />
     <Compile Include="MapperProfile\AssayAnswerSheetProfile.cs" />
+    <Compile Include="MapperProfile\LessonProfile .cs" />
     <Compile Include="MapperProfile\LogProfile.cs" />
     <Compile Include="MapperProfile\PackageProfile.cs" />
     <Compile Include="MapperProfile\ProgramProfile.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="MapperProfile\StudentMajorlistProfile.cs" />
     <Compile Include="MapperProfile\TagProfile.cs" />
     <Compile Include="MapperProfile\StudentProfile.cs" />
+    <Compile Include="MapperProfile\TeacherGroupProfile.cs" />
     <Compile Include="MapperProfile\UserProfile.cs" />
     <Compile Include="MapperProfile\RoleProfile.cs" />
     <Compile Include="Services\ActionService.cs" />

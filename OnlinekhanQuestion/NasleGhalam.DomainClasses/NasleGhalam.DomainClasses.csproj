@@ -47,12 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\EducationTree.cs" />
     <Compile Include="Entities\LessonDepartment.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Lookup.cs" />
     <Compile Include="Entities\Module.cs" />
     <Compile Include="Entities\Media.cs" />
+    <Compile Include="Entities\Province.cs" />
     <Compile Include="Entities\QuestionUpdate.cs" />
     <Compile Include="Entities\QuestionAnswerJudge.cs" />
     <Compile Include="Entities\QuestionAnswerView.cs" />
@@ -83,11 +85,13 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Writer.cs" />
     <Compile Include="EntityConfigs\ActionConfig.cs" />
+    <Compile Include="EntityConfigs\CityConfig.cs" />
     <Compile Include="EntityConfigs\EducationTreeConfig.cs" />
     <Compile Include="EntityConfigs\LessonDepartmentConfig.cs" />
     <Compile Include="EntityConfigs\LogConfig.cs" />
     <Compile Include="EntityConfigs\LookupConfig.cs" />
     <Compile Include="EntityConfigs\ModuleConfig.cs" />
+    <Compile Include="EntityConfigs\ProvinceConfig.cs" />
     <Compile Include="EntityConfigs\QuestionUpdateConfig.cs" />
     <Compile Include="EntityConfigs\QuestionAnswerJudgeConfig.cs" />
     <Compile Include="EntityConfigs\QuestionAnswerViewConfig.cs" />

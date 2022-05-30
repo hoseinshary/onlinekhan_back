@@ -69,7 +69,7 @@ namespace NasleGhalam.ServiceLayer.Services
                     lessonItem.LessonId = lesson.Id;
 
 
-
+                    //گرفتن سوالات مباحث
                     var q = _questionService.Value.GetAllByTopicIdsForAssay(
                         lesson.Topics.Select(x => x.Id).ToList(), assayGetQuestionsViewModel.Page,
                         20);
@@ -91,6 +91,7 @@ namespace NasleGhalam.ServiceLayer.Services
                     lessonItem.LessonId = lesson.Id;
                     //foreach (var topic in lesson.Topics)
                     //{
+                    //گرفتن سوالات مباحث
                     var q = _questionService.Value.GetAllByTopicIdsForAssay(
                         lesson.TopicIds.ToList(), assayGetQuestionsViewModel.Page,
                         20);
@@ -149,9 +150,10 @@ namespace NasleGhalam.ServiceLayer.Services
                 {
                     Id = lesson.Id
                 };
+                //افزودن درس به آزمون
                 _uow.MarkAsUnChanged(tempLesson);
                 assay.Lessons.Add(tempLesson);
-
+                //درست کردن هر سوال
                 foreach (var question in lesson.Questions)
                 {
                     if (assayViewModel.NumberOfVarient == AssayVarient.A)
@@ -182,7 +184,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 {
                     Directory.CreateDirectory(dir);
                 }
-
+                //ساخت فایل آزمون
                 // Open a doc file.
                 object missing = System.Reflection.Missing.Value;
                 object readOnly = false;
@@ -340,6 +342,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 return ClientMessageResult.NotFound();
             }
 
+            //حذف روابط مربوط به آزمون
             var lessons = assayViewModel.Lessons.ToList();
             foreach (var lesson in lessons)
             {
@@ -359,6 +362,7 @@ namespace NasleGhalam.ServiceLayer.Services
 
             if (msgRes.MessageType == MessageType.Success)
             {
+                //پاک کردن تمام فایل های مربوط به آزمون
                 if (File.Exists(SitePath.GetAssayAbsPath( "\\" + assayViewModel.File1 + "\\" + assayViewModel.File1) + ".docx"))
                 {
                     File.Delete(SitePath.GetAssayAbsPath("\\" + assayViewModel.File1 + "\\" + assayViewModel.File1) + ".docx");

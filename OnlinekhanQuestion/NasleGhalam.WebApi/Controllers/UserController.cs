@@ -240,6 +240,13 @@ namespace NasleGhalam.WebApi.Controllers
         }
 
         [HttpPost]
+        public IHttpActionResult GetUserToken(UserTokenViewModel token)
+        {
+            return Ok(_userService.GetUserToken(token));
+        }
+
+
+        [HttpPost]
         public IHttpActionResult Login(LoginViewModel login)
         {
 
@@ -289,6 +296,7 @@ namespace NasleGhalam.WebApi.Controllers
 
                 if (msgRes.MessageType == MessageType.Success && !string.IsNullOrEmpty(userViewModel.ProfilePic))
                 {
+                    //Zakhire file bad az sabt
                     postedFile?.SaveAs($"{SitePath.UserProfileRelPath}{userViewModel.ProfilePic}{Path.GetExtension(postedFile.FileName)}".ToAbsolutePath());
                     if (File.Exists(
                         $"{SitePath.UserProfileRelPath}{previusFile}{Path.GetExtension(postedFile.FileName)}"

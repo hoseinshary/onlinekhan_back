@@ -46,18 +46,21 @@ namespace NasleGhalam.ServiceLayer.Services
               a.AnswerSheetCorectExams = new List<AssayAnswerSheetCorectExamViewModel>();
              var assay = _assayService.Value.GetById(a.AssayId);
 
-             
+             //تصحیح آزمون و نشان دادن جواب درست 
              for (int i = 0; i < a.Answers.Count; i++)
              {
                  var tempVal = new AssayAnswerSheetCorectExamViewModel();
+                 //اگر جواب نداده باشد
                  if (a.Answers[i] == "0")
                  {
                      tempVal.Tashih = Tashih.Non;
                  }
+                 //اگر جواب درست باشد
                  else if (a.Answers[i].ToString() == assay.QuestionsAnswer[i])
                  {
                      tempVal.Tashih = Tashih.Correct;
                  }
+                 //اگر جواب غلط باشد
                  else
                  {
                      tempVal.Tashih = Tashih.Wrong;
@@ -95,20 +98,23 @@ namespace NasleGhalam.ServiceLayer.Services
                 itemAdd.Title = assayAnswerSheet.Assay.Title;
                 for (int i = 0; i < assayAnswerSheet.Answers.Length; i++)
                 {
+                    //اگر جواب نداده باشد
                     if (assayAnswerSheet.Answers[i] == 0)
                     {
                         itemAdd.NonScore++;
                     }
+                    //اگر درست جواب داده باشد
                     else if (assayAnswerSheet.Answers[i] == assayAnswerSheet.Assay.QuestionsAnswer1[i])
                     {
                         itemAdd.CorrectScore++;
                     }
+                    //اگر غلط جواب داده باشد
                     else
                     {
                         itemAdd.WrongScore++;
                     }
                 }
-
+                //محاسبه نتیجه آزمون و نمره
                 itemAdd.ExamScore =
                     ((((itemAdd.CorrectScore * 3) - itemAdd.WrongScore) / (assayAnswerSheet.Answers.Length * 3)) * 100);
                 itemAdd.CorrectScore = ((itemAdd.CorrectScore) / (assayAnswerSheet.Answers.Length)) * 100;
@@ -160,14 +166,17 @@ namespace NasleGhalam.ServiceLayer.Services
                 for (int i = 0; i < assayAnswerSheetViewModel.Answers.Count ; i++)
                 {
                     var tempVal = new AssayAnswerSheetCorectExamViewModel();
+                    //اگر جواب نداده باشد
                     if (assayAnswerSheetViewModel.Answers[i] == 0)
                     {
                         tempVal.Tashih = Tashih.Non;
                     }
+                    //اگر درست جواب داده باشد
                     else if (assayAnswerSheetViewModel.Answers[i].ToString() == assay.QuestionsAnswer[i])
                     {
                         tempVal.Tashih = Tashih.Correct;
                     }
+                    //اگر غلط جواب داده باشد
                     else
                     {
                         tempVal.Tashih = Tashih.Wrong;

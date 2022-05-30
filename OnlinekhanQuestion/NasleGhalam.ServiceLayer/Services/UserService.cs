@@ -315,6 +315,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 };
             }
 
+            //Agar password khalie update nashavad
             var user = Mapper.Map<UserUpdateViewModel, User>(userViewModel);
             if (string.IsNullOrEmpty(user.Password))
             {
@@ -396,6 +397,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 };
             }
 
+            //اگر پسورد خالی است اپدیت نشود
             var user = Mapper.Map<UserUpdateViewModel, User>(userViewModel);
             if (string.IsNullOrEmpty(user.Password))
             {
@@ -557,6 +559,111 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
         /// <summary>
+        /// گرفتن توکن از طرف SSO
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="EncryptedString"></param>
+        /// <returns></returns>
+        public LoginResultViewModel GetUserToken(UserTokenViewModel token)
+        {
+            var loginResult = new LoginResultViewModel
+            {
+                MessageType = MessageType.Error
+            };
+
+            var user = _users
+                .Include(current => current.Role)
+                .First(x => x.Id == token.UserId);
+
+            if (user != null)
+            {
+                //چک کردن ولیدیت بودن انکریپت
+                var tempEncrypt = Encryption.Encrypt(user.Username + user.Password);
+                if (tempEncrypt == token.EncryptedString)
+                {
+                    if (!user.IsActive)
+                    {
+                        loginResult.Message = "نام کاربری شما فعال نمی باشد.";
+                    }
+                    else
+                    {
+                        //گرفتن ساب منو ها
+                        loginResult.SubMenus = _actionService.Value.GetSubMenu(user.Role.SumOfActionBit);
+                        if (loginResult.SubMenus.Count == 0)
+                        {
+                            loginResult.Message = "شما به صفحه ای دسترسی ندارید";
+                        }
+                        else
+                        {
+                            var defaultPage = "";
+
+                            if (user.Role.Level == 3)
+                            {
+                                defaultPage = "/panel/expertpanel";
+                            }
+                            else if (user.Role.Level < 3)
+                            {
+                                defaultPage = "/panel/adminpanel";
+                            }
+                            else if (user.Role.Id == 2015)
+                            {
+                                defaultPage = "/panel/teacherPanel";
+                            }
+                            else if (user.Role.Level == 100)
+                            {
+                                defaultPage = "/panel/studentPanel";
+                            }
+                            else
+                            {
+
+                                foreach (var item in loginResult.SubMenus)
+                                {
+                                    if (item.EnName == "/User")
+                                    {
+                                        defaultPage = item.EnName;
+                                        break;
+                                    }
+                                }
+
+                                if (string.IsNullOrEmpty(defaultPage))
+                                {
+                                    defaultPage = loginResult.SubMenus[0].EnName;
+                                }
+                            }
+
+                            loginResult.Message = "ورود موفقیت آمیز";
+                            loginResult.MessageType = MessageType.Success;
+
+                            loginResult.Menus = _actionService.Value.GetMenu(user.Role.SumOfActionBit);
+                            loginResult.DefaultPage = defaultPage;
+
+                            loginResult.FullName = user.Name + " " + user.Family;
+                            loginResult.ProfilePic = $"/Api/User/GetPictureFile/{user.ProfilePic}".ToFullRelativePath();
+                            //ساخت توکن
+                            loginResult.Token = JsonWebToken.CreateToken(user.Role.Level,
+                                user.IsAdmin, user.Id, user.Role.SumOfActionBit, user.Role.UserType);
+                        }
+                    }
+                }
+                else
+                {
+                    loginResult.Message = "عدم دسترسی.";
+                }
+            }
+            else
+            {
+                loginResult.Message = "عدم دسترسی.";
+            }
+
+            return loginResult;
+
+
+
+        }
+
+
+
+        /// <summary>
         /// احراز هویت
         /// </summary>
         /// <param name="login"></param>
@@ -583,6 +690,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 }
                 else
                 {
+                    //گرفتن ساب منو ها
                     loginResult.SubMenus = _actionService.Value.GetSubMenu(usr.Role.SumOfActionBit);
                     if (loginResult.SubMenus.Count == 0)
                     {
@@ -634,7 +742,7 @@ namespace NasleGhalam.ServiceLayer.Services
 
                         loginResult.FullName = usr.Name + " " + usr.Family;
                         loginResult.ProfilePic = $"/Api/User/GetPictureFile/{usr.ProfilePic}".ToFullRelativePath();
-
+                        //ساخت توکن
                         loginResult.Token = JsonWebToken.CreateToken(usr.Role.Level,
                             usr.IsAdmin, usr.Id, usr.Role.SumOfActionBit, usr.Role.UserType);
                     }

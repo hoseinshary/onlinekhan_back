@@ -65,6 +65,7 @@ namespace NasleGhalam.ServiceLayer.Services
 
            foreach (var lesson in lessons)
            {
+               //گرفتن سوالات از طرف سوالات گروهی
                var questions1 =_questions
                    .Where(x => x.QuestionGroups.Any(y => y.LessonId == lesson.Id))
                    .Include(x=>x.Topics)
@@ -73,7 +74,7 @@ namespace NasleGhalam.ServiceLayer.Services
                    .AsNoTracking()
                    .AsEnumerable()
                    .ToList();
-
+                //گرفتن سوالات از طرف تاپیک
                var ids = lesson.Topics.Select(x => x.Id);
                var questions2 = _questions
                    .Where(current => current.Topics.Any(x => ids.Contains(x.Id)))

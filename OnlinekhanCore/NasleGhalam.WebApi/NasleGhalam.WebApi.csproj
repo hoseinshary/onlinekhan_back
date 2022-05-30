@@ -178,6 +178,7 @@
     </Compile>
     <Compile Include="Controllers\AssayAnswerSheetController.cs" />
     <Compile Include="Controllers\AssayController.cs" />
+    <Compile Include="Controllers\Lesson_UserController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Controllers\StudentMajorlistController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="FilterAttribute\CheckImageQuestionValidation.cs" />
     <Compile Include="FilterAttribute\CheckImageValidationProfileNotRequired.cs" />
     <Compile Include="FilterAttribute\CheckWordFileUpdateValidation.cs" />

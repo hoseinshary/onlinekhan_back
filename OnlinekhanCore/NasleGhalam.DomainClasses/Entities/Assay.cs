@@ -15,7 +15,7 @@ namespace NasleGhalam.DomainClasses.Entities
             Packages = new HashSet<Package>();
             AssayAnswerSheets = new HashSet<AssayAnswerSheet>();
             Lessons = new HashSet<Lesson>();
-            Users = new HashSet<User>();
+           // Users = new HashSet<User>();
 
 
 
@@ -74,7 +74,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public ICollection<Lesson> Lessons { get; set; }
 
         //دانش آموزانی که به آنها این آزمون داده شده 
-        public ICollection<User> Users { get; set; }
+        //public ICollection<User> Users { get; set; }
 
         public ICollection<AssayQuestion> AssayQuestions { get; set; }
 

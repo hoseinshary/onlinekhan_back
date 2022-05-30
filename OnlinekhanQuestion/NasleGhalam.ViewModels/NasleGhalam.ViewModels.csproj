@@ -146,6 +146,7 @@
     <Compile Include="Role\RoleAccessViewModel.cs" />
     <Compile Include="Role\RoleViewModel.cs" />
     <Compile Include="User\LoginResultViewModel.cs" />
+    <Compile Include="User\UserTokenViewModel.cs" />
     <Compile Include="User\LoginViewModel.cs" />
     <Compile Include="User\UserCreateViewModel .cs" />
     <Compile Include="User\UserUpdateViewModel.cs" />

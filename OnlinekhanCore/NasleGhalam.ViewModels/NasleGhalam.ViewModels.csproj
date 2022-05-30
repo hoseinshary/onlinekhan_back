@@ -99,8 +99,9 @@
     <Compile Include="Question\QuestionUpdateTopicViewModel.cs" />
     <Compile Include="Question\QuestionUpdateViewModel.cs" />
     <Compile Include="Question\QuestionViewModel.cs" />
-    <Compile Include="Ratio\RatioUpdateViewModel.cs" />
     <Compile Include="Ratio\RatioCreateViewModel.cs" />
+    <Compile Include="Ratio\RatioUpdateViewModel.cs" />
+    <Compile Include="Ratio\RatioViewModel.cs" />
     <Compile Include="Role\RoleUpdateViewModel.cs" />
     <Compile Include="Role\RoleCreateViewModel.cs" />
     <Compile Include="Tag\TagViewModel.cs" />
@@ -140,7 +141,6 @@
     </Compile>
     <Compile Include="Exam\ExamViewModel.cs" />
     <Compile Include="Lesson\LessonCreateViewModel.cs" />
-    <Compile Include="Ratio\RatioViewModel.cs" />
     <Compile Include="Role\RoleAccessViewModel.cs" />
     <Compile Include="Role\RoleViewModel.cs" />
     <Compile Include="User\ForgotPasswordViewModel.cs" />
@@ -149,6 +149,7 @@
     <Compile Include="User\UserChangePasswordViewModel.cs" />
     <Compile Include="User\UserPreRegisterViewModel.cs" />
     <Compile Include="User\UserRegisterViewModel.cs" />
+    <Compile Include="User\UserTokenViewModel.cs" />
     <Compile Include="User\UserViewModel.cs" />
     <Compile Include="User\UserUpdateViewModel.cs" />
     <Compile Include="User\UserCreateViewModel .cs" />

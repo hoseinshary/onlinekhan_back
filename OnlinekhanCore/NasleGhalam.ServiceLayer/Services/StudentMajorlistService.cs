@@ -80,7 +80,7 @@ namespace NasleGhalam.ServiceLayer.Services
             }
         }
       
-
+        //گرفتن تمام رشته ها
         public IList<MajorViewModel> GetAllMajors()
         {
             return _majors
@@ -89,6 +89,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 .Select(Mapper.Map<MajorViewModel>)
                 .ToList();
         }
+        //گرفتن رشته با ای دی
         public IList<MajorViewModel> GetMajorById(int id)
         {
             return _majors
@@ -98,6 +99,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 .Select(Mapper.Map<MajorViewModel>)
                 .ToList();
         }
+        //گرفتن رشته با پارامتر
         public IList<MajorViewModel> GetMajorsBySearch(MajorSearchViewModel majorSearch)
         {
             
@@ -175,6 +177,7 @@ namespace NasleGhalam.ServiceLayer.Services
             studentmajorlist.Title = stduentMajorlistViewModel.Title;
 
             var majors = _studentmajorlist_major.Where(x => x.StudentMajorListId == stduentMajorlistViewModel.Id).Include(x => x.Major).ToList();
+            //حذف همه رشته ها از لیست
             var deletemajorList = studentmajorlist.StudentMajorList_Major
                  .Where(oldMaj => stduentMajorlistViewModel.MajorsId.All(newMajId => newMajId != oldMaj.Major.Id))
                  .ToList();
@@ -183,6 +186,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 studentmajorlist.StudentMajorList_Major.Remove(item);
                 _uow.MarkAsDeleted(item);
             }
+            //افزودن رشته به لیست
             var addmajorList = stduentMajorlistViewModel.MajorsId
                .Where(oldMajId => studentmajorlist.StudentMajorList_Major.All(newMaj => newMaj.Major.Id != oldMajId))
                .ToList();
@@ -193,6 +197,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 studentmajorlist.StudentMajorList_Major.Add(studentmajor);
             }
 
+            //درست کردن اولویت
             int priority = 1;
             foreach (var item in stduentMajorlistViewModel.MajorsId)
             {
