@@ -69,7 +69,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public string QuestionsAnswer3 { get; set; }
      
         public string QuestionsAnswer4 { get; set; }
-
+      
 
         public ICollection<Lesson> Lessons { get; set; }
 

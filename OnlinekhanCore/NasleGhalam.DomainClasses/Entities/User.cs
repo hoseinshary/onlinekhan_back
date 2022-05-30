@@ -9,15 +9,12 @@ namespace NasleGhalam.DomainClasses.Entities
         {
             
             
-            QuestionJudges = new HashSet<QuestionJudge>();
             QuestionAnswers = new HashSet<QuestionAnswer>();
-            QuestionAnswerJudges = new HashSet<QuestionAnswerJudge>();
             Lessons = new HashSet<Lesson>();
             AssayAnswerSheets = new HashSet<AssayAnswerSheet>();
             Assays = new HashSet<Assay>();
             Sales = new HashSet<Sale>();
             SupervisorQuestions = new HashSet<Question>();
-            QuestionsUpdates = new HashSet<QuestionUpdate>();
             Medias = new HashSet<Media>();
             Logs = new HashSet<Log>();
         }
@@ -49,9 +46,7 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public int RoleId { get; set; }
 
-        public City City { get; set; }
-
-        public int CityId { get; set; }
+    
 
         public Student Student { get; set; }
 
@@ -64,11 +59,10 @@ namespace NasleGhalam.DomainClasses.Entities
 
         
         public ICollection<Question> SupervisorQuestions { get; set; }
-        public ICollection<QuestionJudge> QuestionJudges { get; set; }
-        public ICollection<QuestionGroup> QuestionGroups { get; set; }
+      
 
         public ICollection<QuestionAnswer> QuestionAnswers { get; set; }
-        public ICollection<QuestionAnswerJudge> QuestionAnswerJudges { get; set; }
+     
         public ICollection<Lesson> Lessons { get; set; }
 
         public ICollection<AssayAnswerSheet> AssayAnswerSheets { get; set; }
@@ -78,7 +72,7 @@ namespace NasleGhalam.DomainClasses.Entities
         public ICollection<Sale> Sales { get; set; }
 
 
-        public ICollection<QuestionUpdate> QuestionsUpdates { get; set; }
+    
 
         public ICollection<Media> Medias { get; set; }
         public ICollection<Log> Logs { get; set; }

@@ -145,7 +145,7 @@ namespace NasleGhalam.ServiceLayer.Services
         public IList<int> GetAllChildren(List<int> ids)
         {
 
-           
+
             var allTopics = _topics.Where(x => x.LessonId == _topics.FirstOrDefault(y => y.Id == ids.FirstOrDefault()).LessonId).AsNoTracking()
                 .AsEnumerable()
                 .Select(Mapper.Map<TopicViewModel>)
@@ -158,7 +158,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 if (allTopics.Count(x => x.ParentTopicId == id) == 0)
                 {
                     returnIds.Add(allTopics.Where(x => x.Id == id).Select(y=>y.Id).FirstOrDefault());
-                    
+
                 }
                 else
                 {
@@ -185,7 +185,7 @@ namespace NasleGhalam.ServiceLayer.Services
                         if (topicsChildTemp.Count == 0)
                             break;
                     }
-                    
+
                 }
             }
 
@@ -233,18 +233,18 @@ namespace NasleGhalam.ServiceLayer.Services
         ///  گرفتن همه مبحث ها تا سطح 3
         /// </summary>
         /// <returns></returns>
-        public IList<TopicViewModel> 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        public IList<TopicViewModel>
+
+
+
+
+
+
+
+
+
+
+
             GetAll4LevelByLessonId(int id)
         {
             List<TopicViewModel> returnVal = new List<TopicViewModel>();
@@ -293,7 +293,7 @@ namespace NasleGhalam.ServiceLayer.Services
         {
             var topic = Mapper.Map<Topic>(topicViewModel);
             var hasRoot = _topics.Any(x => x.LessonId == topicViewModel.LessonId);
-
+       
             if (topicViewModel.ParentTopicId == 0 ||
                 topicViewModel.ParentTopicId == null)
             {
@@ -306,7 +306,7 @@ namespace NasleGhalam.ServiceLayer.Services
                 {
                     Message = "برای این درس مبحث ریشه ثبت شده است!(تنها یک مبحث ریشه برای هر درس قابل ثبت است.)"
                 };
-
+     
             _topics.Add(topic);
             var serverResult = _uow.CommitChanges(CrudType.Create, Title);
             var clientResult = Mapper.Map<ClientMessageResult>(serverResult);

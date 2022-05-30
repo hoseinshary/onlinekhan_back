@@ -40,7 +40,7 @@ namespace NasleGhalam.ViewModels.User
 
         public string UserPicturePath => $"/Api/User/GetPictureFile/{ProfilePic}".ToFullRelativePath();
 
-        
+
     }
 }
 

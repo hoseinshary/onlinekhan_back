@@ -10,6 +10,7 @@ using NasleGhalam.ViewModels.Topic;
 using NasleGhalam.ViewModels.User;
 using NasleGhalam.ViewModels.Writer;
 
+
 namespace NasleGhalam.ViewModels.Question
 {
     public class QuestionViewModel 
@@ -83,7 +84,7 @@ namespace NasleGhalam.ViewModels.Question
 
         public List<LookupViewModel> Lookup_AreaTypes { get; set; } = new List<LookupViewModel>();
 
-        public List<QuestionOptionViewModel> QuestionOptions { get; set; } = new List<QuestionOptionViewModel>();
+     
 
         public List<QuestionAnswerViewModel> QuestionAnswers { get; set; } = new List<QuestionAnswerViewModel>();
 

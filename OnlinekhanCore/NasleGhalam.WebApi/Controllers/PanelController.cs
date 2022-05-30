@@ -25,7 +25,7 @@ namespace NasleGhalam.WebApi.Controllers
         {
             var data = new
             {                
-                CountAllJudged =_questionService.CountAllJudgedByUserId(Request.GetUserId())
+              //  CountAllJudged =_questionService.CountAllJudgedByUserId(Request.GetUserId())
             };
 
             return Ok(data);

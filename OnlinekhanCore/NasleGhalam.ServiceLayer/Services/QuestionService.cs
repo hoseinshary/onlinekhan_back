@@ -36,8 +36,7 @@ namespace NasleGhalam.ServiceLayer.Services
         {
             _uow = uow;
             _questions = uow.Set<Question>();
-            _questionJudges = uow.Set<QuestionJudge>();
-            _questionAnswerJudges = uow.Set<QuestionAnswerJudge>();
+           
             _users = uow.Set<User>();
             _topicService = topicService;
 
@@ -65,7 +64,6 @@ namespace NasleGhalam.ServiceLayer.Services
             //    .FirstOrDefault();
             return _questions
                 .Where(x=>x.Deleted == false)
-                .Include(current => current.QuestionOptions)
                 .Include(current => current.Topics)
                 .Include(current => current.Topics.Select(x => x.Lesson))
                 .Include(current => current.Tags)
@@ -73,7 +71,6 @@ namespace NasleGhalam.ServiceLayer.Services
                 .Include(current => current.Writer)
                 .Include(current => current.QuestionAnswers)
                 .Include(current => current.Supervisors)
-                .Include(current => current.QuestionJudges)
 
                 .Where(current => current.Id == id)
                 .AsNoTracking()
@@ -153,36 +150,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
 
-        public IList<QuestionViewModel> GetAllByTopicIdsNoAnswerJudge(IEnumerable<int> ids, int userid, int rollLevel)
-        {
-
-            if (rollLevel < 3)
-            {
-                return _questions
-                    .Where(x => x.Deleted == false)
-                    .Where(current => current.Topics.Any(x => ids.Contains(x.Id)))
-                    //.Where(x => x.QuestionAnswers.All(y => y.QuestionAnswerJudges.Any()))
-                    .Where(x => x.QuestionAnswers.Any(y => y.QuestionAnswerJudges.Count < x.Topics.FirstOrDefault().Lesson.NumberOfJudges))
-
-                    .AsNoTracking()
-                    .AsEnumerable()
-                    .Select(Mapper.Map<QuestionViewModel>)
-                    .ToList();
-            }
-            else
-            {
-                return _questions
-                    .Where(x => x.Deleted == false)
-                    .Where(current => current.Topics.Any(x => ids.Contains(x.Id)))
-                    .Where(x => x.QuestionAnswers.All(y => y.QuestionAnswerJudges.All(z => z.UserId != userid)))
-                    .AsNoTracking()
-                    .AsEnumerable()
-                    .Select(Mapper.Map<QuestionViewModel>)
-                    .ToList();
-            }
-
-        }
-
+     
 
 
         /// <summary>
@@ -201,57 +169,11 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
 
-        /// <summary>
-        /// تعداد همه سوالات کارشناسی شده توسط یک کاربر
-        /// </summary>
-        /// <returns></returns>
-        public int CountAllJudgedByUserId(int id)
-        {
-            return _questions
-                .Where(x => x.Deleted == false)
-                .Where(current => current.QuestionJudges.Any(x => x.UserId == id))
-                .AsNoTracking()
-                .AsEnumerable()
-                .Count();
-        }
+  
 
 
 
-        /// <summary>
-        /// گرفتن همه سوالات کارشناسی شده توسط یک کاربر مربوط به درس
-        /// </summary>
-        /// <returns></returns>
-        public IList<QuestionViewModel> GetAllJudgedByUserIdByLessonId(int userId, int rolllevel, int lessonId)
-        {
-            if (rolllevel < 3)
-            {
-                return _questions
-                    .Where(x => x.Deleted == false)
-                    .Where(x => x.QuestionGroups.Any(y => y.LessonId == lessonId))
-                    .Where(x => x.QuestionJudges.Count >= x.QuestionGroups.FirstOrDefault().Lesson.NumberOfJudges)
-                    .OrderByDescending(x => x.Id)
-                    .AsNoTracking()
-                    .AsEnumerable()
-                    .Select(Mapper.Map<QuestionViewModel>)
-                    .ToList();
-
-            }
-            else
-            {
-                return _questions
-                    .Where(x => x.Deleted == false)
-                    .Where(current => current.QuestionJudges.Any(x => x.UserId == userId))
-                    .Where(x => x.QuestionGroups.Any(y => y.LessonId == lessonId))
-                    //.Where(x => x.QuestionJudges.Count >= x.Topics.FirstOrDefault().Lesson.NumberOfJudges)
-                    .OrderByDescending(x => x.Id)
-                    .AsNoTracking()
-                    .AsEnumerable()
-                    .Select(Mapper.Map<QuestionViewModel>)
-                    .ToList();
-
-
-            }
-        }
+       
 
         /// <summary>
         /// گرفتن همه سوالات کارشناسی شده توسط یک کاربر
@@ -262,7 +184,7 @@ namespace NasleGhalam.ServiceLayer.Services
             return _questions
                 .Where(x => x.Deleted == false)
                 .Where(current => current.IsActive)
-                .Where(current => current.QuestionGroups.Any(x => x.LessonId == id))
+                .Where(current => current.Topics.Any(x => x.LessonId == id))
                 .AsNoTracking()
                 .AsEnumerable()
                 .Select(Mapper.Map<QuestionViewModel>)
@@ -270,22 +192,7 @@ namespace NasleGhalam.ServiceLayer.Services
         }
 
 
-        /// <summary>
-        /// گرفتن همه سوالات کارشناسی شده توسط یک کاربر
-        /// </summary>
-        /// <returns></returns>
-        public IList<QuestionViewModel> GetAllUnActiveByLessonId(int id)
-        {
-            return _questions
-                .Where(x => x.Deleted == false)
-                .Where(current => !current.IsActive)
-                .Where(current => current.QuestionGroups.Any(x => x.LessonId == id))
-                .Where(x => x.QuestionJudges.Count >= x.QuestionGroups.FirstOrDefault().Lesson.NumberOfJudges)
-                .AsNoTracking()
-                .AsEnumerable()
-                .Select(Mapper.Map<QuestionViewModel>)
-                .ToList();
-        }
+  
 
         /// <summary>
         /// تعداد همه سوالات کارشناسی شده توسط یک کاربر
@@ -312,21 +219,6 @@ namespace NasleGhalam.ServiceLayer.Services
 
 
 
-        /// <summary>
-        /// گرفتن همه سوالات کارشناسی شده توسط یک کاربر
-        /// </summary>
-        /// <returns></returns>
-        public IList<QuestionViewModel> GetAllJudgedByUserId(int id)
-        {
-            return _questions
-                .Where(x => x.Deleted == false)
-                .Where(current => current.QuestionJudges.Any(x => x.UserId == id))
-                .OrderByDescending(x => x.Id)
-                .AsNoTracking()
-                .AsEnumerable()
-                .Select(Mapper.Map<QuestionViewModel>)
-                .ToList();
-        }
 
 
         /// <summary>
@@ -792,114 +684,19 @@ namespace NasleGhalam.ServiceLayer.Services
 
 
 
+  
 
-        /// <summary>
-        /// پاک کردن فایل های گزینه یک سوال 
-        /// </summary>
-        public static void DeleteOptionsOfQuestion(string FileName)
-        {
-            var filename1 = Encryption.Base64Encode(Encryption.Encrypt(1 + "-" + FileName));
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx");
-            }
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png");
-            }
-            filename1 = Encryption.Base64Encode(Encryption.Encrypt(2 + "-" + FileName));
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx");
-            }
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png");
-            }
-            filename1 = Encryption.Base64Encode(Encryption.Encrypt(3 + "-" + FileName));
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx");
-            }
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png");
-            }
-            filename1 = Encryption.Base64Encode(Encryption.Encrypt(0 + "-" + FileName));
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".docx");
-            }
-            if (File.Exists(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png"))
-            {
-                File.Delete(SitePath.GetQuestionOptionsAbsPath(filename1) + ".png");
-            }
-        }
+   
+
+
+ 
 
 
 
 
-        /// <summary>
-        /// ویرایش سوال
-        /// </summary>
-        /// <param name="questionViewModel"></param>
-        /// <param name="word"></param>
-        /// <returns></returns>
-        public ClientMessageResult Update(ViewModels.Question.QuestionUpdateViewModel questionViewModel)
-        {
-            var question = _questions
-                .Include(current => current.QuestionOptions)
-                .Include(current => current.Topics)
-                .Include(current => current.Tags)
-                .Include(current => current.Lookup_AreaTypes)
-                .Include(current => current.Supervisors)
-                .First(current => current.Id == questionViewModel.Id);
 
 
 
-            var previousFileName = questionViewModel.FileName;
-            Microsoft.Office.Interop.Word.Application app = null;
-            Document source = null;
-            string wordFilename = null;
-            var haveFileUpdate = false;
-            if (questionViewModel.FileBytes.Length > 0)
-            {
-                wordFilename = SitePath.GetQuestionGroupTempAbsPath(questionViewModel.FileName) + ".docx";
-                haveFileUpdate = true;
-                questionViewModel.FileName = Guid.NewGuid().ToString();
-
-
-                //save Doc file in temp memory
-                using (var ms = new MemoryStream(questionViewModel.FileBytes))
-                {
-                    using (var file = new FileStream(wordFilename, FileMode.Create, FileAccess.Write))
-                    {
-                        ms.WriteTo(file);
-                    }
-                }
-
-                // Open a doc file.
-                app = new Microsoft.Office.Interop.Word.Application();
-                source = app.Documents.Open(wordFilename);
-
-                //حذف عدد اول سوال
-                if (QuestionMaking.IsQuestionParagraph(source.Paragraphs[1].Range.Text))
-                {
-                    int i = 1;
-                    while (i < source.Paragraphs[1].Range.Characters.Count &&
-                           source.Paragraphs[1].Range.Characters[i].Text != "-")
-                    {
-                        source.Paragraphs[1].Range.Characters[i].Delete();
-                    }
-                    source.Paragraphs[1].Range.Characters[i].Delete();
-                }
-
-                foreach (Paragraph paragraph in source.Paragraphs)
-                {
-                    question.Context += paragraph.Range.Text;
-                }
-
-            }
 
             question.WriterId = questionViewModel.WriterId;
             question.Description = questionViewModel.Description;
