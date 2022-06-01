@@ -14,10 +14,7 @@ namespace Onlinekhan.SSO.DomainClasses.EntityConfigs
             Property(x => x.ObjectId).IsRequired();
             Property(x => x.ObjectValue).HasMaxLength(200)
                 .HasColumnType("nvarchar(max)").IsRequired();
-            HasRequired(x => x.User)
-                .WithMany(x => x.Logs)
-                .HasForeignKey(x => x.UserId)
-                .WillCascadeOnDelete(false);
+           
         }
     }
 }

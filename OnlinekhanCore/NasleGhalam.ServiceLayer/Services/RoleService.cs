@@ -24,6 +24,15 @@ namespace NasleGhalam.ServiceLayer.Services
             _actionService = actionService;
         }
 
+        public RoleViewModel GetByIdForSSO(int id)
+        {
+            return _roles
+                .Where(current => current.Id == id)
+                .AsNoTracking()
+                .AsEnumerable()
+                .Select(Mapper.Map<RoleViewModel>)
+                .FirstOrDefault();
+        }
         /// <summary>
         /// گرفتن  نقش با آی دی
         /// </summary>

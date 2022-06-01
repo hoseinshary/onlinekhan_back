@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using AutoMapper;
+using Newtonsoft.Json;
 using Onlinekhan.SSO.Common;
 using Onlinekhan.SSO.DataAccess.Context;
 using Onlinekhan.SSO.DomainClasses.Entities;
 using Onlinekhan.SSO.ServiceLayer.Configs;
 using Onlinekhan.SSO.ServiceLayer.Jwt;
+using Onlinekhan.SSO.ViewModels.Role;
 using Onlinekhan.SSO.ViewModels.User;
 
 namespace Onlinekhan.SSO.Service.Services
@@ -38,10 +41,10 @@ namespace Onlinekhan.SSO.Service.Services
         {
             return _users
                 .Include(current => current.City)
-                .Include(current => current.Role)
+               // .Include(current => current.Role)
                 .Where(current => current.Id == id)
-                .Where(current => current.Role.Level > userRoleLevel)
-                .Where(current => current.Role.UserType == UserType.Organ)
+                //.Where(current => current.Role.Level > userRoleLevel)
+                //.Where(current => current.Role.UserType == UserType.Organ)
                 .AsNoTracking()
                 .AsEnumerable()
                 .Select(Mapper.Map<UserViewModel>)
@@ -58,7 +61,7 @@ namespace Onlinekhan.SSO.Service.Services
         {
             return _users
                 .Include(current => current.City)
-                .Include(current => current.Role)
+                //.Include(current => current.Role)
                 .Where(current => current.Id == id)
                 .AsNoTracking()
                 .AsEnumerable()
@@ -76,7 +79,7 @@ namespace Onlinekhan.SSO.Service.Services
         public IList<UserViewModel> GetAllSupervisors()
         {
             return _users
-                .Where(current => current.Role.Level == 3)
+                //.Where(current => current.Role.Level == 3)
                 .AsNoTracking()
                 .AsEnumerable()
                 .Select(Mapper.Map<UserViewModel>)
@@ -94,9 +97,9 @@ namespace Onlinekhan.SSO.Service.Services
         {
             return _users
                 .Include(current => current.City)
-                .Include(current => current.Role)
-                .Where(current => current.Role.Level > userRoleLevel)
-                .Where(current => current.Role.UserType == UserType.Organ)
+               // .Include(current => current.Role)
+                //.Where(current => current.Role.Level > userRoleLevel)
+                //.Where(current => current.Role.UserType == UserType.Organ)
                 .AsNoTracking()
                 .AsEnumerable()
                 .Select(Mapper.Map<UserViewModel>)
@@ -114,7 +117,7 @@ namespace Onlinekhan.SSO.Service.Services
         public IList<UserViewModel> Search(string nationalNo, string family, string name, byte userRoleLevel)
         {
             return _users
-                .Where(current => current.Role.Level > userRoleLevel)
+               // .Where(current => current.Role.Level > userRoleLevel)
                 .Where(current => string.IsNullOrEmpty(nationalNo) || current.NationalNo.Contains(nationalNo))
                 .Where(current => string.IsNullOrEmpty(family) || current.Family.Contains(family))
                 .Where(current => string.IsNullOrEmpty(name) || current.Name.Contains(name))
@@ -170,50 +173,50 @@ namespace Onlinekhan.SSO.Service.Services
         public ClientMessageResult Register(UserCreateViewModel userViewModel)
         {
             var user = Mapper.Map<User>(userViewModel);
-            if (userViewModel.RoleId == -1)
-            {
-                //دبیر
-                //var teacher = Mapper.Map<Teacher>(userViewModel);
-                var teacher = new Teacher();
-                teacher.User = user;
-                teacher.User.LastLogin = DateTime.Now;
-                teacher.User.RoleId = 2015;
-                _teachers.Add(teacher);
+            //if (userViewModel.RoleId == -1)
+            //{
+            //    //دبیر
+            //    //var teacher = Mapper.Map<Teacher>(userViewModel);
+            //    var teacher = new Teacher();
+            //    teacher.User = user;
+            //    teacher.User.LastLogin = DateTime.Now;
+            //    teacher.User.RoleId = 2015;
+            //    _teachers.Add(teacher);
 
-                // user.RoleId =2015;
-            }
-            else if (userViewModel.RoleId == -2)
-            {
-                //دانش آموز
+            //    // user.RoleId =2015;
+            //}
+            //else if (userViewModel.RoleId == -2)
+            //{
+            //    //دانش آموز
 
-                //var student = Mapper.Map<Student>(userViewModel);
-                var student = new Student();
-                student.User = user;
-                student.User.LastLogin = DateTime.Now;
+            //    //var student = Mapper.Map<Student>(userViewModel);
+            //    var student = new Student();
+            //    student.User = user;
+            //    student.User.LastLogin = DateTime.Now;
 
-                student.User.RoleId = 2005;
-                _students.Add(student);
-
-
+            //    student.User.RoleId = 2005;
+            //    _students.Add(student);
 
 
 
 
 
-            }
-            else if (userViewModel.RoleId == -3)
-            {
-                //مشاور
-                //user.RoleId = 2010;
-            }
-            else
-            {
-                return new ClientMessageResult()
-                {
-                    Message = $"خطا امنیتی در سطح دسترسی!",
-                    MessageType = MessageType.Error
-                };
-            }
+
+
+            //}
+            //else if (userViewModel.RoleId == -3)
+            //{
+            //    //مشاور
+            //    //user.RoleId = 2010;
+            //}
+            //else
+            //{
+            //    return new ClientMessageResult()
+            //    {
+            //        Message = $"خطا امنیتی در سطح دسترسی!",
+            //        MessageType = MessageType.Error
+            //    };
+            //}
 
             //user.IsActive = true;
             //user.IsAdmin = false;
@@ -246,7 +249,16 @@ namespace Onlinekhan.SSO.Service.Services
         public ClientMessageResult Create(UserCreateViewModel userViewModel, byte userRoleLevel)
         {
             // سطح نقش باید بزرگتر از سطح نقش کاربر ویرایش کننده باشد
-            var role = _roleService.Value.GetById(userViewModel.RoleId, userRoleLevel);
+            var data = CoreApi.GetFromCore("/Role/GetByIdForSSO/", userViewModel.RoleId.ToString());
+            if (string.IsNullOrEmpty(data))
+            {
+                return new ClientMessageResult()
+                {
+                    Message = "نقش یافت نگردید",
+                    MessageType = MessageType.Error
+                };
+            }
+            var role = JsonConvert.DeserializeObject<RoleViewModel>(data);
             if (role.Level <= userRoleLevel)
             {
                 return new ClientMessageResult()
@@ -290,8 +302,8 @@ namespace Onlinekhan.SSO.Service.Services
         public ClientMessageResult Update(UserUpdateViewModel userViewModel, byte userRoleLevel)
         {
             // سطح نقش باید بزرگتر از سطح نقش کاربر ویرایش کننده باشد
-            var role = _roleService.Value.GetById(userViewModel.RoleId, userRoleLevel);
-            if (role == null)
+            var data = CoreApi.GetFromCore("/Role/GetByIdForSSO/", userViewModel.RoleId.ToString());
+            if (string.IsNullOrEmpty(data))
             {
                 return new ClientMessageResult()
                 {
@@ -299,6 +311,8 @@ namespace Onlinekhan.SSO.Service.Services
                     MessageType = MessageType.Error
                 };
             }
+            var role = JsonConvert.DeserializeObject<RoleViewModel>(data);
+            
 
             if (role.Level <= userRoleLevel)
             {
@@ -371,8 +385,8 @@ namespace Onlinekhan.SSO.Service.Services
         public ClientMessageResult UpdateUser(UserUpdateViewModel userViewModel, byte userRoleLevel)
         {
             // سطح نقش باید بزرگتر از سطح نقش کاربر ویرایش کننده باشد
-            var role = _roleService.Value.GetByIdPrivate(userViewModel.RoleId, userRoleLevel);
-            if (role == null)
+            var data = CoreApi.GetFromCore("/Role/GetByIdForSSO/", userViewModel.RoleId.ToString());
+            if (string.IsNullOrEmpty(data))
             {
                 return new ClientMessageResult()
                 {
@@ -380,6 +394,8 @@ namespace Onlinekhan.SSO.Service.Services
                     MessageType = MessageType.Error
                 };
             }
+            var role = JsonConvert.DeserializeObject<RoleViewModel>(data);
+            
 
             if (role.Level < userRoleLevel)
             {
@@ -483,8 +499,8 @@ namespace Onlinekhan.SSO.Service.Services
         public ClientMessageResult UpdateImage(UserViewModel userViewModel, byte userRoleLevel)
         {
             // سطح نقش باید بزرگتر از سطح نقش کاربر ویرایش کننده باشد
-            var role = _roleService.Value.GetByIdPrivate(userViewModel.RoleId, userRoleLevel);
-            if (role == null)
+            var data = CoreApi.GetFromCore("/Role/GetByIdForSSO/", userViewModel.RoleId.ToString());
+            if (string.IsNullOrEmpty(data))
             {
                 return new ClientMessageResult()
                 {
@@ -492,6 +508,7 @@ namespace Onlinekhan.SSO.Service.Services
                     MessageType = MessageType.Error
                 };
             }
+            var role = JsonConvert.DeserializeObject<RoleViewModel>(data);
 
             if (role.Level < userRoleLevel)
             {
@@ -561,7 +578,6 @@ namespace Onlinekhan.SSO.Service.Services
             {
                 MessageType = MessageType.Error
             };
-
             var lstUsr = _users
                 .Where(current => current.Username == login.UserName)
                 .Where(current => current.Password == login.Password)
@@ -576,60 +592,34 @@ namespace Onlinekhan.SSO.Service.Services
                 }
                 else
                 {
-                    loginResult.SubMenus = _actionService.Value.GetSubMenu(usr.Role.SumOfActionBit);
-                    if (loginResult.SubMenus.Count == 0)
+                    //SSO Login
+                    var encryption = Encryption.Encrypt(login.UserName + login.Password);
+                    if (login.Site.Id == 2)
                     {
-                        loginResult.Message = "شما به صفحه ای دسترسی ندارید";
-                    }
-                    else
-                    {
-                        var defaultPage = "";
-
-                        if (lstUsr[0].Role.Level == 3)
+                        UserTokenViewModel userToken = new UserTokenViewModel(){EncryptedString = encryption,UserId = usr.Id};
+                        var data = CoreApi.PostToCore("/User/GetUserToken/",JsonConvert.SerializeObject(userToken));
+                        if (string.IsNullOrEmpty(data))
                         {
-                            defaultPage = "/panel/expertpanel";
-                        }
-                        else if (lstUsr[0].Role.Level < 3)
-                        {
-                            defaultPage = "/panel/adminpanel";
-                        }
-                        else if (lstUsr[0].Role.Id == 2015)
-                        {
-                            defaultPage = "/panel/teacherPanel";
-                        }
-                        else if (lstUsr[0].Role.Level == 100)
-                        {
-                            defaultPage = "/panel/studentPanel";
+                                loginResult.Message = "عدم دسترسی.";
                         }
                         else
                         {
-
-                            foreach (var item in loginResult.SubMenus)
-                            {
-                                if (item.EnName == "/User")
-                                {
-                                    defaultPage = item.EnName;
-                                    break;
-                                }
-                            }
-
-                            if (string.IsNullOrEmpty(defaultPage))
-                            {
-                                defaultPage = loginResult.SubMenus[0].EnName;
-                            }
+                            loginResult = JsonConvert.DeserializeObject<LoginResultViewModel>(data);
                         }
-
-                        loginResult.Message = "ورود موفقیت آمیز";
-                        loginResult.MessageType = MessageType.Success;
-
-                        loginResult.Menus = _actionService.Value.GetMenu(usr.Role.SumOfActionBit);
-                        loginResult.DefaultPage = defaultPage;
-
-                        loginResult.FullName = usr.Name + " " + usr.Family;
-                        loginResult.ProfilePic = $"/Api/User/GetPictureFile/{usr.ProfilePic}".ToFullRelativePath();
-
-                        loginResult.Token = JsonWebToken.CreateToken(usr.Role.Level,
-                            usr.IsAdmin, usr.Id, usr.Role.SumOfActionBit, usr.Role.UserType);
+                        
+                    }
+                    else if (login.Site.Id == 3)
+                    {
+                        UserTokenViewModel userToken = new UserTokenViewModel(){EncryptedString = encryption,UserId = usr.Id};
+                        var data = QuestionApi.PostToQuestion("/User/GetUserToken/",JsonConvert.SerializeObject(userToken));
+                        if (string.IsNullOrEmpty(data))
+                        {
+                            loginResult.Message = "عدم دسترسی.";
+                        }
+                        else
+                        {
+                            loginResult = JsonConvert.DeserializeObject<LoginResultViewModel>(data);
+                        }
                     }
                 }
             }

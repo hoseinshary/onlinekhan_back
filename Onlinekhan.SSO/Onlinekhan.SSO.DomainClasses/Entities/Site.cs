@@ -11,7 +11,7 @@ namespace Onlinekhan.SSO.DomainClasses.Entities
     {
         public Site()
         {
-            Users = new HashSet<User>();
+            //Users = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace Onlinekhan.SSO.DomainClasses.Entities
 
         public string Name { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        //public ICollection<User> Users { get; set; }
 
     }
 }

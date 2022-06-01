@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NasleGhalam.WebApi.SmsPanelService {
+namespace Onlinekhan.SSO.WebApi.SmsPanelService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -17,24 +17,24 @@ namespace NasleGhalam.WebApi.SmsPanelService {
         
         // CODEGEN: Generating message contract since element name Username from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoSendCode", ReplyAction="*")]
-        NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse AutoSendCode(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest request);
+        Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse AutoSendCode(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoSendCode", ReplyAction="*")]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse> AutoSendCodeAsync(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest request);
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse> AutoSendCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest request);
         
         // CODEGEN: Generating message contract since element name Username from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SendMessageWithCode", ReplyAction="*")]
-        NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse SendMessageWithCode(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest request);
+        Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse SendMessageWithCode(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SendMessageWithCode", ReplyAction="*")]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse> SendMessageWithCodeAsync(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest request);
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse> SendMessageWithCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest request);
         
         // CODEGEN: Generating message contract since element name Username from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckSendCode", ReplyAction="*")]
-        NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse CheckSendCode(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest request);
+        Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse CheckSendCode(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckSendCode", ReplyAction="*")]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse> CheckSendCodeAsync(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest request);
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse> CheckSendCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -44,12 +44,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class AutoSendCodeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AutoSendCode", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequestBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequestBody Body;
         
         public AutoSendCodeRequest() {
         }
         
-        public AutoSendCodeRequest(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequestBody Body) {
+        public AutoSendCodeRequest(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -90,12 +90,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class AutoSendCodeResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AutoSendCodeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponseBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponseBody Body;
         
         public AutoSendCodeResponse() {
         }
         
-        public AutoSendCodeResponse(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponseBody Body) {
+        public AutoSendCodeResponse(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -124,12 +124,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class SendMessageWithCodeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SendMessageWithCode", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequestBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequestBody Body;
         
         public SendMessageWithCodeRequest() {
         }
         
-        public SendMessageWithCodeRequest(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequestBody Body) {
+        public SendMessageWithCodeRequest(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -170,12 +170,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class SendMessageWithCodeResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SendMessageWithCodeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponseBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponseBody Body;
         
         public SendMessageWithCodeResponse() {
         }
         
-        public SendMessageWithCodeResponse(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponseBody Body) {
+        public SendMessageWithCodeResponse(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -204,12 +204,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class CheckSendCodeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="CheckSendCode", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequestBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequestBody Body;
         
         public CheckSendCodeRequest() {
         }
         
-        public CheckSendCodeRequest(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequestBody Body) {
+        public CheckSendCodeRequest(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -250,12 +250,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     public partial class CheckSendCodeResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="CheckSendCodeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponseBody Body;
+        public Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponseBody Body;
         
         public CheckSendCodeResponse() {
         }
         
-        public CheckSendCodeResponse(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponseBody Body) {
+        public CheckSendCodeResponse(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -278,12 +278,12 @@ namespace NasleGhalam.WebApi.SmsPanelService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface FastSendSoapChannel : NasleGhalam.WebApi.SmsPanelService.FastSendSoap, System.ServiceModel.IClientChannel {
+    public interface FastSendSoapChannel : Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class FastSendSoapClient : System.ServiceModel.ClientBase<NasleGhalam.WebApi.SmsPanelService.FastSendSoap>, NasleGhalam.WebApi.SmsPanelService.FastSendSoap {
+    public partial class FastSendSoapClient : System.ServiceModel.ClientBase<Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap>, Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap {
         
         public FastSendSoapClient() {
         }
@@ -305,96 +305,96 @@ namespace NasleGhalam.WebApi.SmsPanelService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse NasleGhalam.WebApi.SmsPanelService.FastSendSoap.AutoSendCode(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest request) {
+        Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.AutoSendCode(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest request) {
             return base.Channel.AutoSendCode(request);
         }
         
         public long AutoSendCode(string Username, string Password, string ReciptionNumber, string Footer) {
-            NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequestBody();
+            Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Footer = Footer;
-            NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse retVal = ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).AutoSendCode(inValue);
+            Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse retVal = ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).AutoSendCode(inValue);
             return retVal.Body.AutoSendCodeResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse> NasleGhalam.WebApi.SmsPanelService.FastSendSoap.AutoSendCodeAsync(NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest request) {
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse> Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.AutoSendCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest request) {
             return base.Channel.AutoSendCodeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.AutoSendCodeResponse> AutoSendCodeAsync(string Username, string Password, string ReciptionNumber, string Footer) {
-            NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.AutoSendCodeRequestBody();
+        public System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeResponse> AutoSendCodeAsync(string Username, string Password, string ReciptionNumber, string Footer) {
+            Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.AutoSendCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Footer = Footer;
-            return ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).AutoSendCodeAsync(inValue);
+            return ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).AutoSendCodeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse NasleGhalam.WebApi.SmsPanelService.FastSendSoap.SendMessageWithCode(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest request) {
+        Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.SendMessageWithCode(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest request) {
             return base.Channel.SendMessageWithCode(request);
         }
         
         public long SendMessageWithCode(string Username, string Password, string ReciptionNumber, string Code) {
-            NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequestBody();
+            Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Code = Code;
-            NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse retVal = ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).SendMessageWithCode(inValue);
+            Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse retVal = ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).SendMessageWithCode(inValue);
             return retVal.Body.SendMessageWithCodeResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse> NasleGhalam.WebApi.SmsPanelService.FastSendSoap.SendMessageWithCodeAsync(NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest request) {
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse> Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.SendMessageWithCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest request) {
             return base.Channel.SendMessageWithCodeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeResponse> SendMessageWithCodeAsync(string Username, string Password, string ReciptionNumber, string Code) {
-            NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.SendMessageWithCodeRequestBody();
+        public System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeResponse> SendMessageWithCodeAsync(string Username, string Password, string ReciptionNumber, string Code) {
+            Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.SendMessageWithCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Code = Code;
-            return ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).SendMessageWithCodeAsync(inValue);
+            return ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).SendMessageWithCodeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse NasleGhalam.WebApi.SmsPanelService.FastSendSoap.CheckSendCode(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest request) {
+        Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.CheckSendCode(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest request) {
             return base.Channel.CheckSendCode(request);
         }
         
         public bool CheckSendCode(string Username, string Password, string ReciptionNumber, string Code) {
-            NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequestBody();
+            Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Code = Code;
-            NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse retVal = ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).CheckSendCode(inValue);
+            Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse retVal = ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).CheckSendCode(inValue);
             return retVal.Body.CheckSendCodeResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse> NasleGhalam.WebApi.SmsPanelService.FastSendSoap.CheckSendCodeAsync(NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest request) {
+        System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse> Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap.CheckSendCodeAsync(Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest request) {
             return base.Channel.CheckSendCodeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<NasleGhalam.WebApi.SmsPanelService.CheckSendCodeResponse> CheckSendCodeAsync(string Username, string Password, string ReciptionNumber, string Code) {
-            NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest inValue = new NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequest();
-            inValue.Body = new NasleGhalam.WebApi.SmsPanelService.CheckSendCodeRequestBody();
+        public System.Threading.Tasks.Task<Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeResponse> CheckSendCodeAsync(string Username, string Password, string ReciptionNumber, string Code) {
+            Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest inValue = new Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequest();
+            inValue.Body = new Onlinekhan.SSO.WebApi.SmsPanelService.CheckSendCodeRequestBody();
             inValue.Body.Username = Username;
             inValue.Body.Password = Password;
             inValue.Body.ReciptionNumber = ReciptionNumber;
             inValue.Body.Code = Code;
-            return ((NasleGhalam.WebApi.SmsPanelService.FastSendSoap)(this)).CheckSendCodeAsync(inValue);
+            return ((Onlinekhan.SSO.WebApi.SmsPanelService.FastSendSoap)(this)).CheckSendCodeAsync(inValue);
         }
     }
 }

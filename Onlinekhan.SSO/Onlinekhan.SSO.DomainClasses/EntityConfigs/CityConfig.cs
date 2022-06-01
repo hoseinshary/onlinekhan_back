@@ -3,14 +3,17 @@ using Onlinekhan.SSO.DomainClasses.Entities;
 
 namespace Onlinekhan.SSO.DomainClasses.EntityConfigs
 {
-    public class RoleConfig : EntityTypeConfiguration<Role>
+    public class CityConfig : EntityTypeConfiguration<City>
     {
-        public RoleConfig()
+        public CityConfig()
         {
             HasKey(x => x.Id);
             Property(x => x.Name).HasMaxLength(50).IsRequired();
-            HasIndex(x => x.Name).IsUnique().HasName("UK_Role_Name");
-            Property(x => x.SumOfActionBit).HasMaxLength(300).IsRequired();
+
+            HasRequired(x => x.Province)
+                .WithMany(x => x.Cities)
+                .HasForeignKey(x => x.ProvinceId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

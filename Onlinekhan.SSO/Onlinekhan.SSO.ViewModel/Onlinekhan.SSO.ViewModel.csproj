@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Onlinekhan.SSO.ViewModel</RootNamespace>
     <AssemblyName>Onlinekhan.SSO.ViewModel</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,11 +45,14 @@
   <ItemGroup>
     <Compile Include="Actions\MenuViewModel.cs" />
     <Compile Include="Actions\SunMenuViewModel.cs" />
-    <Compile Include="ErrorResources.Designer.cs" />
+    <Compile Include="City\CityCreateViewModel.cs" />
+    <Compile Include="City\CityUpdateViewModel.cs" />
+    <Compile Include="City\CityViewModel.cs" />
     <Compile Include="Log\BrowserInfoViewModel.cs" />
     <Compile Include="Log\LogGetAllViewModel.cs" />
     <Compile Include="Log\LogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Province\ProvinceViewModel.cs" />
     <Compile Include="Role\RoleAccessViewModel.cs" />
     <Compile Include="Role\RoleCreateViewModel.cs" />
     <Compile Include="Role\RoleUpdateViewModel.cs" />
@@ -60,21 +64,33 @@
     <Compile Include="User\UserCreateViewModel .cs" />
     <Compile Include="User\UserPreRegisterViewModel.cs" />
     <Compile Include="User\UserRegisterViewModel.cs" />
+    <Compile Include="User\UserTokenViewModel.cs" />
     <Compile Include="User\UserUpdateViewModel.cs" />
     <Compile Include="User\UserViewModel.cs" />
     <Compile Include="_Attributes\MinLengthExcludeEmptyAndNullAttribute.cs" />
     <Compile Include="_Attributes\NationalNoAttribute.cs" />
     <Compile Include="_Attributes\RequiredDdlAttribute.cs" />
+    <Compile Include="ErrorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Onlinekhan.SSO.Common\Onlinekhan.SSO.Common.csproj">
       <Project>{958B7B46-858B-4241-BE05-11F907B2CA92}</Project>
       <Name>Onlinekhan.SSO.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Onlinekhan.SSO.DomainClasses\Onlinekhan.SSO.DomainClasses.csproj">
+      <Project>{90d41622-5aa2-47df-ae1b-1f76b0fa1948}</Project>
+      <Name>Onlinekhan.SSO.DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ErrorResources.resx" />
+    <EmbeddedResource Include="ErrorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

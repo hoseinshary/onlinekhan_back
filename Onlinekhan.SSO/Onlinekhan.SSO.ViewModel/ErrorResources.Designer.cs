@@ -39,7 +39,7 @@ namespace Onlinekhan.SSO.ViewModels {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Onlinekhan.SSO.ViewModels.ErrorResources", typeof(ErrorResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Onlinekhan.SSO.ViewModel.ErrorResources", typeof(ErrorResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

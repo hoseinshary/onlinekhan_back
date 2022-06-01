@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Web.Http;
 using NasleGhalam.Common;
 using NasleGhalam.ServiceLayer.Services;
 using NasleGhalam.ViewModels.Role;
@@ -28,6 +29,16 @@ namespace NasleGhalam.WebApi.Controllers
             
 
             return Ok(_roleService.GetAll(Request.GetRoleLevel()));
+        }
+        [HttpGet]
+        public IHttpActionResult GetByIdForSSO(int id)
+        {
+            var role = _roleService.GetByIdForSSO(id);
+            if (role == null)
+            {
+                return NotFound();
+            }
+            return Ok(role);
         }
 
         [HttpGet, CheckUserAccess(ActionBits.RoleReadAccess)]

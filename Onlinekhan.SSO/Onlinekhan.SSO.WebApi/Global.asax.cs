@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Elmah.Contrib.WebApi;
-using NasleGhalam.Common;
-using NasleGhalam.ServiceLayer.Configs;
+using Onlinekhan.SSO.Common;
+using Onlinekhan.SSO.ServiceLayer.Configs;
 using StructureMap.Web.Pipeline;
 
 namespace Onlinekhan.SSO.WebApi

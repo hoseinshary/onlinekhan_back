@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Web;
-using NasleGhalam.Common;
+using Onlinekhan.SSO.Common;
 
 namespace Onlinekhan.SSO.WebApi.Extensions
 {

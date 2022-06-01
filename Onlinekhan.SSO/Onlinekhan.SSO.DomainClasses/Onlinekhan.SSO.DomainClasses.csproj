@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Onlinekhan.SSO.DomainClasses</RootNamespace>
     <AssemblyName>Onlinekhan.SSO.DomainClasses</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,14 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Login.cs" />
-    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Province.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="EntityConfigs\CityConfig.cs" />
     <Compile Include="EntityConfigs\LogConfig.cs" />
     <Compile Include="EntityConfigs\LoginConfig.cs" />
-    <Compile Include="EntityConfigs\RoleConfig.cs" />
+    <Compile Include="EntityConfigs\ProvinceConfig.cs" />
     <Compile Include="EntityConfigs\SiteConfig.cs" />
     <Compile Include="EntityConfigs\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
