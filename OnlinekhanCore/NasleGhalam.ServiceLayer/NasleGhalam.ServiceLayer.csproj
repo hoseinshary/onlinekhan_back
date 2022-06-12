@@ -94,6 +94,7 @@
     <Compile Include="MapperProfile\ProgramProfile.cs" />
     <Compile Include="MapperProfile\PublicProfile.cs" />
     <Compile Include="MapperProfile\StudentMajorlistProfile.cs" />
+    <Compile Include="MapperProfile\TagProfile - Copy.cs" />
     <Compile Include="MapperProfile\TagProfile.cs" />
     <Compile Include="MapperProfile\StudentProfile.cs" />
     <Compile Include="MapperProfile\TeacherGroupProfile.cs" />
@@ -111,9 +112,11 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\TeacherGroupService.cs" />
     <Compile Include="Services\StudentMajorlistService.cs" />
+    <Compile Include="Services\ErrorService.cs" />
     <Compile Include="Services\TeacherService.cs" />
     <Compile Include="Services\TagService.cs" />
     <Compile Include="Services\TopicService.cs" />
+    <Compile Include="Services\SaleService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Content Include="%40CodeTemplates\ServiceLayerGenerator.cs">
       <AutoGen>True</AutoGen>

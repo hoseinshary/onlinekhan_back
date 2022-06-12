@@ -51,6 +51,7 @@
     <Compile Include="Entities\AssayAnswerSheet.cs" />
     <Compile Include="Entities\AssayQuestion.cs" />
     <Compile Include="Entities\EducationTree.cs" />
+    <Compile Include="Entities\Error.cs" />
     <Compile Include="Entities\LessonDepartment.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Lookup.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="EntityConfigs\AssayConfig.cs" />
     <Compile Include="EntityConfigs\AssayQuestionConfig.cs" />
     <Compile Include="EntityConfigs\AssaySchaduleConfig.cs" />
+    <Compile Include="EntityConfigs\ErrorConfig.cs" />
     <Compile Include="EntityConfigs\EducationTreeConfig.cs" />
     <Compile Include="EntityConfigs\LessonDepartmentConfig.cs" />
     <Compile Include="EntityConfigs\LogConfig.cs" />

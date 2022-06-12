@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using NasleGhalam.ServiceLayer.Configs;
+using NasleGhalam.WebApi.App_Start;
 using NasleGhalam.WebApi.ModelBinderAndFormatter;
 using Newtonsoft.Json;
 
@@ -18,7 +20,8 @@ namespace NasleGhalam.WebApi
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator), new StructureMapHttpControllerActivator(container));
             //------------------------------
-
+            config.Services.Replace(typeof(IHttpControllerSelector), new HttpNotFoundAwareDefaultHttpControllerSelector(config));
+            config.Services.Replace(typeof(IHttpActionSelector), new HttpNotFoundAwareControllerActionSelector());
 
             //var cors = new EnableCorsAttribute("http://localhost:8080,http://192.168.1.62,http://151.233.58.224:8080", "*", "*");
             var cors = new EnableCorsAttribute("*", "*", "*");
@@ -44,11 +47,22 @@ namespace NasleGhalam.WebApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+
+            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
+            //Error Handling
+            config.Routes.MapHttpRoute(
+                name: "Error404",
+                routeTemplate: "{*url}",
+                defaults: new { controller = "Error", action = "Handle404" }
+            );
+            //---------
         }
     }
 }

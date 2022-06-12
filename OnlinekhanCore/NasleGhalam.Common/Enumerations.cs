@@ -232,6 +232,13 @@ namespace NasleGhalam.Common
 
     }
 
+    public enum SaleStatus
+    {
+        [Display(Name = "پرداخت نشده")]
+        Pending = 0,
+        [Display(Name = "پرداخت شده")]
+        Completed = 1
+    }
     //public enum AnswerType : byte
     //{
     //}

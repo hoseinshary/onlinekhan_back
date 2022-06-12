@@ -71,6 +71,8 @@
     <Compile Include="EducationTree\EducationTreeCreateViewModel.cs" />
     <Compile Include="EducationTree\EducationTreeUpdateViewModel.cs" />
     <Compile Include="EducationTree\EducationTreeViewModel.cs" />
+    <Compile Include="Error\ErrorCreateViewModel.cs" />
+    <Compile Include="Error\ErrorViewModel.cs" />
     <Compile Include="LessonDepartment\LessonDepartmentAssignViewModel.cs" />
     <Compile Include="LessonDepartment\LessonDepatmentViewModel.cs" />
     <Compile Include="Lesson\LessonUpdateViewModel.cs" />
@@ -104,6 +106,9 @@
     <Compile Include="Ratio\RatioViewModel.cs" />
     <Compile Include="Role\RoleUpdateViewModel.cs" />
     <Compile Include="Role\RoleCreateViewModel.cs" />
+    <Compile Include="Sale\SaleCreateViewModel.cs" />
+    <Compile Include="Sale\ChangeStatusViewModel.cs" />
+    <Compile Include="Sale\SaleResultViewModel.cs" />
     <Compile Include="Tag\TagViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupCreateViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupUpdateViewModel.cs" />

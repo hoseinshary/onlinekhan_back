@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NasleGhalam.Common;
 
 namespace NasleGhalam.DomainClasses.Entities
 {
@@ -23,6 +24,8 @@ namespace NasleGhalam.DomainClasses.Entities
 
         public string Code { get; set; }
 
+        public string PaidCode { get; set; }
+        public SaleStatus Status { get; set; }
         public ICollection<Sale_Package> Sale_Packages { get; set; }
 
 
