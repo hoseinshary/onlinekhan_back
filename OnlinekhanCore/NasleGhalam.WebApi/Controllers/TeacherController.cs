@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using NasleGhalam.Common;
+using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ServiceLayer.Services;
 using NasleGhalam.WebApi.FilterAttribute;
 using NasleGhalam.ViewModels.Teacher;
@@ -38,7 +39,17 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(teacher);
         }
-
+        [HttpPost]
+        [CheckModelValidation]
+        public IHttpActionResult CreateTemp(int userId)
+        {
+            var msgRes = _teacherService.CreateTemp(userId);
+            if (msgRes.MessageType == MessageType.Success)
+            {
+                _logService.Create(CrudType.Create, "Teacher", msgRes.Obj, Request.GetUserId());
+            }
+            return Ok(msgRes);
+        }
         [HttpPost]
         [CheckUserAccess(ActionBits.TeacherCreateAccess)]
         [CheckModelValidation]

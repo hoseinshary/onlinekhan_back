@@ -26,7 +26,7 @@ namespace NasleGhalam.WebApi.Controllers
             return Ok(_studentMajorlistService.GetAll());
         }
 
-        [CheckUserAccess(ActionBits.StudentMajorListReadAccess)]
+        [CheckUserAccess()]
         public IHttpActionResult GetById(int id)
         {
             var studentMajorlist = _studentMajorlistService.GetById(id);
@@ -37,7 +37,7 @@ namespace NasleGhalam.WebApi.Controllers
             return Ok(studentMajorlist);
         }
 
-        [CheckUserAccess(ActionBits.StudentMajorListReadAccess)]
+        [CheckUserAccess()]
         public IHttpActionResult GetStudentById()
         {
             var studentMajorlist = _studentMajorlistService.GetStudentById(Request.GetUserId(), Request.GetRoleLevel());
@@ -51,7 +51,7 @@ namespace NasleGhalam.WebApi.Controllers
 
 
 
-        [CheckUserAccess(ActionBits.StudentMajorListReadAccess)]
+        [CheckUserAccess()]
         public IHttpActionResult GetAllMajors()
         {
             var studentMajorlist = _studentMajorlistService.GetAllMajors();
@@ -63,7 +63,7 @@ namespace NasleGhalam.WebApi.Controllers
         }
 
 
-        [CheckUserAccess(ActionBits.StudentMajorListReadAccess)]
+        [CheckUserAccess()]
         public IHttpActionResult GetMajorById(int id)
         {
             var studentMajorlist = _studentMajorlistService.GetMajorById(id);
@@ -75,7 +75,7 @@ namespace NasleGhalam.WebApi.Controllers
         }
 
 
-        [CheckUserAccess(ActionBits.StudentMajorListReadAccess)]
+        [CheckUserAccess()]
         [HttpPost]
         public IHttpActionResult GetMajorsBySearch(MajorSearchViewModel majorSearch)
         {
@@ -92,10 +92,7 @@ namespace NasleGhalam.WebApi.Controllers
         [CheckModelValidation]
         public IHttpActionResult Create(StudentMajorlistCreateViewModel studentMajorlistViewModel)
         {
-            if(Request.GetRoleLevel() != 5)
-                studentMajorlistViewModel.StudentId = 1;
-            else
-                studentMajorlistViewModel.StudentId = Request.GetUserId();
+            studentMajorlistViewModel.StudentId = Request.GetUserId();
             return Ok(_studentMajorlistService.Create(studentMajorlistViewModel));
         }
 

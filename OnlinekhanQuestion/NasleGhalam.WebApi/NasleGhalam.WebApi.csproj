@@ -160,8 +160,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\UserProfile\DefaultProfile.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -252,6 +250,7 @@
     <Folder Include="Content\QuestionGroupTemp\" />
     <Folder Include="Content\QuestionGroup\" />
     <Folder Include="Content\Question\" />
+    <Folder Include="Content\UserProfile\" />
     <Folder Include="Data\" />
     <Folder Include="Views\StudentMajorlist\" />
   </ItemGroup>
@@ -293,11 +292,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63839/</IISUrl>
+          <IISUrl>http://localhost:63841/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

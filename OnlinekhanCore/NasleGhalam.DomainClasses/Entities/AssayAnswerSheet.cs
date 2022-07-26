@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using NasleGhalam.Common;
 
 namespace NasleGhalam.DomainClasses.Entities
@@ -25,15 +26,16 @@ namespace NasleGhalam.DomainClasses.Entities
         public DateTime AssayTime { get; set; }
 
         public DateTime DateTime { get; set; }
-
+        [MaxLength()]
         public string AnswerTimes { get; set; }
-
+        [MaxLength()]
         public string Answers { get; set; }
 
-
+        [MaxLength()]
         public string MaybeList { get; set; }
-
+        [MaxLength()]
         public string AfterList { get; set; }
+        [MaxLength()]
         public string CantList { get; set; }
 
     }

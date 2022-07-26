@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
+using Microsoft.Office.Interop.Excel;
 using NasleGhalam.Common;
 using NasleGhalam.DataAccess.Context;
 using NasleGhalam.DomainClasses.Entities;
@@ -37,6 +39,36 @@ namespace NasleGhalam.ServiceLayer.Services
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// گرفتن  بسته ها با آی دی
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public IList<PackageShoppingBagViewModel> GetPackages(IEnumerable<int> ids)
+        {
+            var packages = new List<PackageShoppingBagViewModel>();
+            foreach (var item in ids)
+            {
+                packages.Add(_packages.Select(Mapper.Map<PackageShoppingBagViewModel>).FirstOrDefault(x => x.Id == item));
+
+            }
+
+            return packages;
+        }
+        /// <summary>
+        /// گرفتن همه بسته ها
+        /// </summary>
+        /// <returns></returns>
+        public IList<PackageViewModel> GetAll()
+        {
+            return _packages
+                .Where(current => !current.IsDelete)
+                .Include(current => current.Lessons)
+                .AsNoTracking()
+                .AsEnumerable()
+                .Select(Mapper.Map<PackageViewModel>)
+                .ToList();
+        }
         /// <summary>
         /// گرفتن همه بسته ها
         /// </summary>

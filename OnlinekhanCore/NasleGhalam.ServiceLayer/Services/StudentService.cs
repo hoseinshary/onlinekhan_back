@@ -184,36 +184,74 @@ namespace NasleGhalam.ServiceLayer.Services
 
             return clientResult;
         }
+        public ClientMessageResult CreateTemp(int userId)
+        {
 
+
+            var student = new Student();
+            student.Id = userId;
+            _students.Add(student);
+
+            var serverResult = _uow.CommitChanges(CrudType.Create, Title);
+            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+
+            if (clientResult.MessageType == MessageType.Success)
+                clientResult.Obj = GetById(student.Id);
+
+            return clientResult;
+        }
         /// <summary>
         /// ویرایش دانش آموز
         /// </summary>
         /// <param name="studentViewModel"></param>
         /// <param name="userRoleLevel"></param>
         /// <returns></returns>
-        public ClientMessageResult Update(StudentUpdateViewModel studentViewModel, byte userRoleLevel)
+        public ClientMessageResult Update(StudentMajorListDataViewModel studentViewModel, int userId)
         {
-            // سطح نقش باید بزرگتر از سطح نقش کاربر ویرایش کننده باشد
-            var role = _roleService.Value.GetById(studentViewModel.User.RoleId, userRoleLevel);
-            if (role == null)
-            {
-                return new ClientMessageResult()
-                {
-                    Message = "نقش یافت نگردید",
-                    MessageType = MessageType.Error
-                };
-            }
-
-            if (role.Level <= userRoleLevel)
-            {
-                return new ClientMessageResult()
-                {
-                    Message = $"سطح نقش باید بزرگتر از ({userRoleLevel}) باشد",
-                    MessageType = MessageType.Error
-                };
-            }
+            
 
             var student = Mapper.Map<Student>(studentViewModel);
+            student.Id = userId;
+            var viewModel = GetById(userId);
+            if (viewModel == null)
+            {
+                _students.Add(student);
+            }
+            else
+            {
+                _uow.MarkAsChanged(student);
+            }
+
+            var serverResult = _uow.CommitChanges(CrudType.Update, Title);
+            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+
+            if (clientResult.MessageType == MessageType.Success)
+            {
+                clientResult.Obj = GetById(student.Id);
+            }
+            else if (serverResult.ErrorNumber == 2601 && serverResult.EnMessage.Contains("UK_User_NationalNo"))
+            {
+                clientResult.Message = "کد ملی تکراری می باشد";
+            }
+            else if (serverResult.ErrorNumber == 2601 && serverResult.EnMessage.Contains("UK_User_Username"))
+            {
+                clientResult.Message = "نام کاربری تکراری می باشد";
+            }
+
+            return clientResult;
+        }
+        /// <summary>
+        /// ویرایش دانش آموز
+        /// </summary>
+        /// <param name="studentViewModel"></param>
+        /// <param name="userRoleLevel"></param>
+        /// <returns></returns>
+        public ClientMessageResult Update(StudentUpdateViewModel studentViewModel, int userId)
+        {
+            
+
+            var student = Mapper.Map<Student>(studentViewModel);
+            student.Id = userId;
             _uow.MarkAsChanged(student.User);
             _uow.MarkAsChanged(student);
 
@@ -245,7 +283,6 @@ namespace NasleGhalam.ServiceLayer.Services
 
             return clientResult;
         }
-
         /// <summary>
         /// حذف دانش آموز
         /// </summary>

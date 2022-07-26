@@ -19,6 +19,7 @@ namespace NasleGhalam.Common
 
         public static string MediaRelPath => "~/Content/Media/";
         public static string DefaultUserProfileRelPath => "~/Content/UserProfile/DefaultProfile.png";
+        public static string DefaultPackageRelPath => "~/Content/Package/Default.png";
         public static string AssayRelPath => "/Content/Assay/";
 
 
@@ -47,7 +48,11 @@ namespace NasleGhalam.Common
             var path = ToAbsolutePath($"{UserProfileRelPath}{name}");
             return File.Exists(path) ? path : ToAbsolutePath(DefaultUserProfileRelPath);
         }
-
+        public static string GetPackageAbsPath(string name)
+        {
+            var path = ToAbsolutePath($"{PackageRelPath}{name}");
+            return File.Exists(path) ? path : ToAbsolutePath(DefaultPackageRelPath);
+        }
         public static string GetWriterAbsPath(string name)
         {
             var path = ToAbsolutePath($"{WriterPictureRelPath}{name}");

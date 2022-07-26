@@ -97,7 +97,12 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(assay);
         }
-
+        [HttpGet, CheckUserAccess(ActionBits.AssayReadAccess)]
+        public IHttpActionResult GetUserAssays()
+        {
+           
+            return Ok(_assayService.GetUserAssays(Request.GetUserId()));
+        }
         [HttpPost]
         [CheckUserAccess(ActionBits.AssayCreateAccess)]
         [CheckModelValidation]

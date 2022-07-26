@@ -12,6 +12,8 @@ namespace NasleGhalam.ServiceLayer.MapperProfile
             CreateMap<StudentCreateViewModel, Student>();
             CreateMap<StudentUpdateViewModel, Student>();
             CreateMap<UserCreateViewModel, Student>();
+            CreateMap<StudentMajorListDataViewModel, Student>();
+            
             CreateMap<StudentViewModel, Student>()
                 .ReverseMap()
               

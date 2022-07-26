@@ -22,6 +22,7 @@ namespace NasleGhalam.ViewModels.StudentMajorlist
         public string Man { get; set; }
         public string University { get; set; }
 
+        public string Province { get; set; }
         [Display(Name = "رشته تحصیلی")]
         public Field Field { get; set; }
 
@@ -30,6 +31,8 @@ namespace NasleGhalam.ViewModels.StudentMajorlist
         public string Description { get; set; }
 
         public string  Apply { get; set; }
+        public int  ZirGoroh { get; set; }
+        public string  NoeGozinesh { get; set; }
 
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using NasleGhalam.Common;
+using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ServiceLayer.Services;
 using NasleGhalam.ViewModels.User;
 using NasleGhalam.WebApi.Extensions;
@@ -29,8 +30,13 @@ namespace NasleGhalam.WebApi.Controllers
             _logService = logService;
         }
 
-      
-
+        [HttpGet]
+        [CheckUserAccess(ActionBits.AssayReadAccess)]
+        public IHttpActionResult GetUserAssay()
+        {
+            return Ok(_userService.GetUserAssay( Request.GetUserId()));
+        }
+       
         [HttpPost]
         public IHttpActionResult GetUserToken(UserTokenViewModel token)
         {

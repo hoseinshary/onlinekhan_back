@@ -10,7 +10,7 @@ namespace Onlinekhan.SSO.Common
 {
     public static class CoreApi
     {
-        private static string coreUrl = "http://localhost:63839/api";
+        private static string coreUrl = "http://159.69.82.251:63839/api";
         public static string GetFromCore(string url, string parameter)
         {
             HttpClient http = new HttpClient();

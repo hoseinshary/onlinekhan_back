@@ -58,14 +58,19 @@ namespace NasleGhalam.ServiceLayer.Services
         {
       
             var error = Mapper.Map<Error>(errorViewModel);
-            
+            if (error == null)
+            {
+                return null;
+            }
+
             _errors.Add(error);
 
-            var serverResult = _uow.CommitChanges(CrudType.Create, Title);
-            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+                var serverResult = _uow.CommitChanges(CrudType.Create, Title);
+                var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
 
-            if (clientResult.MessageType == MessageType.Success)
-                clientResult.Obj = GetById(error.Id);
+                if (clientResult.MessageType == MessageType.Success)
+                    clientResult.Obj = GetById(error.Id);
+            
 
             return clientResult;
         }

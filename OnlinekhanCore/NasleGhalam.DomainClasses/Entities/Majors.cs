@@ -26,6 +26,9 @@ namespace NasleGhalam.DomainClasses.Entities
         public string Province { get; set; }
         public string Description { get; set; }
         public string Apply { get; set; }
+
+        public int ZirGoroh { get; set; }
+        public int NoeGozinesh { get; set; }
         public ICollection<StudentMajorList_Major> StudentMajorList_Major { get; set; }
         public ICollection<StudentMajorlist> StudentMajorlists { get; set; }
     }

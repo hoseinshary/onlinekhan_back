@@ -53,7 +53,12 @@ namespace NasleGhalam.WebApi.Controllers
         {
             return _questionService.GetAllQuestionsReport(new FilterQuestionReportViewModel{LessonId = id});
         }
-
+        [HttpGet, CheckUserAccess(ActionBits.ReportReadAccess)]
+        public IList<AllQuestionTopicedByUser> GetAllTopicedQuestionByUsers(int lessonId)
+        {
+            return _lessonService.GetAllTopicedQuestionByUsers(lessonId);
+        }
+        
         [HttpGet]
         [CheckModelValidation]
 

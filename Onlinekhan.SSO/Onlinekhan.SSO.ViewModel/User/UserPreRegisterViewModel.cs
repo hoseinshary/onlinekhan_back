@@ -28,8 +28,8 @@ namespace Onlinekhan.SSO.ViewModels.User
         [Display(Name = "رمز عبور")]
         public string Password { get; set; }
 
-        [Display(Name = "جنسیت")]
-        public bool Gender { get; set; }
+        [Display(Name = "معلم")]
+        public bool IsTeacher { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorResources), ErrorMessageResourceName = "Required")]
         [StringLength(maximumLength: 11, MinimumLength = 11, ErrorMessageResourceType = typeof(ErrorResources), ErrorMessageResourceName = "Length")]

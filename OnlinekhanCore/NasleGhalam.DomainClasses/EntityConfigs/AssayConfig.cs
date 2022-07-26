@@ -9,7 +9,7 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
         public AssayConfig()
         {
             HasKey(x => x.Id);
-            Property(x => x.Title).HasMaxLength(50).IsRequired();
+            Property(x => x.Title).HasMaxLength(150).IsRequired();
             Property(x => x.QuestionsFile1).HasMaxLength(Int32.MaxValue);
             Property(x => x.QuestionsFile2).HasMaxLength(Int32.MaxValue);
             Property(x => x.QuestionsFile3).HasMaxLength(Int32.MaxValue);

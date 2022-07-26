@@ -58,11 +58,11 @@ namespace NasleGhalam.DataAccess.Migrations
                         AssayVarient = c.Int(nullable: false),
                         AssayTime = c.DateTime(nullable: false),
                         DateTime = c.DateTime(nullable: false),
-                        AnswerTimes = c.String(maxLength: 50),
-                        Answers = c.String(maxLength: 50),
-                        MaybeList = c.String(maxLength: 50),
-                        AfterList = c.String(maxLength: 50),
-                        CantList = c.String(maxLength: 50),
+                        AnswerTimes = c.String(maxLength:500),
+                        Answers = c.String(maxLength:500),
+                        MaybeList = c.String(maxLength: 500),
+                        AfterList = c.String(maxLength: 500),
+                        CantList = c.String(maxLength:500),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Assays", t => t.AssayId)

@@ -108,6 +108,7 @@
     <Compile Include="Report\AllUsersReporQuestionViewModel.cs" />
     <Compile Include="Report\AllQuestionOfEachLessonViewModel.cs" />
     <Compile Include="Report\QuestionReportExcelViewModel.cs" />
+    <Compile Include="Report\AllQuestionTopicedByUser.cs" />
     <Compile Include="Report\QuestionReportViewModel.cs" />
     <Compile Include="Resume\EducationCertificateViewModel.cs" />
     <Compile Include="Resume\PublicationViewModel.cs" />

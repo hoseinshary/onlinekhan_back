@@ -8,6 +8,7 @@ namespace Onlinekhan.SSO.ServiceLayer.Configs
         public static int MaxDdlCount = 30;
         public static void RegisterAutoMapper()
         {
+            Mapper.Initialize(cfg => cfg.AddProfiles(typeof(UserProfile).Assembly));
         }
     }
 }

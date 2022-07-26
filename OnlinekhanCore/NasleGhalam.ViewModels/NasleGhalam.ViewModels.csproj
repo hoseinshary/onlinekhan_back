@@ -84,6 +84,7 @@
     <Compile Include="Lookup\LookupViewModel.cs" />
     <Compile Include="Package\PackageCreateViewModel.cs" />
     <Compile Include="Package\PackageUpdateViewModel.cs" />
+    <Compile Include="Package\PackageShoppingBagViewModel.cs" />
     <Compile Include="Package\PackageViewModel.cs" />
     <Compile Include="Program\ProgramItemCreateViewModel.cs" />
     <Compile Include="Program\ProgramItemViewModel.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Sale\SaleCreateViewModel.cs" />
     <Compile Include="Sale\ChangeStatusViewModel.cs" />
     <Compile Include="Sale\SaleResultViewModel.cs" />
+    <Compile Include="Student\StudentMajorListDataViewModel.cs" />
     <Compile Include="Tag\TagViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupCreateViewModel.cs" />
     <Compile Include="TeacherGroup\TeacherGroupUpdateViewModel.cs" />

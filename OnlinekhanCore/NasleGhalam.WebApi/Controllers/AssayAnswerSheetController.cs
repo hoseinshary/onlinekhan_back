@@ -38,7 +38,16 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(assayAnswerSheet);
         }
-
+        [HttpGet, CheckUserAccess(ActionBits.AssayAnswerSheetReadAccess)]
+        public IHttpActionResult GetAssayById(int id)
+        {
+            var assayAnswerSheet = _assayAnswerSheetService.GetAssayById(id);
+            if (assayAnswerSheet == null)
+            {
+                return NotFound();
+            }
+            return Ok(assayAnswerSheet);
+        }
 
         [HttpGet]
         [CheckUserAccess(ActionBits.AssayAnswerSheetReadAccess)]

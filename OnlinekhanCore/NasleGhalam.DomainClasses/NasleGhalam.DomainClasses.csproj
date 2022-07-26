@@ -61,7 +61,6 @@
     <Compile Include="Entities\Program.cs" />
     <Compile Include="Entities\ProgramItem.cs" />
     <Compile Include="Entities\Media.cs" />
-    <Compile Include="Entities\QuestionAnswerJudge.cs" />
     <Compile Include="Entities\QuestionAnswerView.cs" />
     <Compile Include="Entities\QuestionAnswer.cs" />
     <Compile Include="Entities\Action.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="Entities\EducationBook.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\AssaySchedule.cs" />
-    <Compile Include="Entities\QuestionJudge.cs" />
     <Compile Include="Entities\Sale.cs" />
     <Compile Include="Entities\Sale_Package.cs" />
     <Compile Include="Entities\StudentMajorlist.cs" />

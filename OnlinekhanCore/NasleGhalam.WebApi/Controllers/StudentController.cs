@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using NasleGhalam.Common;
+using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ServiceLayer.Services;
 using NasleGhalam.WebApi.FilterAttribute;
 using NasleGhalam.ViewModels.Student;
@@ -53,20 +54,36 @@ namespace NasleGhalam.WebApi.Controllers
             }
             return Ok(student);
         }
-
-        [HttpPost]
-        [CheckUserAccess(ActionBits.StudentCreateAccess)]
-        [CheckModelValidation]
-        public IHttpActionResult Create(StudentCreateViewModel studentViewModel)
+        [HttpGet, CheckUserAccess(ActionBits.StudentReadAccess)]
+        public IHttpActionResult GetMyInfo()
         {
-            var msgRes = _studentService.Create(studentViewModel, Request.GetRoleLevel());
+            var student = _studentService.GetById(Request.GetUserId());
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return Ok(student);
+        }
+        [HttpPost]
+        [CheckModelValidation]
+        public IHttpActionResult CreateTemp([FromUri]int userId)
+        {
+            var msgRes = _studentService.CreateTemp(userId);
+           
+            return Ok(msgRes);
+        }
+        [HttpPost]
+        [CheckUserAccess()]
+        [CheckModelValidation]
+        public IHttpActionResult UpdateStudentMajorListData(StudentMajorListDataViewModel studentViewModel)
+        {
+            var msgRes = _studentService.Update(studentViewModel, Request.GetUserId());
             if (msgRes.MessageType == MessageType.Success)
             {
-                _logService.Create(CrudType.Create, "Student", msgRes.Obj, Request.GetUserId());
+                _logService.Create(CrudType.Update, "Student", msgRes.Obj, Request.GetUserId());
             }
             return Ok(msgRes);
         }
-
         [HttpPost]
         [CheckUserAccess(ActionBits.StudentUpdateAccess)]
         [CheckModelValidation]

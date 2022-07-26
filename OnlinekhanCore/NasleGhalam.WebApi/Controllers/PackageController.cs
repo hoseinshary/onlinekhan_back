@@ -3,10 +3,13 @@ using NasleGhalam.Common;
 using NasleGhalam.ServiceLayer.Services;
 using NasleGhalam.WebApi.FilterAttribute;
 using NasleGhalam.ViewModels.Package;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using NasleGhalam.WebApi.Extensions;
 
 namespace NasleGhalam.WebApi.Controllers
@@ -31,6 +34,11 @@ namespace NasleGhalam.WebApi.Controllers
         {
             return Ok(_packageService.GetAllByEducationTreeId(ids));
         }
+        [HttpGet, CheckUserAccess(ActionBits.PackageReadAccess)]
+        public IHttpActionResult GetAll()
+        {
+            return Ok(_packageService.GetAll());
+        }
 
         [HttpGet, CheckUserAccess(ActionBits.PackageReadAccess)]
         public IHttpActionResult GetById(int id)
@@ -43,6 +51,39 @@ namespace NasleGhalam.WebApi.Controllers
             return Ok(package);
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetPictureFile(string id = null)
+        {
+            var stream = new MemoryStream();
+            id += ".jpg";
+            var filestraem = File.OpenRead(SitePath.GetPackageAbsPath(id));
+            filestraem.CopyTo(stream);
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(stream.ToArray())
+            };
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = id
+                };
+            result.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("application/octet-stream");
+            filestraem.Dispose();
+            stream.Dispose();
+            return result;
+        }
+        [HttpGet, CheckUserAccess(ActionBits.PackageReadAccess)]
+        public IHttpActionResult GetPackages([FromUri]IEnumerable<int> ids)
+        {
+            var package = _packageService.GetPackages(ids);
+            if (package == null)
+            {
+                return NotFound();
+            }
+            return Ok(package);
+        }
         [HttpPost]
         [CheckUserAccess(ActionBits.PackageCreateAccess)]
         [CheckModelValidation]

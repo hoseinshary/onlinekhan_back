@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using NasleGhalam.Common;
+using NasleGhalam.DomainClasses.Entities;
 
 namespace NasleGhalam.ViewModels.Assay
 {
@@ -17,18 +18,18 @@ namespace NasleGhalam.ViewModels.Assay
 
         [Display(Name = "")]
         public int Time { get; set; }
-
-
         [Display(Name = "")]
         public int LookupId_Importance { get; set; }
 
-
+        public DomainClasses.Entities.Lookup Lookup_Importance { get; set; }
         [Display(Name = "")]
         public int LookupId_Type { get; set; }
 
-
+        public DomainClasses.Entities.Lookup Lookup_Type { get; set; }
         [Display(Name = "")]
         public int LookupId_QuestionType { get; set; }
+
+        public DomainClasses.Entities.Lookup Lookup_QuestionType { get; set; }
 
 
         [Display(Name = "")]
@@ -80,7 +81,7 @@ namespace NasleGhalam.ViewModels.Assay
 
         public IList<string> QuestionsPath { get; set; }
 
-
+        public IList<AssayQuestion> AssayQuestions { get; set; }
 
 
     }

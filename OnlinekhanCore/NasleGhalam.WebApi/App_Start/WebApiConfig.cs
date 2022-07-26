@@ -57,11 +57,11 @@ namespace NasleGhalam.WebApi
 
 
             //Error Handling
-            config.Routes.MapHttpRoute(
-                name: "Error404",
-                routeTemplate: "{*url}",
-                defaults: new { controller = "Error", action = "Handle404" }
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "Error404",
+            //    routeTemplate: "{*url}",
+            //    defaults: new { controller = "Error", action = "Handle404" }
+            //);
             //---------
         }
     }

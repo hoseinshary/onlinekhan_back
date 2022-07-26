@@ -46,7 +46,7 @@ namespace NasleGhalam.ServiceLayer.Services
             returnVal.QuestionsPath = new List<string>();
             foreach (var x in returnVal.QuestionsFile)
             {
-                returnVal.QuestionsPath.Add($"/Api/Question/GetPictureFile/{x}".ToFullRelativePath());
+                returnVal.QuestionsPath.Add($"http://159.69.82.251:63841/Api/Question/GetPictureFile/{x}");
             }
             return returnVal;
         }
@@ -108,7 +108,21 @@ namespace NasleGhalam.ServiceLayer.Services
             }
 
         }
-
+        /// <summary>
+        /// گرفتن همه آزمون های یوزر
+        /// </summary>
+        /// <returns></returns>
+        public IList<AssayViewModel> GetUserAssays(int userId)
+        {
+            return _assays.Where(x=> x.UserId == userId).Include(x=>x.Lookup_Importance)
+                .Include(x=>x.Lookup_QuestionType)
+                .Include(x=>x.Lookup_Type)
+                .Include(x=>x.AssayQuestions)
+                .AsNoTracking()
+                .AsEnumerable()
+                .Select(Mapper.Map<AssayViewModel>)
+                .ToList();
+        }
         /// <summary>
         /// گرفتن همه آزمون ها
         /// </summary>

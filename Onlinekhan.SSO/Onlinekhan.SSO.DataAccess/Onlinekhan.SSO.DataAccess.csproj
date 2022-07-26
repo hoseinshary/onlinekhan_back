@@ -55,6 +55,10 @@
   <ItemGroup>
     <Compile Include="Context\DBContext.cs" />
     <Compile Include="Context\IUnitOfWork.cs" />
+    <Compile Include="Migrations\202206140847436_Init.cs" />
+    <Compile Include="Migrations\202206140847436_Init.designer.cs">
+      <DependentUpon>202206140847436_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202206140847436_Init.resx">
+      <DependentUpon>202206140847436_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

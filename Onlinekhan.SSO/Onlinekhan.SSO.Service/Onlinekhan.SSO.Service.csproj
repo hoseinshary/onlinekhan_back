@@ -61,6 +61,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -74,6 +75,11 @@
   <ItemGroup>
     <Compile Include="Configs\SiteConfig.cs" />
     <Compile Include="Configs\StructureMapConfig.cs" />
+    <Compile Include="Connected Services\SmsPanelService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Jwt\JsonWebToken.cs" />
     <Compile Include="Jwt\JwtPayload.cs" />
     <Compile Include="MapperProfile\CityProfile.cs" />
@@ -83,11 +89,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\PhoneVerificationService.cs" />
     <Compile Include="Services\ProvinceService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\SmsPanelService\FastSend.wsdl" />
+    <None Include="Connected Services\SmsPanelService\Onlinekhan.SSO.Service.SmsPanelService.AutoSendCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SmsPanelService\Onlinekhan.SSO.Service.SmsPanelService.CheckSendCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SmsPanelService\Onlinekhan.SSO.Service.SmsPanelService.SendMessageWithCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +124,27 @@
       <Project>{A4CB78A8-0024-44DB-AE78-1A6FE08FB3B7}</Project>
       <Name>Onlinekhan.SSO.ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SmsPanelService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SmsPanelService\FastSend.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SmsPanelService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SmsPanelService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SmsPanelService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

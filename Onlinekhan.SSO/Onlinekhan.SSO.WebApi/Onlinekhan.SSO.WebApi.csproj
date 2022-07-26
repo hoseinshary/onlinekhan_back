@@ -175,6 +175,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="FilterAttribute\CheckImageValidation.cs" />
     <Compile Include="FilterAttribute\CheckImageValidationNotRequired.cs" />

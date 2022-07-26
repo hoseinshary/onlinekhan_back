@@ -8,6 +8,7 @@ using NasleGhalam.DataAccess.Context;
 using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ServiceLayer.Configs;
 using NasleGhalam.ServiceLayer.Jwt;
+using NasleGhalam.ViewModels.Lesson;
 using NasleGhalam.ViewModels.Sale;
 using NasleGhalam.ViewModels.User;
 
@@ -19,15 +20,17 @@ namespace NasleGhalam.ServiceLayer.Services
         private readonly IUnitOfWork _uow;
         private readonly IDbSet<Sale> _sales;
         private readonly Lazy<PackageService> _packageService;
+        private readonly Lazy<Lesson_UserService> _lesson_UserService;
+
 
         public SaleService(IUnitOfWork uow,
-            Lazy<PackageService> packageService)
+            Lazy<PackageService> packageService,Lazy<Lesson_UserService> lesson_UserService)
         {
 
             _uow = uow;
             _sales = _uow.Set<Sale>();
             _packageService = packageService;
-          
+            _lesson_UserService = lesson_UserService;
         }
 
         /// <summary>
@@ -67,7 +70,19 @@ namespace NasleGhalam.ServiceLayer.Services
             var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
 
             if (clientResult.MessageType == MessageType.Success)
+            {
                 clientResult.Obj = GetById(currentSale.Id);
+                List<int> ids = new List<int>();
+                foreach (int item in saleCreateViewModel.packagesId)
+                {
+                    ids.AddRange(_packageService.Value.GetById(item).Lessons.Select(x => x.Id));
+                }
+
+                foreach (var item in ids.Distinct())
+                {
+                    _lesson_UserService.Value.BuyLesson(new BuyLessonViewModel() {UserId = userId, LessonId = item});
+                }
+            }
 
             return clientResult;
         }

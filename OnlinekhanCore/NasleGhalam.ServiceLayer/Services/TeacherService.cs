@@ -16,13 +16,14 @@ namespace NasleGhalam.ServiceLayer.Services
         private readonly IUnitOfWork _uow;
         private readonly IDbSet<Teacher> _teachers;
         private readonly Lazy<RoleService> _roleService;
-
+        private readonly Lazy<UserService> _userService;
         public TeacherService(IUnitOfWork uow,
-            Lazy<RoleService> roleService)
+            Lazy<RoleService> roleService,Lazy<UserService> userService)
         {
             _uow = uow;
             _teachers = uow.Set<Teacher>();
             _roleService = roleService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -85,7 +86,23 @@ namespace NasleGhalam.ServiceLayer.Services
 
             return clientResult;
         }
+        public ClientMessageResult CreateTemp(int userId)
+        {
 
+
+            var teacher = new Teacher();
+            teacher.Id = userId;
+            
+            _teachers.Add(teacher);
+
+            var serverResult = _uow.CommitChanges(CrudType.Create, Title);
+            var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
+
+            if (clientResult.MessageType == MessageType.Success)
+                clientResult.Obj = GetById(teacher.Id);
+
+            return clientResult;
+        }
         /// <summary>
         /// ویرایش دبیر
         /// </summary>

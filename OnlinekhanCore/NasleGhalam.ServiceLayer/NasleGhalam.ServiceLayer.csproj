@@ -94,7 +94,7 @@
     <Compile Include="MapperProfile\ProgramProfile.cs" />
     <Compile Include="MapperProfile\PublicProfile.cs" />
     <Compile Include="MapperProfile\StudentMajorlistProfile.cs" />
-    <Compile Include="MapperProfile\TagProfile - Copy.cs" />
+    <Compile Include="MapperProfile\ErrorProfile.cs" />
     <Compile Include="MapperProfile\TagProfile.cs" />
     <Compile Include="MapperProfile\StudentProfile.cs" />
     <Compile Include="MapperProfile\TeacherGroupProfile.cs" />

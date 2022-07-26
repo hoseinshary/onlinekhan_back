@@ -37,7 +37,7 @@ namespace Onlinekhan.SSO.Service.Services
         /// <param name="id"></param>
         /// <param name="userRoleLevel"></param>
         /// <returns></returns>
-        public UserViewModel GetById(int id, byte userRoleLevel)
+        public UserViewModel GetById(int id,int userRoleLevel)
         {
             return _users
                 .Include(current => current.City)
@@ -50,7 +50,17 @@ namespace Onlinekhan.SSO.Service.Services
                 .Select(Mapper.Map<UserViewModel>)
                 .FirstOrDefault();
         }
-
+        public User GetByIdRaw(int id)
+        {
+            return _users
+                // .Include(current => current.Role)
+                .Where(current => current.Id == id)
+                //.Where(current => current.Role.Level > userRoleLevel)
+                //.Where(current => current.Role.UserType == UserType.Organ)
+                .AsNoTracking()
+                .AsEnumerable()
+                .FirstOrDefault();
+        }
         /// <summary>
         /// گرفتن  کاربر با آی دی
         /// </summary>
@@ -136,10 +146,25 @@ namespace Onlinekhan.SSO.Service.Services
         /// <returns></returns>
         public ClientMessageResult PreRegister(UserPreRegisterViewModel userViewModel)
         {
-            var user = Mapper.Map<User>(userViewModel);
+
+            var user = new User()
+            {
+                Family = userViewModel.Family, Name = userViewModel.Name, Username = userViewModel.Username,
+                Mobile = userViewModel.Mobile, Password = userViewModel.Password
+            };
             //Required
             user.LastLogin = DateTime.Now;
-            user.RoleId = 2014;
+            if (userViewModel.IsTeacher == true)
+            {
+                //دبیر
+                user.RoleId =2015;
+            }
+            else
+            {
+                //دانش آموز
+                user.RoleId = 2005;
+            }
+
             user.IsActive = true;
             user.IsAdmin = false;
             //Temp
@@ -150,14 +175,27 @@ namespace Onlinekhan.SSO.Service.Services
             var serverResult = _uow.CommitChanges(CrudType.Create, Title);
             var clientResult = Mapper.Map<ClientMessageResult>(serverResult);
 
-
+            if (serverResult.MessageType == MessageType.Success)
+            {
+                //Create Teacher or Student
+                User tempuser = GetByIdRaw(user.Id);
+                if (userViewModel.IsTeacher == true)
+                {
+                    CoreApi.PostToCore("/Teacher/CreateTemp?userId="+user.Id, "");
+                }
+                else
+                {
+                       CoreApi.PostToCore("/Student/CreateTemp?userId="+user.Id, "");
+                    
+                }
+            }
             if (serverResult.ErrorNumber == 2601 && serverResult.EnMessage.Contains("UK_User_Mobile"))
             {
                 clientResult.Message = "شماره موبایل تکراری می باشد";
             }
             else if (serverResult.ErrorNumber == 2601 && serverResult.EnMessage.Contains("UK_User_Username"))
             {
-                clientResult.Message = "نام کاربری تکراری می باشد";
+                clientResult.Message = "شماره موبایل تکراری می باشد";
             }
 
             return clientResult;
@@ -605,6 +643,10 @@ namespace Onlinekhan.SSO.Service.Services
                         else
                         {
                             loginResult = JsonConvert.DeserializeObject<LoginResultViewModel>(data);
+                            if (usr.RoleId == 2015)
+                                loginResult.IsTeacher = true;
+                            else
+                                loginResult.IsTeacher = false;
                         }
                         
                     }

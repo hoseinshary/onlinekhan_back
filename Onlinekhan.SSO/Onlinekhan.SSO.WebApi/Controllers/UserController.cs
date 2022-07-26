@@ -6,9 +6,9 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Onlinekhan.SSO.ServiceLayer.Services;
 using Onlinekhan.SSO.Common;
 using Onlinekhan.SSO.Service.Services;
-using Onlinekhan.SSO.ServiceLayer.Services;
 using Onlinekhan.SSO.ViewModels.User;
 using Onlinekhan.SSO.WebApi.Extensions;
 using Onlinekhan.SSO.WebApi.FilterAttribute;
@@ -25,10 +25,12 @@ namespace Onlinekhan.SSO.WebApi.Controllers
     {
         private readonly UserService _userService;
         private readonly LogService _logService;
-        public UserController(UserService userService, LogService logService)
+        private readonly PhoneVerificationService _phoneVerificationService;
+        public UserController(UserService userService, LogService logService,PhoneVerificationService phoneVerificationService)
         {
             _userService = userService;
             _logService = logService;
+            _phoneVerificationService = phoneVerificationService;
         }
 
         [HttpGet, CheckUserAccess(ActionBits.UserReadAccess)]
@@ -72,7 +74,7 @@ namespace Onlinekhan.SSO.WebApi.Controllers
             }
             return Ok(user);
         }
-        /*
+        
         /// <summary>
         /// ارسال کد احراز هویت
         /// </summary>
@@ -84,7 +86,7 @@ namespace Onlinekhan.SSO.WebApi.Controllers
             var result = await _phoneVerificationService.SendVerificationCode(PhoneNumber);
             if(result >= 2000)
             {
-                ClientMessageResult msgRes = new ClientMessageResult() { Message = "کد احراز هویت با موفقیت ارسال شد", MessageType = MessageType.Error };
+                ClientMessageResult msgRes = new ClientMessageResult() { Message = "کد احراز هویت با موفقیت ارسال شد", MessageType = MessageType.Success };
                 return Ok(msgRes);
             }
             else
@@ -94,14 +96,14 @@ namespace Onlinekhan.SSO.WebApi.Controllers
             }
             
         }
-        */
-        //[HttpPost]
-        //public async Task<IHttpActionResult> CheckVerificationCode([FromUri] string PhoneNumber,string Code)
-        //{
-        //    var result = await _phoneVerificationService.CheckVerificationCode(PhoneNumber,Code);
-        //    return Ok(result);
-        //}
-        /*
+
+        [HttpPost]
+        public async Task<IHttpActionResult> CheckVerificationCode([FromUri] string PhoneNumber, string Code)
+        {
+            var result = await _phoneVerificationService.CheckVerificationCode(PhoneNumber, Code);
+            return Ok(result);
+        }
+
         /// <summary>
         /// فراموشی رمز عبور
         /// </summary>
@@ -151,7 +153,7 @@ namespace Onlinekhan.SSO.WebApi.Controllers
             }
 
         }
-        */
+        
         [HttpPost]
         [CheckModelValidation]
         [CheckImageValidationProfileNotRequired("img", 1024)]

@@ -11,6 +11,7 @@ namespace NasleGhalam.ServiceLayer.MapperProfile
             CreateMap<PackageViewModel, Package>();
             CreateMap<PackageCreateViewModel, Package>();
             CreateMap<PackageUpdateViewModel, Package>();
+            CreateMap<PackageShoppingBagViewModel, Package>().ReverseMap();
         }
     }
 }

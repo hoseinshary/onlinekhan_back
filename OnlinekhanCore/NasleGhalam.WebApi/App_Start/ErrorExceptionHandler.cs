@@ -62,6 +62,7 @@ namespace NasleGhalam.WebApi.App_Start
             }
             catch (HttpResponseException ex)
             {
+            /*
                 var code = ex.Response.StatusCode;
                 if (code != HttpStatusCode.NotFound && code != HttpStatusCode.MethodNotAllowed)
                     throw;
@@ -74,8 +75,8 @@ namespace NasleGhalam.WebApi.App_Start
                 ErrorCreateViewModel errorViewModel = new ErrorCreateViewModel() {Route = controllerContext.Request.RequestUri.ToString(),ErrorCode = 404};
                 controllerContext.RouteData.Values["ErrorViewModel"] = errorViewModel;
                 decriptor = base.SelectAction(controllerContext);
+            */
             }
-
             return decriptor;
         }
     }

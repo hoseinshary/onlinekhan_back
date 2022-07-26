@@ -18,6 +18,7 @@ namespace NasleGhalam.ViewModels.User
 
         public string DefaultPage { get; set; }
 
+        public bool IsTeacher { get; set; }
         public IList<SubMenuViewModel> SubMenus { get; set; }
 
         public IList<MenuViewModel> Menus { get; set; }

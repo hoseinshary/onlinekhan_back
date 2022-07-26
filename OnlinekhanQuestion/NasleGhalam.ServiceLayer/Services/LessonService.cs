@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using NasleGhalam.Common;
 using NasleGhalam.DataAccess.Context;
 using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ViewModels.Lesson;
+using NasleGhalam.ViewModels.Question;
 using NasleGhalam.ViewModels.Report;
 
 namespace NasleGhalam.ServiceLayer.Services
@@ -17,7 +19,7 @@ namespace NasleGhalam.ServiceLayer.Services
         private readonly IUnitOfWork _uow;
         private readonly IDbSet<Lesson> _lessons;
         private readonly IDbSet<Question> _questions;
-
+        private readonly IDbSet<QuestionUpdate> _questionUpdate;
         private readonly Lazy<EducationTreeService> _educationTreeService;
 
         public LessonService(IUnitOfWork uow, Lazy<EducationTreeService> educationTreeService)
@@ -25,7 +27,7 @@ namespace NasleGhalam.ServiceLayer.Services
             _uow = uow;
             _lessons = uow.Set<Lesson>();
             _questions = uow.Set<Question>();
-
+            _questionUpdate = uow.Set<QuestionUpdate>();
             _educationTreeService = educationTreeService;
         }
 
@@ -124,6 +126,65 @@ namespace NasleGhalam.ServiceLayer.Services
 
         }
 
+         public IList<AllQuestionTopicedByUser> GetAllTopicedQuestionByUsers(int lessonId)
+        {
+           var lesson = _lessons
+                .Where(x=>x.Id == lessonId)
+                .Include(x=> x.Topics)
+                .AsNoTracking()
+                .AsEnumerable()
+                .FirstOrDefault();
+
+           List<AllQuestionTopicedByUser> userTopics = new List<AllQuestionTopicedByUser>();
+
+          
+               //گرفتن سوالات از طرف سوالات گروهی
+               var questions1 =_questions
+                   .Where(x => x.QuestionGroups.Any(y => y.LessonId == lesson.Id))
+                   .Include(x=>x.Topics)
+                   .Include(x => x.Topics.Select(y=> y.Lesson))
+                   .Include(x => x.QuestionJudges)
+                   .AsNoTracking()
+                   .AsEnumerable()
+                   .ToList();
+                //گرفتن سوالات از طرف تاپیک
+               var ids = lesson.Topics.Select(x => x.Id);
+              
+
+
+               var allQuestionTopiced = questions1.Where(current => current.Topics.Any(x => ids.Contains(x.Id)))
+                   .Count();
+
+               var questionTopics = questions1.Where(current => current.Topics.Any(x => ids.Contains(x.Id)));
+
+
+               foreach (var item in questionTopics)
+               {
+
+                   foreach (var item2 in _questionUpdate.Include(x=> x.User).Where(x => x.QuestionId == item.Id && x.QuestionActivity == QuestionActivity.Topic))
+                   {
+                       
+                       var usrTop = userTopics.FirstOrDefault(x => x.UserId == item2.UserId);
+                       if (usrTop != null)
+                       {
+                           usrTop.QuestionTopiced += 1;
+                           usrTop.QuestionTopicedId.Add(item2.QuestionId);
+                       }
+                       else
+                       {
+                           userTopics.Add(new AllQuestionTopicedByUser(){UserId = item2.UserId,Name = item2.User.Name+" "+item2.User.Family,QuestionTopiced = 1,QuestionTopicedId = new List<int>() {item2.QuestionId}});
+                       }
+
+                   }
+                  
+               }
+               
+
+               
+
+           return userTopics;
+
+        }
         /// <summary>
         /// گرفتن همه درس ها با آی دی بخش
         /// </summary>

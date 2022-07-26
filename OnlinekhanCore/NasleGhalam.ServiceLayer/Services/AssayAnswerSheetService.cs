@@ -78,7 +78,64 @@ namespace NasleGhalam.ServiceLayer.Services
              return a;
 
         }
+        /// <summary>
+        /// گرفتن همه پاسخ نامه آزمون
+        /// </summary>
+        /// <returns></returns>
+        public AssayAnswerSheetViewModel GetAssayById(int id)
+        {
+            AssayAnswerSheetViewModel a = new AssayAnswerSheetViewModel();
+            var b =  _assayAnswerSheets
+                .Include(x =>x.Assay.AssayQuestions)
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionHardnessType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_AuthorType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionRank))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_RepeatnessType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_AreaTypes))
+                .Where(current => current.AssayId == id)
+                .AsNoTracking()
+                .AsEnumerable()
+                //.Select(Mapper.Map<AssayAnswerSheetViewModel>)
+                .FirstOrDefault();
 
+            a = Mapper.Map<AssayAnswerSheetViewModel>(b);
+            a.QuestionIds = b.Assay.AssayQuestions.Select(x => x.QuestionId).ToList();
+            a.AnswerSheetCorectExams = new List<AssayAnswerSheetCorectExamViewModel>();
+            var assay = _assayService.Value.GetById(a.AssayId);
+
+            //تصحیح آزمون و نشان دادن جواب درست 
+            for (int i = 0; i < a.Answers.Count; i++)
+            {
+                var tempVal = new AssayAnswerSheetCorectExamViewModel();
+                //اگر جواب نداده باشد
+                if (a.Answers[i] == "0")
+                {
+                    tempVal.Tashih = Tashih.Non;
+                }
+                //اگر جواب درست باشد
+                else if (a.Answers[i].ToString() == assay.QuestionsAnswer[i])
+                {
+                    tempVal.Tashih = Tashih.Correct;
+                }
+                //اگر جواب غلط باشد
+                else
+                {
+                    tempVal.Tashih = Tashih.Wrong;
+                }
+
+                tempVal.NumberOfQuestion = i + 1;
+                tempVal.Path = assay.QuestionsFile[i];
+                tempVal.CorrectAnswer = assay.QuestionsAnswer[i];
+
+                a.AnswerSheetCorectExams.Add(tempVal);
+
+
+            }
+
+            return a;
+        }
         /// <summary>
         /// گرفتن همه پاسخ نامه ها
         /// </summary>

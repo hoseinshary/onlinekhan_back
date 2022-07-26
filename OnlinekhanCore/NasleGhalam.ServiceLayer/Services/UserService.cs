@@ -8,6 +8,7 @@ using NasleGhalam.DataAccess.Context;
 using NasleGhalam.DomainClasses.Entities;
 using NasleGhalam.ServiceLayer.Configs;
 using NasleGhalam.ServiceLayer.Jwt;
+using NasleGhalam.ViewModels.Assay;
 using NasleGhalam.ViewModels.User;
 
 namespace NasleGhalam.ServiceLayer.Services
@@ -33,6 +34,12 @@ namespace NasleGhalam.ServiceLayer.Services
             _teachers = _uow.Set<Teacher>();
             _roleService = roleService;
             _actionService = actionService;
+        }
+
+        public IEnumerable<string> GetUserAssay(int userId)
+        {
+            var usr = _users.Include(x => x.Assays).Where(x => x.Id == userId).FirstOrDefault();
+            return usr.Assays.Select(x=> x.Title);
         }
 
         /// <summary>
@@ -63,61 +70,19 @@ namespace NasleGhalam.ServiceLayer.Services
                     }
                     else
                     {
-                        loginResult.SubMenus = _actionService.Value.GetSubMenu(user.Role.SumOfActionBit);
-                        if (loginResult.SubMenus.Count == 0)
-                        {
-                            loginResult.Message = "شما به صفحه ای دسترسی ندارید";
-                        }
-                        else
-                        {
-                            var defaultPage = "";
-
-                            if (user.Role.Level == 3)
-                            {
-                                defaultPage = "/panel/expertpanel";
-                            }
-                            else if (user.Role.Level < 3)
-                            {
-                                defaultPage = "/panel/adminpanel";
-                            }
-                            else if (user.Role.Id == 2015)
-                            {
-                                defaultPage = "/panel/teacherPanel";
-                            }
-                            else if (user.Role.Level == 100)
-                            {
-                                defaultPage = "/panel/studentPanel";
-                            }
-                            else
-                            {
-
-                                foreach (var item in loginResult.SubMenus)
-                                {
-                                    if (item.EnName == "/User")
-                                    {
-                                        defaultPage = item.EnName;
-                                        break;
-                                    }
-                                }
-
-                                if (string.IsNullOrEmpty(defaultPage))
-                                {
-                                    defaultPage = loginResult.SubMenus[0].EnName;
-                                }
-                            }
+                        
 
                             loginResult.Message = "ورود موفقیت آمیز";
                             loginResult.MessageType = MessageType.Success;
 
-                            loginResult.Menus = _actionService.Value.GetMenu(user.Role.SumOfActionBit);
-                            loginResult.DefaultPage = defaultPage;
+                            loginResult.DefaultPage = "/dashboard";
 
+                          
                             loginResult.FullName = user.Name + " " + user.Family;
-                            loginResult.ProfilePic = $"/Api/User/GetPictureFile/{user.ProfilePic}".ToFullRelativePath();
+                            loginResult.ProfilePic = $"http://159.69.82.251:63840/Api/User/GetPictureFile/{user.ProfilePic}";
 
                             loginResult.Token = JsonWebToken.CreateToken(user.Role.Level,
                                 user.IsAdmin, user.Id, user.Role.SumOfActionBit, user.Role.UserType);
-                        }
                     }
                 }
                 else

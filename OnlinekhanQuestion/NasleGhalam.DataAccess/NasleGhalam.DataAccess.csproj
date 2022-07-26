@@ -52,6 +52,10 @@
   <ItemGroup>
     <Compile Include="Context\DBContext.cs" />
     <Compile Include="Context\IUnitOfWork.cs" />
+    <Compile Include="Migrations\202206120657222_init.cs" />
+    <Compile Include="Migrations\202206120657222_init.Designer.cs">
+      <DependentUpon>202206120657222_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,6 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202206120657222_init.resx">
+      <DependentUpon>202206120657222_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

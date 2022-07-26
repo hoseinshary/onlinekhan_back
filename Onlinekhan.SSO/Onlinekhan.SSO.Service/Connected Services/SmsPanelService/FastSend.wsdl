@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AutoSendCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReciptionNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Footer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AutoSendCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AutoSendCodeResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessageWithCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReciptionNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessageWithCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendMessageWithCodeResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSendCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReciptionNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSendCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckSendCodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AutoSendCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:AutoSendCode" />
+  </wsdl:message>
+  <wsdl:message name="AutoSendCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:AutoSendCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageWithCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessageWithCode" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageWithCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessageWithCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckSendCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckSendCode" />
+  </wsdl:message>
+  <wsdl:message name="CheckSendCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckSendCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FastSendSoap">
+    <wsdl:operation name="AutoSendCode">
+      <wsdl:input message="tns:AutoSendCodeSoapIn" />
+      <wsdl:output message="tns:AutoSendCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageWithCode">
+      <wsdl:input message="tns:SendMessageWithCodeSoapIn" />
+      <wsdl:output message="tns:SendMessageWithCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSendCode">
+      <wsdl:input message="tns:CheckSendCodeSoapIn" />
+      <wsdl:output message="tns:CheckSendCodeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FastSendSoap" type="tns:FastSendSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AutoSendCode">
+      <soap:operation soapAction="http://tempuri.org/AutoSendCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageWithCode">
+      <soap:operation soapAction="http://tempuri.org/SendMessageWithCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSendCode">
+      <soap:operation soapAction="http://tempuri.org/CheckSendCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FastSendSoap12" type="tns:FastSendSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AutoSendCode">
+      <soap12:operation soapAction="http://tempuri.org/AutoSendCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageWithCode">
+      <soap12:operation soapAction="http://tempuri.org/SendMessageWithCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSendCode">
+      <soap12:operation soapAction="http://tempuri.org/CheckSendCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FastSend">
+    <wsdl:port name="FastSendSoap" binding="tns:FastSendSoap">
+      <soap:address location="http://smspanel.trez.ir/FastSend.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FastSendSoap12" binding="tns:FastSendSoap12">
+      <soap12:address location="http://smspanel.trez.ir/FastSend.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
