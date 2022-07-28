@@ -45,5 +45,17 @@ namespace NasleGhalam.ViewModels.AssayAnswerSheet
         public AssayViewModel Assay { get; set; }
         public IList<AssayAnswerSheetCorectExamViewModel> AnswerSheetCorectExams { get; set; }
 
+        public IList<QuestionTotal> TotalAnswer { get; set; }
+       
+    }
+    public class QuestionTotal
+    {
+        public int QuestionId { get; set; }
+        public int TotalFirstChoice { get; set; }
+        public int TotalSecondChoice { get; set; }
+        public int TotalThirdChoice { get; set; }
+        public int TotalForthChoice { get; set; }
+        public int TotalNonChoice { get; set; }
+
     }
 }

@@ -51,9 +51,9 @@ namespace NasleGhalam.ViewModels.Question
 
         public List<string> TopicAnswer { get; set; } = new List<string>();
 
-        public string QuestionWordPath => $"/Api/Question/GetWordFile/{FileName}".ToFullRelativePath();
+        public string QuestionWordPath => $"http://159.69.82.251:63841/Api/Question/GetWordFile/{FileName}";
 
-        public string QuestionPicturePath => $"/Api/Question/GetPictureFile/{FileName}".ToFullRelativePath();
+        public string QuestionPicturePath => $"http://159.69.82.251:63841/Api/Question/GetPictureFile/{FileName}";
 
         public int LookupId_QuestionType { get; set; }
 

@@ -148,7 +148,6 @@ namespace NasleGhalam.ServiceLayer.Services
         {
             var newIds = _topicService.Value.GetAllChildren(ids);
             
-
             return _questions
                 .Where(x => x.Deleted == false)
                 .Include(current => current.Writer)

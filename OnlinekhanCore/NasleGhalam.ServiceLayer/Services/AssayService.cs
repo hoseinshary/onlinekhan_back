@@ -19,6 +19,7 @@ namespace NasleGhalam.ServiceLayer.Services
         private const string Title = "آزمون";
         private readonly IUnitOfWork _uow;
         private readonly IDbSet<Assay> _assays;
+        private readonly IDbSet<Lesson> _lessons;
 
         private readonly Lazy<QuestionService> _questionService;
 
@@ -26,6 +27,7 @@ namespace NasleGhalam.ServiceLayer.Services
         {
             _uow = uow;
             _assays = uow.Set<Assay>();
+            _lessons = uow.Set<Lesson>();
             _questionService = questionService;
         }
 
@@ -160,13 +162,9 @@ namespace NasleGhalam.ServiceLayer.Services
 
             foreach (var lesson in assayViewModel.Lessons)
             {
-                Lesson tempLesson = new Lesson()
-                {
-                    Id = lesson.Id
-                };
+
                 //افزودن درس به آزمون
-                _uow.MarkAsUnChanged(tempLesson);
-                assay.Lessons.Add(tempLesson);
+                assay.Lessons.Add(_lessons.FirstOrDefault(x=> x.Id == lesson.Id));
                 //درست کردن هر سوال
                 foreach (var question in lesson.Questions)
                 {

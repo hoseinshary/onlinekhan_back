@@ -177,17 +177,17 @@ namespace Onlinekhan.SSO.Service.Services
 
             if (serverResult.MessageType == MessageType.Success)
             {
-                //Create Teacher or Student
-                User tempuser = GetByIdRaw(user.Id);
-                if (userViewModel.IsTeacher == true)
-                {
-                    CoreApi.PostToCore("/Teacher/CreateTemp?userId="+user.Id, "");
-                }
-                else
-                {
-                       CoreApi.PostToCore("/Student/CreateTemp?userId="+user.Id, "");
+                ////Create Teacher or Student
+                //User tempuser = GetByIdRaw(user.Id);
+                //if (userViewModel.IsTeacher == true)
+                //{
+                //    CoreApi.PostToCore("/Teacher/CreateTemp?userId="+user.Id, "");
+                //}
+                //else
+                //{
+                //       CoreApi.PostToCore("/Student/CreateTemp?userId="+user.Id, "");
                     
-                }
+                //}
             }
             if (serverResult.ErrorNumber == 2601 && serverResult.EnMessage.Contains("UK_User_Mobile"))
             {

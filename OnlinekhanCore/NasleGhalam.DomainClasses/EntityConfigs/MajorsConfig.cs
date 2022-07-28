@@ -21,9 +21,9 @@ namespace NasleGhalam.DomainClasses.EntityConfigs
             Property(x => x.AdmissionSecond).IsRequired();
             Property(x => x.Woman).IsRequired();
             Property(x => x.Man).IsRequired();
-            Property(x => x.Province).IsRequired();
+            Property(x => x.Province).IsRequired().HasMaxLength(250);
             Property(x => x.Description).IsRequired();
-            Property(x => x.Apply).IsRequired();
+            Property(x => x.Apply).IsRequired().HasMaxLength(150);
             Property(x => x.University).HasMaxLength(200).HasColumnType("nvarchar(max)").IsRequired();
             Property(x => x.Field).IsRequired();
                 

@@ -82,11 +82,123 @@ namespace NasleGhalam.ServiceLayer.Services
         /// گرفتن همه پاسخ نامه آزمون
         /// </summary>
         /// <returns></returns>
+        public IList<AssayAnswerSheetViewModel> GetAssayByStudentId(int id)
+        {
+            AssayAnswerSheetViewModel a = new AssayAnswerSheetViewModel();
+            var allAssay = _assayAnswerSheets.Include(x => x.Assay.AssayQuestions).ToList();
+            var bassays =  _assayAnswerSheets
+                .Include(x =>x.Assay.AssayQuestions)
+                .Include(x =>x.Assay.Lookup_Type)
+                .Include(x =>x.Assay.Lookup_QuestionType)
+                .Include(x =>x.Assay.Lookup_Importance)
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionHardnessType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_AuthorType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionRank))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_RepeatnessType))
+                .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_AreaTypes))
+                .Where(current => current.UserId == id)
+                .AsNoTracking()
+                .AsEnumerable()
+                //.Select(Mapper.Map<AssayAnswerSheetViewModel>)
+                .ToList();
+            IList<AssayAnswerSheetViewModel> alist = new List<AssayAnswerSheetViewModel>();
+            foreach (var b in bassays)
+            {
+
+
+                a = Mapper.Map<AssayAnswerSheetViewModel>(b);
+                a.QuestionIds = b.Assay.AssayQuestions.Select(x => x.QuestionId).ToList();
+                a.AnswerSheetCorectExams = new List<AssayAnswerSheetCorectExamViewModel>();
+                var assay = _assayService.Value.GetById(a.AssayId);
+
+                //تصحیح آزمون و نشان دادن جواب درست 
+                for (int i = 0; i < a.Answers.Count; i++)
+                {
+                    var tempVal = new AssayAnswerSheetCorectExamViewModel();
+                    //اگر جواب نداده باشد
+                    if (a.Answers[i] == "0")
+                    {
+                        tempVal.Tashih = Tashih.Non;
+                    }
+                    //اگر جواب درست باشد
+                    else if (a.Answers[i].ToString() == assay.QuestionsAnswer[i])
+                    {
+                        tempVal.Tashih = Tashih.Correct;
+                    }
+                    //اگر جواب غلط باشد
+                    else
+                    {
+                        tempVal.Tashih = Tashih.Wrong;
+                    }
+
+                    tempVal.NumberOfQuestion = i + 1;
+                    tempVal.Path = assay.QuestionsFile[i];
+                    tempVal.CorrectAnswer = assay.QuestionsAnswer[i];
+
+                    a.AnswerSheetCorectExams.Add(tempVal);
+                    a.TotalAnswer = new List<QuestionTotal>();
+
+                    foreach (var item in a.QuestionIds)
+                    {
+                        a.TotalAnswer.Add(new QuestionTotal()
+                        {
+                            QuestionId = item, TotalFirstChoice = 0, TotalSecondChoice = 0, TotalThirdChoice = 0,
+                            TotalForthChoice = 0
+                        });
+                    }
+
+                    foreach (var assayAnswerSheet in allAssay)
+                    {
+                        var QuestionIds = assayAnswerSheet.Assay.AssayQuestions.Select(x => x.QuestionId).ToList();
+
+                        for (int j = 0; j < QuestionIds.Count; j++)
+                        {
+                            if (a.QuestionIds.Contains(QuestionIds[j]))
+                            {
+                                if (assayAnswerSheet.Answers.Split(';')[j] == "0")
+                                    a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalNonChoice++;
+                                if (assayAnswerSheet.Answers.Split(';')[j] == "1")
+                                    a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j])
+                                        .TotalFirstChoice++;
+                                if (assayAnswerSheet.Answers.Split(';')[j] == "2")
+                                    a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j])
+                                        .TotalSecondChoice++;
+                                if (assayAnswerSheet.Answers.Split(';')[j] == "3")
+                                    a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j])
+                                        .TotalThirdChoice++;
+                                if (assayAnswerSheet.Answers.Split(';')[j] == "4")
+                                    a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j])
+                                        .TotalForthChoice++;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                alist.Add(a);
+            }
+
+            return alist;
+        }
+
+        /// <summary>
+        /// گرفتن همه پاسخ نامه آزمون
+        /// </summary>
+        /// <returns></returns>
         public AssayAnswerSheetViewModel GetAssayById(int id)
         {
             AssayAnswerSheetViewModel a = new AssayAnswerSheetViewModel();
+            var allAssay = _assayAnswerSheets.Include(x => x.Assay.AssayQuestions).ToList();
             var b =  _assayAnswerSheets
                 .Include(x =>x.Assay.AssayQuestions)
+                .Include(x =>x.Assay.Lookup_Type)
+                .Include(x =>x.Assay.Lookup_QuestionType)
+                .Include(x =>x.Assay.Lookup_Importance)
                 .Include(x => x.Assay.AssayQuestions.Select(q => q.Question))
                 .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionType))
                 .Include(x => x.Assay.AssayQuestions.Select(q => q.Question.Lookup_QuestionHardnessType))
@@ -130,7 +242,36 @@ namespace NasleGhalam.ServiceLayer.Services
                 tempVal.CorrectAnswer = assay.QuestionsAnswer[i];
 
                 a.AnswerSheetCorectExams.Add(tempVal);
+                a.TotalAnswer = new List<QuestionTotal>();
 
+                foreach (var item in a.QuestionIds)
+                {
+                    a.TotalAnswer.Add(new QuestionTotal(){QuestionId = item,TotalFirstChoice = 0,TotalSecondChoice = 0,TotalThirdChoice = 0,TotalForthChoice = 0});
+                }
+                foreach (var assayAnswerSheet in allAssay)
+                {
+                    var QuestionIds = assayAnswerSheet.Assay.AssayQuestions.Select(x => x.QuestionId).ToList();
+
+                    for (int j = 0; j < QuestionIds.Count; j++)
+                    {
+                        if (a.QuestionIds.Contains(QuestionIds[j]))
+                        {
+                            if (assayAnswerSheet.Answers.Split(';')[j] == "0")
+                                a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalNonChoice++;
+                            if (assayAnswerSheet.Answers.Split(';')[j] == "1")
+                                a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalFirstChoice++;
+                            if (assayAnswerSheet.Answers.Split(';')[j] == "2")
+                                a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalSecondChoice++;
+                            if (assayAnswerSheet.Answers.Split(';')[j] == "3")
+                                a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalThirdChoice++;
+                            if (assayAnswerSheet.Answers.Split(';')[j] == "4")
+                                a.TotalAnswer.FirstOrDefault(x => x.QuestionId == QuestionIds[j]).TotalForthChoice++;
+
+                        }
+
+                    }
+
+                }
 
             }
 

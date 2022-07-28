@@ -93,6 +93,7 @@
     <Compile Include="MapperProfile\PackageProfile.cs" />
     <Compile Include="MapperProfile\ProgramProfile.cs" />
     <Compile Include="MapperProfile\PublicProfile.cs" />
+    <Compile Include="MapperProfile\QuestionProfile.cs" />
     <Compile Include="MapperProfile\StudentMajorlistProfile.cs" />
     <Compile Include="MapperProfile\ErrorProfile.cs" />
     <Compile Include="MapperProfile\TagProfile.cs" />

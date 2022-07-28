@@ -130,7 +130,11 @@ namespace NasleGhalam.ServiceLayer.Services
         /// گرفتن همه مبحث ها
         /// </summary>
         /// <returns></returns>
-        public IList<TopicViewModel> GetAll()
+        public Topic GetAll()
+        {
+            return _topics.First();
+        }
+        public IList<TopicViewModel> GetAllRiazy()
         {
             return _topics
                 .AsNoTracking()
@@ -138,7 +142,6 @@ namespace NasleGhalam.ServiceLayer.Services
                 .Select(Mapper.Map<TopicViewModel>)
                 .ToList();
         }
-
 
         /// <summary>
         /// گرفتن همه مبحث ها
@@ -193,7 +196,6 @@ namespace NasleGhalam.ServiceLayer.Services
 
             return returnIds;
         }
-
         /// <summary>
         ///  گرفتن همه مبحث ها تا سطح 3
         /// </summary>

@@ -140,10 +140,6 @@ namespace Onlinekhan.SSO.WebApi.Controllers
             if (result)
             {
                 var msgRes = _userService.PreRegister(userViewModel);
-                if (msgRes.MessageType == MessageType.Success)
-                {
-                    _logService.Create(CrudType.Create, "User-PreRegister", msgRes.Obj, Request.GetUserId());
-                }
                 return Ok(msgRes);
             }
             else
